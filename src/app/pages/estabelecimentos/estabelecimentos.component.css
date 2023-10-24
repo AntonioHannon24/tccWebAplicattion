@@ -1,0 +1,8 @@
+img{
+    max-width: 280px;
+}.card-title{
+    color: var(--primary-color);
+}.cidade{
+    font-weight: bold;
+    color: var(--primary-color);
+}

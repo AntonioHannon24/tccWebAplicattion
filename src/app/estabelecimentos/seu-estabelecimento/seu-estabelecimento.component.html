@@ -1,0 +1,41 @@
+<div *ngIf="estabelecimento" class="fundoForm">
+    <div class="container containerFormRow">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="h1 text-center">{{estabelecimento.nome}}</h1><br><br>
+                <div class="icone-celular">
+                    <p><i class="bi bi-telephone-fill"></i> {{estabelecimento.telefone}}</p>
+                </div><br>
+                <div class="icone-celular">
+                    <p><i class="bi bi-briefcase-fill"></i> {{estabelecimento.cnpj}}</p>
+                </div><br>
+                <div class="icone-email">
+                    <p><i class="bi bi-envelope"></i> {{estabelecimento.email}}</p>
+                </div><br>
+                <div class="icone-endereco">
+                    <p><i class="bi bi-geo-alt"></i> {{estabelecimento.endereco}}</p>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-2">
+                <img src="{{baseApiUrl}}uploads//{{estabelecimento.logo}}" alt="" class="imagempromo" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+
+    id?:number,
+    nome:string,
+    cnpj:string,
+    endereco:string,
+    telefone:string,
+    logo:string,
+    cep:string,
+    email:string,
+    cidade_id?:number,
+    created_at?:string,
+    update_at?:string,
+-->

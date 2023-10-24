@@ -1,0 +1,31 @@
+<div class="fundoForm d-flex justify-content-center align-items-center">
+    <div class="row container containerForm">
+        <h1 class="text-center">{{title}}</h1>
+        <form (ngSubmit)="submit()" [formGroup]="servicosForm" #formDir="ngForm">
+            <input type="hidden" formControlName="id" />
+            <input type="hidden" formControlName="estabelecimento_id" />
+
+            <div class="mb-3 campos">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" required />
+                <div *ngIf="nome.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="funcao">Valor</label>
+                <input type="text" class="form-control" formControlName="valor" required />
+                <div *ngIf="valor.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+            <div class="mb-3 campos">
+                <label for="funcao">Descrição</label>
+                <input type="text" class="form-control" formControlName="descricao" required />
+                <div *ngIf="descricao.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="submit">{{btnText}}</button>
+        </form>
+        <div class="voltar">
+            <button (click)="voltar()" class="botaoVoltar">Voltar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div *ngIf="servico">
+    <app-form-servicos (onSubmit)="editHandler($event)" [btnText]="btnText" [title]="title"
+        [servicoData]="servico"></app-form-servicos>
+</div>
+

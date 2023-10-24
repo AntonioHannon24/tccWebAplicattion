@@ -1,0 +1,35 @@
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de serviços cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>Nome</td>
+                    <td>Descrição</td>
+                    <td>Valor</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let serv of estabelecimento?.servico! | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th scope="row">{{ serv.id }}</th>
+                    <td>{{ serv.nome }}</td>
+                    <td>{{ serv.descricao }}</td>
+                    <td>{{ serv.valor }}</td>
+                    <td>
+                        <button class="botoes" (click)="removeServico(serv.id!)"><i class="bi bi-trash"></i></button>
+                        <button class="botoes" (click)="editServico(serv.id!)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <div>
+            <a routerLink="/new-servico/{{idEstab}}">Cadastre seus serviços</a><br>
+        </div>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <button (click)="voltar()" class="botaoVoltar">Voltar</button>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="fundoForm d-flex justify-content-center align-items-center">
+    <div class="row container containerForm">
+        <h1 class="text-center">{{title}}</h1>
+        <form (ngSubmit)="submit()" [formGroup]="funcionarioForm" #formDir="ngForm">
+            <input type="hidden" formControlName="id" />
+            <input type="hidden" formControlName="estabelecimento_id" />
+
+            <div class="mb-3 campos">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" required />
+                <div *ngIf="nome.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" formControlName="email" required />
+                <div *ngIf="email.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" formControlName="password" required />
+            </div>
+            <div class="mb-3 campos">
+                <label for="exampleInputPassword1" class="form-label">Confirmar Senha</label>
+                <input type="password" class="form-control" formControlName="password2" required />
+                <div *ngIf="(formDir.submitted && conferir() != true)" class="form-text">As senhas não coencidem</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="funcao">Função</label>
+                <input type="text" class="form-control" formControlName="funcao" required />
+                <div *ngIf="funcao.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="cidade_id">Cidade</label>
+                <input type="text" class="form-control" formControlName="cidade_id" required />
+                <div *ngIf="cidade_id.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos"><!--logo-->
+                <label for="foto">Foto</label>
+                <input type="file" style="margin-left: 5%;" (change)="onFileSelected($event)">
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="submit">{{btnText}}</button>
+        </form>
+        <div class="voltar">
+            <button (click)="voltar()" class="botaoVoltar">Voltar</button>
+        </div>
+    </div>
+</div>

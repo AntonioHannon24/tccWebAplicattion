@@ -1,0 +1,9 @@
+<div id="modal" class="hide">
+    <div class="face" (click)="messageService.closeModal()">
+    </div>
+    <div class="modal">
+            <h2>Mensagens</h2>
+            <div *ngFor="let message of messageService.messages">{{message}}</div>
+            <button type="button" class="clear" (click)="messageService.closeModal()">Limpar</button>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="fundoForm">
+    <div class="container row conteinerCards">
+        <div>
+            <h1 class="h1 text-center">Estabelecimentos cadastrados</h1>
+        </div>
+        <div class="my-4 d-flex justify-content-center">
+            <form>
+                <span class="mx-2"><i class="bi bi-search"></i></span> <input type="text" placeholder=" Busque Aqui!!" (input)="search($event)">
+            </form>
+        </div>
+        <div class="card mx-4 my-5" style="width: 18rem;" *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage:6, currentPage: p }">
+            <img src="{{baseApiUrl}}uploads//{{estab.logo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{estab.nome}}</h5>
+                <p class="card-text">
+                <p>Endereço: {{estab.endereco}}</p>
+                <p>Cidade: {{estab.cidade_id}}</p>
+                <a href="info-estab/{{estab.id}}" class="btn btn-primary" >Veja mais</a>
+            </div>
+            
+        </div>
+        <div class="paginator">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>
