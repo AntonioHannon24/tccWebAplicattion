@@ -25,6 +25,8 @@ import { EditFuncionariosComponent } from './estabelecimentos/edit-funcionarios/
 import { FormFuncionariosComponent } from './estabelecimentos/formularios/form-funcionarios/form-funcionarios.component';
 import { NewServicesComponent } from './estabelecimentos/new-services/new-services.component';
 import { NewFuncionariosComponent } from './estabelecimentos/new-funcionarios/new-funcionarios.component';
+import { LoginFuncionariosComponent } from './funcionarios/login-funcionarios/login-funcionarios.component';
+import { LoginAdminComponent } from './administrativo/login-admin/login-admin.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { NewFuncionariosComponent } from './estabelecimentos/new-funcionarios/ne
     EditFuncionariosComponent,
     FormFuncionariosComponent,
     NewServicesComponent,
-    NewFuncionariosComponent
+    NewFuncionariosComponent,
+    LoginFuncionariosComponent,
+    LoginAdminComponent
   ],
   imports: [
     BrowserModule,

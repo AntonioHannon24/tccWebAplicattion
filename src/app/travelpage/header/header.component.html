@@ -27,33 +27,36 @@
                     <a class="nav-link" *ngIf="logado ==! true" routerLink="contato"
                         routerLinkActive="active-link">Contato</a>
                 </li>
+
                 <!--Rotas com autenticação-->
 
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="authService.isLoggedIn$ | async" routerLink="seuEstabelecimento"
+                    <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="seuEstabelecimento"
                         routerLinkActive="active-link">Seu Estabelecimento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="authService.isLoggedIn$ | async" routerLink="agenda"
+                    <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="agenda"
                         routerLinkActive="active-link">Agenda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="authService.isLoggedIn$ | async" routerLink="servicos"
+                    <a class="nav-link" *ngIf="logado && tipo=='Estab'"  routerLink="servicos"
                         routerLinkActive="active-link">Serviços</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="authService.isLoggedIn$ | async" routerLink="funcionarios"
+                    <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="funcionarios"
                         routerLinkActive="active-link">Funcionarios</a>
                 </li>
 
-
-
                 <li class="nav-item">
                     <a class="nav-link" routerLink="login" routerLinkActive="active-link"
-                        *ngIf="logado != true; else loginOff">Login</a>
+                        *ngIf="logado != true; else loginOff">Sou estabelecimento</a>
                     <ng-template #loginOff>
                         <a class="nav-link" routerLinkActive="active-link" (click)="logoff()">Sair</a>
                     </ng-template>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="loginFuncionarios" routerLinkActive="active-link"
+                        *ngIf="logado != true">Sou funcionario</a>
                 </li>
 
             </ul>

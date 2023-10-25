@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,19 +11,23 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit{
 
   logado?: boolean;
-  isAdmin?: boolean;
+  tipo!:any;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService,
+              private router: Router,
+          
+              ) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(valor => {
       this.logado = valor;
     });
-    /*
-    this.authService.role.subscribe((valor)=>{
-      this.isAdmin = valor
-    })
-    */
+
+    this.authService.tipo.subscribe(valor => {
+      this.tipo = valor;
+      console.log(valor)
+    });
+    
   }
   logoff() {
 

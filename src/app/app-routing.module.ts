@@ -13,6 +13,8 @@ import { EditServicosComponent } from './estabelecimentos/edit-servicos/edit-ser
 import { EditFuncionariosComponent } from './estabelecimentos/edit-funcionarios/edit-funcionarios.component';
 import { NewServicesComponent } from './estabelecimentos/new-services/new-services.component';
 import { NewFuncionariosComponent } from './estabelecimentos/new-funcionarios/new-funcionarios.component';
+import { LoginFuncionariosComponent } from './funcionarios/login-funcionarios/login-funcionarios.component';
+import { LoginAdminComponent } from './administrativo/login-admin/login-admin.component';
 
 const routes: Routes = [
 
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path: 'estabelecimentos', component:EstabelecimentosComponent },
   {path: 'contato', component:ContatoComponent },
   {path: 'login', component:LoginComponent },
+  {path: 'loginFuncionarios', component:LoginFuncionariosComponent },
+  {path: 'adminLogin', component:LoginAdminComponent },
 
 
 

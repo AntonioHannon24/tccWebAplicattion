@@ -11,23 +11,25 @@ export class AuthService {
 
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
-  //private _role = new BehaviorSubject<boolean>(false)
+  private _tipo = new BehaviorSubject<string|null>(null)
   public _id = new BehaviorSubject<Number>(0)
 
   isLoggedIn$ = this._isLoggedIn$.asObservable();
-  //role = this._role.asObservable()
   id = this._id.asObservable()
+  tipo = this._tipo.asObservable()
+
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/loginEstabelecimento`
+  private apiUrlFunc = `${this.baseApiUrl}api/loginFuncionarios`
 
   constructor(private http: HttpClient, private messageService: MessageService) {
 
     const token = localStorage.getItem('auth')
-    //const role = localStorage.getItem('role')
+    const tipo = localStorage.getItem('tipo')
     const id = Number(localStorage.getItem('id'));
     this._id.next(id!);
     this._isLoggedIn$.next(!!token)
-    //this._role.next(this.admin(role))
+    this._tipo.next(tipo)
   }
 
   async login(formData: any): Promise<Observable<any>> {
@@ -37,10 +39,11 @@ export class AuthService {
 
         this._isLoggedIn$.next(true)
         this._id.next(response.user.id)
+        this._tipo.next("Estab")
         //this._role.next(this.admin(response.user.tipo_usuario))
 
         localStorage.setItem('auth', response.token.token)
-        //localStorage.setItem('role', response.user.tipo_usuario)
+        localStorage.setItem('tipo', "Estab")
         localStorage.setItem('id', response.user.id)
 
         this.log(response.message)
@@ -52,6 +55,36 @@ export class AuthService {
       })
     )
   }
+
+
+  async loginFuncionarios(formData:any): Promise<Observable<any>>{
+
+    return this.http.post(this.apiUrlFunc, formData).pipe(
+      tap((response: any): any => {
+
+        this._isLoggedIn$.next(true)
+        this._id.next(response.user.id)
+        this._tipo.next("Func")
+        //this._role.next(this.admin(response.user.tipo_usuario))
+
+        localStorage.setItem('auth', response.token.token)
+        localStorage.setItem('tipo', "Func")
+        localStorage.setItem('id', response.user.id)
+
+        this.log(response.message)
+
+        
+      }), catchError((err: any): any => {
+        this.handleError(err.error)
+        return of()
+      })
+    )
+
+
+
+  }
+
+
 
   async logoff() {
 
