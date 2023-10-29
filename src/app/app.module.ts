@@ -27,6 +27,10 @@ import { NewServicesComponent } from './estabelecimentos/new-services/new-servic
 import { NewFuncionariosComponent } from './estabelecimentos/new-funcionarios/new-funcionarios.component';
 import { LoginFuncionariosComponent } from './funcionarios/login-funcionarios/login-funcionarios.component';
 import { LoginAdminComponent } from './administrativo/login-admin/login-admin.component';
+import { ListaComponent } from './administrativo/listaEstabelecimentos/lista/lista.component';
+import { EditEstabelecimentoComponent } from './estabelecimentos/edit-estabelecimento/edit-estabelecimento.component';
+import { FormEstabelecimentoComponent } from './estabelecimentos/formularios/form-estabelecimento/form-estabelecimento.component';
+import { NewEstabelecimentoComponent } from './estabelecimentos/new-estabelecimento/new-estabelecimento.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { LoginAdminComponent } from './administrativo/login-admin/login-admin.co
     NewServicesComponent,
     NewFuncionariosComponent,
     LoginFuncionariosComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    ListaComponent,
+    EditEstabelecimentoComponent,
+    FormEstabelecimentoComponent,
+    NewEstabelecimentoComponent,
   ],
   imports: [
     BrowserModule,

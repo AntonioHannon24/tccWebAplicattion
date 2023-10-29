@@ -30,6 +30,15 @@
 
                 <!--Rotas com autenticação-->
 
+
+                <!--Administradores-->
+
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="logado && tipo=='Admin'" routerLink="lista-estabelecimentos"
+                        routerLinkActive="active-link">Lista de estabelecimentos</a>
+                </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="seuEstabelecimento"
                         routerLinkActive="active-link">Seu Estabelecimento</a>

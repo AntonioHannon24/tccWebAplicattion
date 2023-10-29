@@ -8,7 +8,7 @@ export interface Estabelecimento {
     logo:string,
     cep:string,
     email:string,
-    cidade_id?:number,
+    cidade_id?:any,
     created_at?:string,
     update_at?:string,
     funcionario?:[{

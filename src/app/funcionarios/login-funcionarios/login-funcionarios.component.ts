@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class LoginFuncionariosComponent {
 
   constructor(private authservice: AuthService,
     private route: Router,
-    private location: Location) { }
+   ) { }
 
   ngOnInit(): void {
 
@@ -46,12 +45,6 @@ export class LoginFuncionariosComponent {
 
 
 
-  }
-
-
-  
-  voltar() {
-    this.location.back()
   }
 
   get email() {

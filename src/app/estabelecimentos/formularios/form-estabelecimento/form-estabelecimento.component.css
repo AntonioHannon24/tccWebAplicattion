@@ -1,0 +1,20 @@
+.fundo
+{
+  margin-top: 5em;
+  background-image: url("../../../../assets/happiDog.jpg");
+  min-height: 680px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.container
+{
+  min-height: 400px;
+  min-width: 400px;
+  opacity: .9;
+  background-color: #fff;
+  border: 1px solid black;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}

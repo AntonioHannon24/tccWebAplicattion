@@ -15,6 +15,9 @@ import { NewServicesComponent } from './estabelecimentos/new-services/new-servic
 import { NewFuncionariosComponent } from './estabelecimentos/new-funcionarios/new-funcionarios.component';
 import { LoginFuncionariosComponent } from './funcionarios/login-funcionarios/login-funcionarios.component';
 import { LoginAdminComponent } from './administrativo/login-admin/login-admin.component';
+import { ListaComponent } from './administrativo/listaEstabelecimentos/lista/lista.component';
+import { EditEstabelecimentoComponent } from './estabelecimentos/edit-estabelecimento/edit-estabelecimento.component';
+import { NewEstabelecimentoComponent } from './estabelecimentos/new-estabelecimento/new-estabelecimento.component';
 
 const routes: Routes = [
 
@@ -25,7 +28,8 @@ const routes: Routes = [
   {path: 'contato', component:ContatoComponent },
   {path: 'login', component:LoginComponent },
   {path: 'loginFuncionarios', component:LoginFuncionariosComponent },
-  {path: 'adminLogin', component:LoginAdminComponent },
+  {path: 'loginAdmin', component:LoginAdminComponent },
+  {path: 'new-estabelecimento', component:NewEstabelecimentoComponent },
 
 
 
@@ -41,6 +45,9 @@ const routes: Routes = [
   {path: 'edit-servicos/:id', component:EditServicosComponent },
   {path: 'new-funcionario/:id', component:NewFuncionariosComponent },
   {path: 'edit-funcionarios/:id', component:EditFuncionariosComponent },
+  {path: 'lista-estabelecimentos', component:ListaComponent },
+  {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent },
+
   
 
 

@@ -21,6 +21,7 @@ export class AuthService {
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/loginEstabelecimento`
   private apiUrlFunc = `${this.baseApiUrl}api/loginFuncionarios`
+  private apiUrlAdmin = `${this.baseApiUrl}api/loginAdmin`
 
   constructor(private http: HttpClient, private messageService: MessageService) {
 
@@ -84,6 +85,29 @@ export class AuthService {
 
   }
 
+  async loginAdmin(formData:any): Promise<Observable<any>>{
+
+    return this.http.post(this.apiUrlAdmin, formData).pipe(
+      tap((response: any): any => {
+
+        this._isLoggedIn$.next(true)
+        this._id.next(response.user.id)
+        this._tipo.next("Admin")
+        //this._role.next(this.admin(response.user.tipo_usuario))
+
+        localStorage.setItem('auth', response.token.token)
+        localStorage.setItem('tipo', "Admin")
+        localStorage.setItem('id', response.user.id)
+        this.log(response.message)
+      }), catchError((err: any): any => {
+        this.handleError(err.error)
+        return of()
+      })
+    )
+
+
+
+  }
 
 
   async logoff() {
