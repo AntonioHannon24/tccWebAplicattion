@@ -1,0 +1,40 @@
+<div class="fundoForm d-flex justify-content-center align-items-center">
+    <div class="row container containerForm">
+        <h1 class="text-center">{{title}}</h1>
+        <form (ngSubmit)="submit()"[formGroup]="noticiaForm" #formDir="ngForm">
+            
+            <input type="hidden" formControlName="id" />
+
+            <div class="mb-3 campos">
+                <label for="titulo" class="form-label">titulo</label>
+                <input type="text" class="form-control" formControlName="titulo" required>
+
+                <div class="form-text" *ngIf="titulo.invalid && formDir.submitted">O titulo é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control" formControlName="descricao" required />
+                <div *ngIf="descricao.invalid && formDir.submitted" class="form-text">A descrição é obrigatória</div>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="link">Link</label>
+                <input type="text" class="form-control" formControlName="link" required />
+                <div *ngIf="(link.invalid && formDir.submitted)" class="form-text">O link é obrigatório</div>
+            </div>
+
+            <div class="mb-3 campos"><!--logo-->
+                <label for="image">Imagem</label>
+                <input type="file" style="margin-left: 5%;" (change)="onFileSelected($event)">
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="submit">{{btnText}}</button>
+
+        </form>
+        <button (click)="voltar()" class="botaoVoltar">Voltar</button>
+    </div>
+</div>
+
+
+

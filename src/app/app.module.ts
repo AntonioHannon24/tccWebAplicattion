@@ -36,6 +36,9 @@ import { UsuariosComponent } from './administrativo/formularios/usuarios/usuario
 import { EditUserComponent } from './administrativo/edit-user/edit-user.component';
 import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/lista-funcionarios.component';
 import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
+import { NoticiasFormComponent } from './administrativo/formularios/noticias-form/noticias-form.component';
+import { NewNoticiasComponent } from './administrativo/new-noticias/new-noticias.component';
+import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-no
     EditUserComponent,
     ListaFuncionariosComponent,
     ListaNoticiasComponent,
+    NoticiasFormComponent,
+    NewNoticiasComponent,
+    EditNoticiasComponent,
   ],
   imports: [
     BrowserModule,

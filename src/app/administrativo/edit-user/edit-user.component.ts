@@ -42,7 +42,7 @@ export class EditUserComponent implements OnInit{
     formData.append("cpf",usuarioData.cpf)
     formData.append("password",usuarioData.password)
     formData.append("cidade_id",usuarioData.cidade_id)
-     console.log(formData)  
+    
     await this.usuarioService.updateUsuario(id!,formData).subscribe(()=>{this.goHome()})
     
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 
@@ -16,19 +16,15 @@ export class NewEstabelecimentoComponent  implements OnInit{
 
   title: string = "Novo Petshop"
   btnText: string = "Go"
-  id!: Number
 
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
     private route: Router,
-    private router: ActivatedRoute,
     private messageService: MessageService
   ) { }
 
-  ngOnInit(): void {
-    this.id = Number(this.router.snapshot.paramMap.get('id'))
-  }
+  ngOnInit(): void {}
 
   async createHandle(estabelecimento: Estabelecimento) {
     const formData = new FormData();

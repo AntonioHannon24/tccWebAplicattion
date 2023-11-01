@@ -24,6 +24,9 @@ import { EditUserComponent } from './administrativo/edit-user/edit-user.componen
 import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/lista-funcionarios.component';
 import { admGuard } from './guardas/administradores/adm.guard';
 import { estabGuard } from './guardas/estabelecimentos/estab.guard';
+import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
+import { NewNoticiasComponent } from './administrativo/new-noticias/new-noticias.component';
+import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
 
 const routes: Routes = [
 
@@ -56,7 +59,9 @@ const routes: Routes = [
   {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent,canActivate: [admGuard]},
   {path: 'edit-usuario/:id', component:EditUserComponent,canActivate: [admGuard] },
   {path: 'lista-funcionarios/:id', component:ListaFuncionariosComponent,canActivate: [admGuard]},
-  
+  {path: 'lista-noticias', component:ListaNoticiasComponent,canActivate: [admGuard]},
+  {path: 'new-noticias', component:NewNoticiasComponent,canActivate: [admGuard]},
+  {path: 'edit-noticias/:id', component:EditNoticiasComponent,canActivate: [admGuard]},
 
 
 ];

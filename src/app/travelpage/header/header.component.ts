@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit{
 
     this.authService.tipo.subscribe(valor => {
       this.tipo = valor;
-      console.log(valor)
+  
     });
     
   }

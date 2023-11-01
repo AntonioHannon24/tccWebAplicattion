@@ -33,7 +33,7 @@ export class FormEstabelecimentoComponent {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.estabdata)
+
 
     this.cidadeService.getAllCidades().subscribe((items) => {
       const data = items.data

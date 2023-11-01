@@ -44,7 +44,7 @@ export class LoginComponent {
     })
 
 
-//console.log('teste')
+
   }
 
 

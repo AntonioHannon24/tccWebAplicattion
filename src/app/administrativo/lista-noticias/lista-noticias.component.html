@@ -1,1 +1,35 @@
-<p>lista-noticias works!</p>
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de funcionarios cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>Titulo</td>
+                    <td>Descrição</td>
+                    <td>Link</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let not of noticicas! | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th scope="row">{{ not.id }}</th>
+                    <td>{{ not.titulo }}</td>
+                    <td>{{ not.descricao }}</td>
+                    <td>{{ not.link }}</td>
+                    <td>
+                        <button class="botoes" (click)="removeNoticia(not.id!)"><i
+                                class="bi bi-trash"></i></button>
+                        <button class="botoes" (click)="editar(not.id!)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <div>
+            <a routerLink="/new-noticias">Cadastre seus Funcionarios</a><br>
+        </div>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>
