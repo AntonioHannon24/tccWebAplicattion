@@ -1,0 +1,32 @@
+
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de usuários cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>Nome</td>
+                    <td>E-mail</td>
+                    <td>Tipo</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let user of usuarios | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.nome }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.tipo_usuario }}</td>
+                    <td>
+                        <button class="botoes" (click)="removeUser(user.id!)"><i class="bi bi-trash"></i></button>
+                        <button class="botoes" (click)="editar(user.id!)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

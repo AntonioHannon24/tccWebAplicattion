@@ -31,6 +31,11 @@ import { ListaComponent } from './administrativo/listaEstabelecimentos/lista/lis
 import { EditEstabelecimentoComponent } from './estabelecimentos/edit-estabelecimento/edit-estabelecimento.component';
 import { FormEstabelecimentoComponent } from './estabelecimentos/formularios/form-estabelecimento/form-estabelecimento.component';
 import { NewEstabelecimentoComponent } from './estabelecimentos/new-estabelecimento/new-estabelecimento.component';
+import { ListaUsuariosComponent } from './administrativo/lista-usuarios/lista-usuarios.component';
+import { UsuariosComponent } from './administrativo/formularios/usuarios/usuarios.component';
+import { EditUserComponent } from './administrativo/edit-user/edit-user.component';
+import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/lista-funcionarios.component';
+import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +64,11 @@ import { NewEstabelecimentoComponent } from './estabelecimentos/new-estabelecime
     EditEstabelecimentoComponent,
     FormEstabelecimentoComponent,
     NewEstabelecimentoComponent,
+    ListaUsuariosComponent,
+    UsuariosComponent,
+    EditUserComponent,
+    ListaFuncionariosComponent,
+    ListaNoticiasComponent,
   ],
   imports: [
     BrowserModule,

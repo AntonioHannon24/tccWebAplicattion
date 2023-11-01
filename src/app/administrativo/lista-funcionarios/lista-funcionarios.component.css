@@ -1,0 +1,15 @@
+.botoes {
+    border: 0;
+    background-color: transparent;
+    margin-left: 10px;
+}
+.botoes:hover {
+    color: var(--primary-color);
+    transition: 1s;
+}
+.tabela {
+    min-height: 600px;
+}
+.title {
+    padding: 20px;
+}

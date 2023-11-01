@@ -57,7 +57,6 @@ export class AuthService {
     )
   }
 
-
   async loginFuncionarios(formData:any): Promise<Observable<any>>{
 
     return this.http.post(this.apiUrlFunc, formData).pipe(
@@ -108,7 +107,6 @@ export class AuthService {
 
 
   }
-
 
   async logoff() {
 

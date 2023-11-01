@@ -18,6 +18,12 @@ import { LoginAdminComponent } from './administrativo/login-admin/login-admin.co
 import { ListaComponent } from './administrativo/listaEstabelecimentos/lista/lista.component';
 import { EditEstabelecimentoComponent } from './estabelecimentos/edit-estabelecimento/edit-estabelecimento.component';
 import { NewEstabelecimentoComponent } from './estabelecimentos/new-estabelecimento/new-estabelecimento.component';
+import { ListaUsuariosComponent } from './administrativo/lista-usuarios/lista-usuarios.component';
+import { UsuariosComponent } from './administrativo/formularios/usuarios/usuarios.component';
+import { EditUserComponent } from './administrativo/edit-user/edit-user.component';
+import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/lista-funcionarios.component';
+import { admGuard } from './guardas/administradores/adm.guard';
+import { estabGuard } from './guardas/estabelecimentos/estab.guard';
 
 const routes: Routes = [
 
@@ -37,17 +43,19 @@ const routes: Routes = [
 
   //rotas com autenticação
 
-  {path: 'seuEstabelecimento', component:SeuEstabelecimentoComponent },
-  {path: 'agenda', component:AgendaComponent },
-  {path: 'funcionarios', component:FuncionariosComponent },
-  {path: 'servicos', component:ServicosComponent },
-  {path: 'new-servico/:id', component:NewServicesComponent },
-  {path: 'edit-servicos/:id', component:EditServicosComponent },
-  {path: 'new-funcionario/:id', component:NewFuncionariosComponent },
-  {path: 'edit-funcionarios/:id', component:EditFuncionariosComponent },
-  {path: 'lista-estabelecimentos', component:ListaComponent },
-  {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent },
-
+  {path: 'seuEstabelecimento', component:SeuEstabelecimentoComponent,canActivate:[estabGuard] },
+  {path: 'agenda', component:AgendaComponent,canActivate:[estabGuard] },
+  {path: 'funcionarios', component:FuncionariosComponent,canActivate:[estabGuard] },
+  {path: 'servicos', component:ServicosComponent,canActivate:[estabGuard] },
+  {path: 'new-servico/:id', component:NewServicesComponent,canActivate:[estabGuard] },
+  {path: 'edit-servicos/:id', component:EditServicosComponent,canActivate:[estabGuard] },
+  {path: 'new-funcionario/:id', component:NewFuncionariosComponent,canActivate:[estabGuard] },
+  {path: 'edit-funcionarios/:id', component:EditFuncionariosComponent,canActivate:[estabGuard] },
+  {path: 'lista-estabelecimentos', component:ListaComponent,canActivate: [admGuard] },
+  {path: 'lista-usuarios', component:ListaUsuariosComponent,canActivate: [admGuard] },
+  {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent,canActivate: [admGuard]},
+  {path: 'edit-usuario/:id', component:EditUserComponent,canActivate: [admGuard] },
+  {path: 'lista-funcionarios/:id', component:ListaFuncionariosComponent,canActivate: [admGuard]},
   
 
 

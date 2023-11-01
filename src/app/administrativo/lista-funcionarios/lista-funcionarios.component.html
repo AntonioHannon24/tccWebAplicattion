@@ -1,0 +1,36 @@
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de funcionarios cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>Nome</td>
+                    <td>E-mail</td>
+                    <td>Função</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let func of estabelecimento?.funcionario! | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th scope="row">{{ func.id }}</th>
+                    <td>{{ func.nome }}</td>
+                    <td>{{ func.email }}</td>
+                    <td>{{ func.funcao }}</td>
+                    <td>
+                        <button class="botoes" (click)="removeFuncionario(func.id!)"><i
+                                class="bi bi-trash"></i></button>
+                        <button class="botoes" (click)="editFuncionario(func.id!)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <div>
+            <a routerLink="/new-funcionario/{{this.id}}">Cadastre seus Funcionarios</a><br>
+        </div>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <button (click)="voltar()" class="botaoVoltar">Voltar</button>
+    </div>
+</div>

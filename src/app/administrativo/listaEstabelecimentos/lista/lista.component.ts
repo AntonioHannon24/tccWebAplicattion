@@ -4,7 +4,7 @@ import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabe
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { AuthService } from 'src/app/Services/Auth/auth.service';
+
 
 @Component({
   selector: 'app-lista',
@@ -51,7 +51,9 @@ export class ListaComponent implements OnInit{
   editar(id:number){
     this.router.navigate([`/edit-estabelecimentos/${id}`])
   }
-
+  listaFuncionarios(id:number){
+    this.router.navigate([`/lista-funcionarios/${id}`])
+  }
 
 }
 
