@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Response } from 'src/app/interfaces/Response';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 
@@ -38,7 +38,14 @@ export class EstabelecimentoService {
 
   createEstab(formData: FormData): Observable<FormData> {
 
-    return this.http.post<FormData>(this.apiUrl, formData).pipe(catchError(err => {
+    return this.http.post<FormData>(this.apiUrl, formData).pipe(
+
+      tap((response: any): any => {
+
+        this.log(response.message)
+        
+      }),
+      catchError(err => {
       this.handleError(err.error)
       return of()
     }))

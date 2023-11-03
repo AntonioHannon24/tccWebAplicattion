@@ -37,8 +37,8 @@ import { EditUserComponent } from './administrativo/edit-user/edit-user.componen
 import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/lista-funcionarios.component';
 import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
 import { NoticiasFormComponent } from './administrativo/formularios/noticias-form/noticias-form.component';
-import { NewNoticiasComponent } from './administrativo/new-noticias/new-noticias.component';
 import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
+import { ListaServicosComponent } from './administrativo/lista-servicos/lista-servicos.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +73,8 @@ import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-notic
     ListaFuncionariosComponent,
     ListaNoticiasComponent,
     NoticiasFormComponent,
-    NewNoticiasComponent,
     EditNoticiasComponent,
+    ListaServicosComponent,
   ],
   imports: [
     BrowserModule,

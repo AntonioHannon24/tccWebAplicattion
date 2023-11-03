@@ -18,16 +18,11 @@
                     <td>{{ not.descricao }}</td>
                     <td>{{ not.link }}</td>
                     <td>
-                        <button class="botoes" (click)="removeNoticia(not.id!)"><i
-                                class="bi bi-trash"></i></button>
                         <button class="botoes" (click)="editar(not.id!)"><i class="bi bi-pen"></i></button>
                     </td>
                 </tr>
             </thead>
         </table>
-        <div>
-            <a routerLink="/new-noticias">Cadastre seus Funcionarios</a><br>
-        </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>

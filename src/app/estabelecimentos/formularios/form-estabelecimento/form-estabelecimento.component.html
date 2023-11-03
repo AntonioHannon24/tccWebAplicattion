@@ -43,6 +43,15 @@
                     <label for="logo">Logo</label>
                     <input type="file" style="margin-left: 5%;" (change)="onFileSelected($event)">
                 </div>
+                <div class="mb-3 campos">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" formControlName="password" required />
+                </div>
+                <div class="mb-3 campos">
+                    <label for="exampleInputPassword1" class="form-label">Confirmar Senha</label>
+                    <input type="password" class="form-control" formControlName="password2" required />
+                    <div *ngIf="(formDir.submitted && conferir() != true)" class="form-text">As senhas não coencidem</div>
+                </div>
                 <div class="mb-3 campos"><!--cidade-->
                     <label for="cidade_id">Cidade</label>
                     <select class="form-select" formControlName="cidade_id">

@@ -25,8 +25,8 @@ import { ListaFuncionariosComponent } from './administrativo/lista-funcionarios/
 import { admGuard } from './guardas/administradores/adm.guard';
 import { estabGuard } from './guardas/estabelecimentos/estab.guard';
 import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
-import { NewNoticiasComponent } from './administrativo/new-noticias/new-noticias.component';
 import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
+import { ListaServicosComponent } from './administrativo/lista-servicos/lista-servicos.component';
 
 const routes: Routes = [
 
@@ -50,17 +50,19 @@ const routes: Routes = [
   {path: 'agenda', component:AgendaComponent,canActivate:[estabGuard] },
   {path: 'funcionarios', component:FuncionariosComponent,canActivate:[estabGuard] },
   {path: 'servicos', component:ServicosComponent,canActivate:[estabGuard] },
+  {path: 'lista-servicos/:id', component:ListaServicosComponent,canActivate:[admGuard] },
   {path: 'new-servico/:id', component:NewServicesComponent,canActivate:[estabGuard] },
+  {path: 'new-servicos/:id', component:NewServicesComponent,canActivate:[admGuard] },
   {path: 'edit-servicos/:id', component:EditServicosComponent,canActivate:[estabGuard] },
   {path: 'new-funcionario/:id', component:NewFuncionariosComponent,canActivate:[estabGuard] },
   {path: 'edit-funcionarios/:id', component:EditFuncionariosComponent,canActivate:[estabGuard] },
   {path: 'lista-estabelecimentos', component:ListaComponent,canActivate: [admGuard] },
   {path: 'lista-usuarios', component:ListaUsuariosComponent,canActivate: [admGuard] },
   {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent,canActivate: [admGuard]},
+  {path: 'edit-seuEstabelecimento/:id', component:EditEstabelecimentoComponent,canActivate: [estabGuard]},
   {path: 'edit-usuario/:id', component:EditUserComponent,canActivate: [admGuard] },
   {path: 'lista-funcionarios/:id', component:ListaFuncionariosComponent,canActivate: [admGuard]},
   {path: 'lista-noticias', component:ListaNoticiasComponent,canActivate: [admGuard]},
-  {path: 'new-noticias', component:NewNoticiasComponent,canActivate: [admGuard]},
   {path: 'edit-noticias/:id', component:EditNoticiasComponent,canActivate: [admGuard]},
 
 

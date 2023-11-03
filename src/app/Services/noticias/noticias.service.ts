@@ -25,14 +25,7 @@ export class NoticiasService {
       return this.http.get<Response<Noticias>>(url)
     }
   
-    removeNoticas(id:number){
-      const url = `${this.apiUrl}/${id}`
-      return this.http.delete(url)
-    }
-    createNoticias(formData:FormData):Observable< FormData >{
-      return this.http.post<FormData>(this.apiUrl,formData)
-    
-    }
+
     updateNoticias(id:number,formData:FormData):Observable<FormData>{
 
       const url =`${this.apiUrl}/${id}`

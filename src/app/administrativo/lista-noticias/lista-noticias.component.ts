@@ -32,12 +32,6 @@ export class ListaNoticiasComponent implements OnInit {
     })
   }
 
-  async removeNoticia(id:number){
-    await this.noticiasService.removeNoticas(id).subscribe()
-    this.router.navigate(['']).then(()=>{
-      this.messageService.add('Noticia deletada com sucesso!!')
-    })
-  }
   editar(id:number){
     this.router.navigate([`/edit-noticias/${id}`])
   }

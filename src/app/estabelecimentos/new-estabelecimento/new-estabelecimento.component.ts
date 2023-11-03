@@ -10,12 +10,12 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
   templateUrl: './new-estabelecimento.component.html',
   styleUrls: ['./new-estabelecimento.component.css']
 })
-export class NewEstabelecimentoComponent  implements OnInit{
+export class NewEstabelecimentoComponent implements OnInit {
 
 
 
   title: string = "Novo Petshop"
-  btnText: string = "Go"
+  btnText: string = "Novo Estabelecimento"
 
 
   constructor(
@@ -24,35 +24,34 @@ export class NewEstabelecimentoComponent  implements OnInit{
     private messageService: MessageService
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async createHandle(estabelecimento: Estabelecimento) {
     const formData = new FormData();
 
-    formData.append("nome",estabelecimento.nome)
-    formData.append("cnpj",estabelecimento.cnpj)
-    formData.append("endereco",estabelecimento.endereco)
-    formData.append("telefone",estabelecimento.telefone)
-    formData.append("logo",estabelecimento.logo)
-    formData.append("cep",estabelecimento.cep)
-    formData.append("email",estabelecimento.email)
-    formData.append("cidadeId",estabelecimento.cidade_id)
-    
+    formData.append("nome", estabelecimento.nome)
+    formData.append("cnpj", estabelecimento.cnpj)
+    formData.append("endereco", estabelecimento.endereco)
+    formData.append("telefone", estabelecimento.telefone)
+    formData.append("logo", estabelecimento.logo)
+    formData.append("cep", estabelecimento.cep)
+    formData.append("email", estabelecimento.email)
+    formData.append("cidadeId", estabelecimento.cidade_id)
+    formData.append("password", estabelecimento.password)
+
     if (estabelecimento.logo) {
       formData.append("logo", estabelecimento.logo)
     }
 
 
 
-    await this.estabelecimentoService.createEstab(formData).subscribe(() => { this.goHome()})
+    await this.estabelecimentoService.createEstab(formData).subscribe(() => { this.goHome() })
   }
 
   goHome() {
-    this.route.navigate(['']).then(() => {
-      this.messageService.add("Estabelecimento criado com sucesso!!")
-    }
-    )
-
+    this.route.navigate([''])
   }
 
 }
+
+

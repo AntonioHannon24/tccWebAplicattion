@@ -54,6 +54,7 @@ export class FormEstabelecimentoComponent {
       logo: new FormControl(''),
       cep: new FormControl(this.estabdata ? this.estabdata.cep : '', [Validators.required]),
       email: new FormControl(this.estabdata ? this.estabdata.email : '', [Validators.required]),
+      password:new FormControl(this.estabdata ? this.estabdata.password: '',[Validators.required]),
       cidade_id: new FormControl(this.estabdata ? this.estabdata.cidade_id: '', [Validators.required],),
 
 
@@ -105,6 +106,20 @@ export class FormEstabelecimentoComponent {
 
   get usuario_id() {
     return this.estabForm.get('usuario_id')!;
+  }
+
+  get password() {
+    return this.estabForm.get('password')!;
+  }
+
+  conferir() {
+    const senha = this.estabForm.get('password')!.value;
+    const confirmarSenha = this.estabForm.get('password2')!.value;
+    if (senha === confirmarSenha) {
+      return true
+    } else {
+      return false
+    }
   }
 
 

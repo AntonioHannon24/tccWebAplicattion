@@ -1,44 +1,36 @@
 <div class="fundo">
     <div class="container row align-items-start">
-        <div class="coluna1 col-lg-6 content text-light">
-            <h1 class="h1">teste</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui perferendis expedita repudiandae
-                itaque eum. Modi voluptate mollitia nulla inventore eligendi, culpa blanditiis, officiis maxime eaque
-                quibusdam, facere architecto aut?
-            </p>
+        <div class="coluna1 col-lg-6 content text-light"
+            style="background-image: url('{{baseApiUrl}}uploads//{{noticias1?.image}}');">
+            <h1 class="h1">{{noticias1?.titulo}}</h1>
+            <p>{{noticias1?.descricao}}</p>
             <div class="link">
-                <a href="*">teste <i class="bi bi-arrow-right"></i></a>
+                <a href="{{noticias1?.link}}" target="_blank">Link <i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
+
         <div class="col-lg-5 coluna2 ">
-            <a href="*">
-                <div class="bg-primary caixa">
-                    <h1 class="h1">teste</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui perferendis expedita
-                        repudiandae
-                        itaque eum. Modi voluptate mollitia nulla inventore eligendi, culpa blanditiis, officiis maxime
-                        eaque
-                        quibusdam, facere architecto aut?
-                    </p>
-                    teste <i class="bi bi-arrow-right"></i>
+            <a href="{{noticias2?.link}}" target="_blank">
+                <div class="bg-primary caixa"
+                    style="background-image: url('{{baseApiUrl}}uploads//{{noticias2?.image}}');">
+                    <h1 class="h1">{{noticias2?.titulo}}</h1>
+                    <p>{{noticias2?.descricao}}</p>
+                    Link <i class="bi bi-arrow-right"></i>
                 </div>
             </a>
-            <a href="*">
-                <div class="bg-primary caixa">
-                    <h1 class="h1">teste</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui perferendis expedita
-                        repudiandae
-                        itaque eum. Modi voluptate mollitia nulla inventore eligendi, culpa blanditiis, officiis maxime
-                        eaque
-                        quibusdam, facere architecto aut?
-                    </p>
-                    teste <i class="bi bi-arrow-right"></i>
+            <a href="{{noticias3?.link}}" target="_blank">
+                <div class="bg-primary caixa"
+                    style="background-image: url('{{baseApiUrl}}uploads//{{noticias3?.image}}');">
+                    <h1 class="h1">{{noticias3?.titulo}}</h1>
+                    <p>{{noticias3?.descricao}}</p>
+                    Link <i class="bi bi-arrow-right"></i>
                 </div>
             </a>
         </div>
     </div>
 </div>
-<div class="container carrosel">
+
+<div class="container carrosel" style="width: 500px; ">
     <div id="carouselExampleDark" class="carousel carousel-dark slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -48,86 +40,50 @@
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
                 aria-label="Slide 3"></button>
         </div>
+
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-                <img src="../../../assets/happiDog.jpg" class="d-block w-100" alt="...">
+                <img src="{{baseApiUrl}}uploads//{{noticias4?.image}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block text-light">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                    <h5>{{noticias4?.titulo}}</h5>
+                    <p>{{noticias4?.descricao}}</p>
+                    <a href="{{noticias4?.link}}" target="_blank">Link</a>
                 </div>
             </div>
-            <div class="carousel-item " data-bs-interval="2000">
-                <img src="../../../assets/f-dog-catching-frisbee.jpg" class="d-block w-100" alt="...">
+
+            <div class="carousel-item " data-bs-interval="2000" *ngFor="let not of noticias5">
+                <img src="{{baseApiUrl}}uploads//{{not.image}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block text-dark">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../../../assets/natureza.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block text-light">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                    <h5>{{not.titulo}}</h5>
+                    <p>{{not.descricao}}</p>
+                    <a href="{{not.link}}" target="_blank">link</a>
                 </div>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Anterior</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Proximo</span>
         </button>
     </div>
-
 </div>
 
-
-<div class="container d-flex align-items-center justify-content-center row">
-    <div class="card mb-3" style="max-width: 800px;">
+<div class="container d-flex align-items-center justify-content-center row mt-5">
+    <div class="card mb-3" style="max-width: 800px;" *ngFor="let not of noticias6">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="{{baseApiUrl}}uploads//{{not.image}}" class="img-fluid rounded-start"
+                    style="max-height: 180px;">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    <h5 class="card-title">{{not.titulo}}</h5>
+                    <p class="card-text">{{not.descricao}}</p>
+                    <p><a href="{{not.link}}" target="_blank">link</a></p>
+                    <p class="card-text"><small class="text-body-secondary">{{not.created_at}}</small></p>
                 </div>
             </div>
         </div>
