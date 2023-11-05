@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   templateUrl: './form-estabelecimento.component.html',
   styleUrls: ['./form-estabelecimento.component.css']
 })
-export class FormEstabelecimentoComponent {
+export class FormEstabelecimentoComponent implements OnInit{
 
 
   @Output() onSubmit = new EventEmitter<Estabelecimento>()

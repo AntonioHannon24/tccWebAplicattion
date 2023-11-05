@@ -1,0 +1,30 @@
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de serviços cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>Nome</td>
+                    <td>E-mail</td>
+                    <td>Assunto</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let cont of contatos | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th scope="row">{{ cont.id }}</th>
+                    <td>{{ cont.nome }}</td>
+                    <td>{{ cont.email }}</td>
+                    <td>{{ cont.assunto }}</td>
+                    <td>
+                        <button class="botoes" (click)="editar(cont.id)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<div *ngIf="contato">
+    <app-form-contatos (onSubmit)="editHandler($event)" [btnText]="btnText" [title]="title" [contatoData]="contato"></app-form-contatos>
+</div>

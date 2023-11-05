@@ -27,6 +27,8 @@ import { estabGuard } from './guardas/estabelecimentos/estab.guard';
 import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-noticias.component';
 import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
 import { ListaServicosComponent } from './administrativo/lista-servicos/lista-servicos.component';
+import { ListaContatosComponent } from './administrativo/lista-contatos/lista-contatos.component';
+import { EditContatosComponent } from './administrativo/edit-contatos/edit-contatos.component';
 
 const routes: Routes = [
 
@@ -56,7 +58,9 @@ const routes: Routes = [
   {path: 'edit-servicos/:id', component:EditServicosComponent,canActivate:[estabGuard] },
   {path: 'new-funcionario/:id', component:NewFuncionariosComponent,canActivate:[estabGuard] },
   {path: 'edit-funcionarios/:id', component:EditFuncionariosComponent,canActivate:[estabGuard] },
+  {path: 'edit-contatos/:id', component:EditContatosComponent,canActivate:[admGuard] },
   {path: 'lista-estabelecimentos', component:ListaComponent,canActivate: [admGuard] },
+  {path: 'lista-contatos', component:ListaContatosComponent,canActivate: [admGuard] },
   {path: 'lista-usuarios', component:ListaUsuariosComponent,canActivate: [admGuard] },
   {path: 'edit-estabelecimentos/:id', component:EditEstabelecimentoComponent,canActivate: [admGuard]},
   {path: 'edit-seuEstabelecimento/:id', component:EditEstabelecimentoComponent,canActivate: [estabGuard]},

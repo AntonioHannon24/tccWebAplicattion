@@ -39,6 +39,10 @@ import { ListaNoticiasComponent } from './administrativo/lista-noticias/lista-no
 import { NoticiasFormComponent } from './administrativo/formularios/noticias-form/noticias-form.component';
 import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-noticias.component';
 import { ListaServicosComponent } from './administrativo/lista-servicos/lista-servicos.component';
+import { FormContatoComponent } from './pages/formularios/contato/form-contato/form-contato.component';
+import { ListaContatosComponent } from './administrativo/lista-contatos/lista-contatos.component';
+import { FormContatosComponent } from './administrativo/formularios/form-contatos/form-contatos.component';
+import { EditContatosComponent } from './administrativo/edit-contatos/edit-contatos.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +79,10 @@ import { ListaServicosComponent } from './administrativo/lista-servicos/lista-se
     NoticiasFormComponent,
     EditNoticiasComponent,
     ListaServicosComponent,
+    FormContatoComponent,
+    ListaContatosComponent,
+    FormContatosComponent,
+    EditContatosComponent,
   ],
   imports: [
     BrowserModule,

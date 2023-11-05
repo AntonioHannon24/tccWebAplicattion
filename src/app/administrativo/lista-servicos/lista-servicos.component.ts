@@ -3,7 +3,6 @@ import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
-import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { Location } from '@angular/common';
 
