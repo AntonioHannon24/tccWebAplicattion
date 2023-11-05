@@ -19,6 +19,7 @@ export class FormContatosComponent {
   @Input() contatoData: Contato | null = null;
 
   estado:string = ""
+  opcaoSelecionada:string = ""
   
   constructor() { }
 
@@ -32,6 +33,7 @@ export class FormContatosComponent {
     })
 
     this.estado= this.contatoData?.estado == "1" ? "Novo" : ""
+    this.opcaoSelecionada = "1"
   }
 
   async submit() {
