@@ -1,1 +1,37 @@
-<p>agenda works!</p>
+<div class="fundoForm">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="selected"></mat-calendar>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 divLista">
+                    <table class="table">
+                        <thead>
+                            <tr>
+   
+                                <td>Nome</td>
+                                <td>E-mail</td>
+                                <td>Função</td>
+                                <td>Painel</td>
+                            </tr>
+                            <tr>
+                                <td>teste</td>
+                                <td>teste2</td>
+                                <td>teste3</td>
+                                <td>
+                                    <button class="botoes"><i class="bi bi-trash"></i></button>
+                                    <button class="botoes"><i class="bi bi-pen"></i></button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
