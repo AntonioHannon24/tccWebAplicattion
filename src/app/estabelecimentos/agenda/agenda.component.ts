@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,8 +6,14 @@ import { Component } from '@angular/core';
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.css']
 })
-export class AgendaComponent {
+export class AgendaComponent implements OnInit {
 
   selected: Date | null | undefined;
+
+  constructor(){}
+
+  ngOnInit(): void {
+    
+  }
 
 }

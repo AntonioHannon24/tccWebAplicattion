@@ -5,7 +5,6 @@ export interface Cidade {
     created_at?:string,
     update_at?:string,
     estabelecimento?:[{
-
         id?:number,
         nome:string,
         cnpj:string,
