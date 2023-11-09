@@ -42,14 +42,6 @@ export class NoticiasComponent implements OnInit {
         }
       }
 
-      console.log('Notícias 1:', this.noticias1);
-      console.log('Notícias 2:', this.noticias2);
-      console.log('Notícias 3:', this.noticias3);
-      console.log('Notícias 4:', this.noticias4);
-      console.log('Notícias 5:', this.noticias5);
-      console.log('Notícias 6:', this.noticias6);
-
-
     })
   }
 

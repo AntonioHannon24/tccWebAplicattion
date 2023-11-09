@@ -27,7 +27,7 @@ export class UsuariosComponent implements OnInit{
   constructor(private cidadeService: CidadeService, private location:Location) { }
 
   ngOnInit(): void {
-    console.log(this.userData)
+   
     this.cidadeService.getAllCidades().subscribe((items) => {
       const data = items.data
       data.map((items) => {

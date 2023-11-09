@@ -16,6 +16,7 @@ export class AgendaService {
   private apiUrl = `${this.baseApiUrl}api/agendamentos`
   private agendaEstabelecimentos = `${this.baseApiUrl}api/agendaEstabelecimentos`
   private agendaFuncionarios = `${this.baseApiUrl}api/agendaFuncionarios`
+  private agendaDataEstabelecimentos = `${this.baseApiUrl}api/agendaDataEstabelecimento`
 
   constructor(
     private http:HttpClient,
@@ -36,13 +37,19 @@ export class AgendaService {
     return this.http.put<FormData>(url,formData)
   }
 
-  getAgendaEstabelecimento(id:number):Observable<Response<Agenda>>{
+  getAgendaEstabelecimento(id:number):Observable<Response<Agenda[]>>{
     const url =`${this.agendaEstabelecimentos}/${id}`
-    return this.http.get<Response<Agenda>>(url)
+    return this.http.get<Response<Agenda[]>>(url)
   }
   getAgendaFuncionario(id:number):Observable<Response<Agenda>>{
     const url =`${this.agendaFuncionarios}/${id}`
     return this.http.get<Response<Agenda>>(url)
+  }
+
+  agendaDataEstabelecimento(id:number,date:string):Observable<Response<Agenda[]>>{
+    const url =`${this.agendaDataEstabelecimentos}/${id}/${date}`
+    console.log(url)
+    return this.http.get<Response<Agenda[]>>(url)
   }
 
 

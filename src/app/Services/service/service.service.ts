@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Response } from 'src/app/interfaces/Response';
 import { Servicos } from 'src/app/interfaces/Servicos';
-import { MessageService } from '../MessageServices/message.service';
 
 
 @Injectable({
@@ -18,7 +17,6 @@ export class ServiceService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
   ) { }
 
 

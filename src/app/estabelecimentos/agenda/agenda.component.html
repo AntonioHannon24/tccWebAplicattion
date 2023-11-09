@@ -11,6 +11,28 @@
                             <h4 class="modal-title pull-left">Dia selecionado</h4>
                         </div>
                         <div class="modal-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                        <td>Data</td>
+                                        <td>Status</td>
+                                        <td>Funcionario</td>
+                                        <td>Pet</td>
+                                        <td>Painel</td>
+                                    </tr>
+                                    <tr *ngFor="let agenda of agenda">
+                                        <td>{{agenda.data_hora}}</td>
+                                        <td>{{agenda.status}}</td>
+                                        <td>{{agenda.funcionario_id}}</td>
+                                        <td>{{agenda.pet_id}}</td>
+                                        <td>
+                                            <button class="botoes"><i class="bi bi-trash"></i></button>
+                                            <button class="botoes"><i class="bi bi-pen"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
@@ -21,19 +43,22 @@
 
             <div class="col-md-6">
                 <div class="p-3 divLista">
+                    <h1>Todas as agendas cadastradas</h1>
                     <table class="table">
                         <thead>
                             <tr>
 
-                                <td>Nome</td>
-                                <td>E-mail</td>
-                                <td>Função</td>
+                                <td>Data</td>
+                                <td>Status</td>
+                                <td>Funcionario</td>
+                                <td>Pet</td>
                                 <td>Painel</td>
                             </tr>
-                            <tr>
-                                <td>teste</td>
-                                <td>teste2</td>
-                                <td>teste3</td>
+                            <tr *ngFor="let agenda of FullAgenda">
+                                <td>{{agenda.data_hora}}</td>
+                                <td>{{agenda.status}}</td>
+                                <td>{{agenda.funcionario_id}}</td>
+                                <td>{{agenda.pet_id}}</td>
                                 <td>
                                     <button class="botoes"><i class="bi bi-trash"></i></button>
                                     <button class="botoes"><i class="bi bi-pen"></i></button>
