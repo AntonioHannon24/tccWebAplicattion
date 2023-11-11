@@ -27,8 +27,7 @@
                                         <td>{{agenda.funcionario_id}}</td>
                                         <td>{{agenda.pet_id}}</td>
                                         <td>
-                                            <button class="botoes"><i class="bi bi-trash"></i></button>
-                                            <button class="botoes"><i class="bi bi-pen"></i></button>
+                                            <button class="botoes" (click)="botaEditar(agenda.id)"><i class="bi bi-pen"></i></button>
                                         </td>
                                     </tr>
                                 </thead>
@@ -52,7 +51,7 @@
                                 <td>Status</td>
                                 <td>Funcionario</td>
                                 <td>Pet</td>
-                                <td>Painel</td>
+                                <td>Editar</td>
                             </tr>
                             <tr *ngFor="let agenda of FullAgenda">
                                 <td>{{agenda.data_hora}}</td>
@@ -60,8 +59,7 @@
                                 <td>{{agenda.funcionario_id}}</td>
                                 <td>{{agenda.pet_id}}</td>
                                 <td>
-                                    <button class="botoes"><i class="bi bi-trash"></i></button>
-                                    <button class="botoes"><i class="bi bi-pen"></i></button>
+                                    <button class="botoes" (click)="botaEditar(agenda.id)"><i class="bi bi-pen"></i></button>
                                 </td>
                             </tr>
                         </thead>

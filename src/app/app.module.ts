@@ -49,6 +49,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 
 import {MatNativeDateModule} from '@angular/material/core';
+import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.component';
+import { FormAgendamentoComponent } from './estabelecimentos/formularios/form-agendamento/form-agendamento.component';
 
 
 
@@ -91,6 +93,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     ListaContatosComponent,
     FormContatosComponent,
     EditContatosComponent,
+    EditAgendaComponent,
+    FormAgendamentoComponent,
   ],
   imports: [
     BrowserModule,

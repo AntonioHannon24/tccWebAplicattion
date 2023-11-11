@@ -29,6 +29,7 @@ import { EditNoticiasComponent } from './administrativo/edit-noticias/edit-notic
 import { ListaServicosComponent } from './administrativo/lista-servicos/lista-servicos.component';
 import { ListaContatosComponent } from './administrativo/lista-contatos/lista-contatos.component';
 import { EditContatosComponent } from './administrativo/edit-contatos/edit-contatos.component';
+import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.component';
 
 const routes: Routes = [
 
@@ -68,7 +69,7 @@ const routes: Routes = [
   {path: 'lista-funcionarios/:id', component:ListaFuncionariosComponent,canActivate: [admGuard]},
   {path: 'lista-noticias', component:ListaNoticiasComponent,canActivate: [admGuard]},
   {path: 'edit-noticias/:id', component:EditNoticiasComponent,canActivate: [admGuard]},
-
+  {path: 'edit-agendas/:id', component:EditAgendaComponent},
 
 ];
 

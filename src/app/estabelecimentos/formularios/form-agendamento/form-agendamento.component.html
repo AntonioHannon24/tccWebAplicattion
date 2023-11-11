@@ -1,0 +1,41 @@
+<div class="fundoForm d-flex justify-content-center align-items-center">
+    <div class="row container containerForm">
+        <h1 class="text-center">{{title}}</h1>
+        <form (ngSubmit)="submit()" [formGroup]="agendaForm" #formDir="ngForm">
+            
+            <div class="mb-3">
+                <label for="data_hora" class="form-label">Data-Hora</label>
+                <input class="form-control" type="text" formControlName="data_hora" aria-label="readonly input example" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <input class="form-control" type="text" formControlName="status" aria-label="readonly input example" readonly>
+                <p *ngIf="status.invalid && formDir.submitted">Altere o status</p>
+            </div>
+
+            <div class="mb-3">
+                <label for="servico_id" class="form-label">Serviço</label>
+                <input class="form-control" type="text" formControlName="servico_id" aria-label="readonly input example" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="usuario_id" class="form-label">Usuário</label>
+                <input class="form-control" type="text" formControlName="usuario_id" aria-label="readonly input example" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="funcionario_id" class="form-label">Funcionario</label>
+                <input class="form-control" type="text" formControlName="funcionario_id" aria-label="readonly input example" readonly>
+                <p *ngIf="status.invalid && formDir.submitted">Adicione um funcionário</p>
+            </div>
+
+            <div class="mb-3">
+                <label for="pet_id" class="form-label">Pet</label>
+                <input class="form-control" type="text" formControlName="pet_id" aria-label="readonly input example" readonly>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
