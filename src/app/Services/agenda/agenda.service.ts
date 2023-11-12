@@ -33,7 +33,10 @@ export class AgendaService {
   }
 
   updateAgenda(id:number,formData:FormData):Observable<FormData>{
+
+    
     const url =`${this.apiUrl}/${id}`
+    console.log(url)
     return this.http.put<FormData>(url,formData)
   }
 
@@ -48,7 +51,6 @@ export class AgendaService {
 
   agendaDataEstabelecimento(id:number,date:string):Observable<Response<Agenda[]>>{
     const url =`${this.agendaDataEstabelecimentos}/${id}/${date}`
-    console.log(url)
     return this.http.get<Response<Agenda[]>>(url)
   }
 

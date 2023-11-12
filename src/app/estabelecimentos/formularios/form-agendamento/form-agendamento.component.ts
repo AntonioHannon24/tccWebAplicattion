@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { Agenda } from 'src/app/interfaces/Agenda';
+import { Funcionario } from 'src/app/interfaces/Funcionario';
 
 @Component({
   selector: 'app-form-agendamento',
@@ -16,9 +18,18 @@ export class FormAgendamentoComponent {
   @Input() title!: string
   @Input() agendaData: Agenda | null = null;
 
-  constructor() { }
+  opcaoSelecionadaStatus:string = ""
+  statusInit!:number
+  funcionarios:Funcionario[] = []
+
+  constructor(private funcionariosService:FuncionarioService) { }
 
   ngOnInit(): void {
+
+    this.funcionariosService.funcionariosEstab(Number(this.agendaData?.estabelecimento_id)).subscribe((item)=>{
+      this.funcionarios = item.data
+    })
+
     this.agendaForm = new FormGroup({
       id: new FormControl(this.agendaData ? this.agendaData.id :'', [Validators.required]),
       data_hora: new FormControl(this.agendaData ? this.agendaData.data_hora :'', [Validators.required]),
@@ -31,6 +42,10 @@ export class FormAgendamentoComponent {
   
     })
 
+    this.statusInit == 1 ? " Novo ": ""
+
+    
+
   }
 
   async submit() {
@@ -39,13 +54,15 @@ export class FormAgendamentoComponent {
     }
     const formData = new FormData();
 
-    formData.append("id", this.agendaForm.get('id')?.value)
-    formData.append("data_hora", this.agendaForm.get('data_hora')?.value)
+ 
+
     formData.append("status", this.agendaForm.get('status')?.value)
-    formData.append("servico_id", this.agendaForm.get('servico_id')?.value);
-    formData.append("usuario_id", this.agendaForm.get('usuario_id')?.value);
+  
+  
     formData.append("funcionario_id", this.agendaForm.get('funcionario_id')?.value)
-    formData.append("pet_id", this.agendaForm.get('pet_id')?.value)
+  
+    
+    
     this.onSubmit.emit(this.agendaForm.value)
   }
 

@@ -13,6 +13,7 @@ export class FuncionarioService {
   
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/funcionarios`
+  private funcEstab = `${this.baseApiUrl}api/funcionariosEstab`
 
   constructor(private http:HttpClient) { }
 
@@ -39,6 +40,15 @@ export class FuncionarioService {
       return this.http.put<FormData>(url,formData)
     }
   
+
+    funcionariosEstab(id:number):Observable<Response<Funcionario[]>>{
+
+      const url =`${this.funcEstab}/${id}`
+      return this.http.get<Response<Funcionario[]>>(url)
+
+      
+
+    }
   
 
 

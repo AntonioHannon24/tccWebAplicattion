@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AgendaService } from 'src/app/Services/agenda/agenda.service';
-import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { PetsService } from 'src/app/Services/pets/pets.service';
 import { UsuariosService } from 'src/app/Services/usuarios/usuarios.service';
 import { Agenda } from 'src/app/interfaces/Agenda';
-import { forkJoin } from 'rxjs';
+import { firstValueFrom, forkJoin } from 'rxjs';
 import { ServiceService } from 'src/app/Services/service/service.service';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
+import { Response } from 'src/app/interfaces/Response';
+
+
 
 @Component({
   selector: 'app-edit-agenda',
@@ -15,50 +18,48 @@ import { ServiceService } from 'src/app/Services/service/service.service';
 })
 export class EditAgendaComponent {
 
-
   agenda!: Agenda
   btnText: string = "Editar"
   title: string = "Editar Agenda"
-
+  servId!:string;
+  petId!:string;
+  userId!:string;
+  estabId!: string;
 
   constructor(
     private agendaService: AgendaService,
     private route: ActivatedRoute,
-    private funcionarioService: FuncionarioService,
     private petService: PetsService,
     private usuarioService: UsuariosService,
-    private serviceServices: ServiceService
+    private serviceServices: ServiceService,
+    public messageService:MessageService,
+    private router:Router,
 
   ) { }
-
 
   ngOnInit(): void {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    let funcionarioResult, petResult, usuarioResult, servicoResult;
-
+    let petResult, usuarioResult, servicoResult;
     this.agendaService.getAgenda(id).subscribe(agendaResult => {
-
       const agendaLoad = agendaResult.data;
 
-      funcionarioResult = this.funcionarioService.getFuncionario(Number(agendaLoad.funcionario_id));
+      this.servId = agendaLoad.servico_id
+      this.petId = agendaLoad.pet_id
+      this.userId = agendaLoad.servico_id
+      this.estabId = agendaLoad.estabelecimento_id
+
+
       petResult = this.petService.getPet(Number(agendaLoad.pet_id));
       usuarioResult = this.usuarioService.getUsuario(Number(agendaLoad.usuario_id));
       servicoResult = this.serviceServices.getServico(Number(agendaLoad.servico_id))
-
-
       forkJoin({
-        funcionario: funcionarioResult,
         pet: petResult,
         usuario: usuarioResult,
         servico: servicoResult,
-
       }).subscribe(results => {
-
         this.agenda = {
           ...agendaLoad,
-          funcionario_id: results.funcionario.data.nome,
           pet_id: results.pet.data.nome,
           usuario_id: results.usuario.data.nome,
           servico_id: results.servico.data.nome
@@ -72,19 +73,24 @@ export class EditAgendaComponent {
 
     const id = this.agenda.id
 
+
     const formData = new FormData()
 
-    formData.append('id', agendaData.data_hora)
-    formData.append('email', agendaData.status)
-    formData.append("funcao", agendaData.servico_id)
-    formData.append("foto", agendaData.usuario_id)
-    formData.append("cidade_id", agendaData.funcionario_id)
-    formData.append("password", agendaData.pet_id)
+    formData.append('data_hora', agendaData.data_hora)
+    formData.append('status', agendaData.status)
+    formData.append("servico_id", this.servId)
+    formData.append("usuario_id", this.petId)
+    formData.append("funcionario_id", agendaData.funcionario_id)
+    formData.append("pet_id", this.petId)
+    formData.append("estabelecimento_id", this.estabId)
 
-
-    await this.agendaService.updateAgenda(id!, formData).subscribe()
+    this.agendaService.updateAgenda(id!, formData).subscribe((item:any)=>{
+      
+      this.messageService.add(item.message)
+      this.router.navigate(['agenda'])
+    })
+     
   }
-
 
 
 

@@ -8,10 +8,21 @@
                 <input class="form-control" type="text" formControlName="data_hora" aria-label="readonly input example" readonly>
             </div>
 
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <input class="form-control" type="text" formControlName="status" aria-label="readonly input example" readonly>
-                <p *ngIf="status.invalid && formDir.submitted">Altere o status</p>
+            <div class="mb-3 campos">
+                <label for="status">Status</label>
+                <select class="form-select" formControlName="status" [(ngModel)]="opcaoSelecionadaStatus">
+                    <option value="1" selected >{{statusInit}}</option>
+                    <option value="2">Em atendimento</option>
+                    <option value="3">Finalizado</option>
+                    <p *ngIf="status.invalid && formDir.submitted">Altere o status</p>
+                </select>
+            </div>
+
+            <div class="mb-3 campos">
+                <label for="funcionario_id">Funcionarios</label>
+                <select class="form-select" formControlName="funcionario_id">
+                    <option *ngFor="let func of funcionarios" value="{{func.id}}">{{func.nome}}</option>
+                </select>
             </div>
 
             <div class="mb-3">
@@ -24,11 +35,6 @@
                 <input class="form-control" type="text" formControlName="usuario_id" aria-label="readonly input example" readonly>
             </div>
 
-            <div class="mb-3">
-                <label for="funcionario_id" class="form-label">Funcionario</label>
-                <input class="form-control" type="text" formControlName="funcionario_id" aria-label="readonly input example" readonly>
-                <p *ngIf="status.invalid && formDir.submitted">Adicione um funcionário</p>
-            </div>
 
             <div class="mb-3">
                 <label for="pet_id" class="form-label">Pet</label>

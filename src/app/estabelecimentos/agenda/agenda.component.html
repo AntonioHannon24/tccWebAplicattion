@@ -1,42 +1,55 @@
 <div class="fundoForm">
+ 
+    <ng-template class="modal" #myModal>
+
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Dia selecionado</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <td>Data</td>
+                        <td>Status</td>
+                        <td>Pet</td>
+                        <td>Funcionario</td>
+                        <td>Painel</td>
+                    </tr>
+                    <tr *ngFor="let agenda of agenda">
+                        <td>{{agenda.data_hora}}</td>
+                        <td>{{agenda.status}}</td>
+                        <td>{{agenda.funcionario_id}}</td>
+                        <td>{{agenda.pet_id}}</td>
+                        <td>
+                            <button class="botoes" (click)="botaEditar(agenda.id)"><i
+                                    class="bi bi-pen"></i></button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
+        </div>
+
+    </ng-template>
+ 
+ 
     <div class="container mt-4">
+
+
+
+
+
         <div class="row">
             <div class="col-md-6">
                 <div>
                     <mat-card class="demo-inline-calendar-card">
                         <mat-calendar [(selected)]="selected" (selectedChange)="dataSelecionada($event)"></mat-calendar>
                     </mat-card>
-                    <ng-template #myModal>
-                        <div class="modal-header">
-                            <h4 class="modal-title pull-left">Dia selecionado</h4>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
 
-                                        <td>Data</td>
-                                        <td>Status</td>
-                                        <td>Funcionario</td>
-                                        <td>Pet</td>
-                                        <td>Painel</td>
-                                    </tr>
-                                    <tr *ngFor="let agenda of agenda">
-                                        <td>{{agenda.data_hora}}</td>
-                                        <td>{{agenda.status}}</td>
-                                        <td>{{agenda.funcionario_id}}</td>
-                                        <td>{{agenda.pet_id}}</td>
-                                        <td>
-                                            <button class="botoes" (click)="botaEditar(agenda.id)"><i class="bi bi-pen"></i></button>
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
-                        </div>
-                    </ng-template>
+
                 </div>
             </div>
 
@@ -49,17 +62,18 @@
 
                                 <td>Data</td>
                                 <td>Status</td>
-                                <td>Funcionario</td>
                                 <td>Pet</td>
+                                <td>Funcionario</td>
                                 <td>Editar</td>
                             </tr>
                             <tr *ngFor="let agenda of FullAgenda">
                                 <td>{{agenda.data_hora}}</td>
                                 <td>{{agenda.status}}</td>
-                                <td>{{agenda.funcionario_id}}</td>
                                 <td>{{agenda.pet_id}}</td>
+                                <td>{{agenda.funcionario_id}}</td>
                                 <td>
-                                    <button class="botoes" (click)="botaEditar(agenda.id)"><i class="bi bi-pen"></i></button>
+                                    <button class="botoes" (click)="botaEditar(agenda.id)"><i
+                                            class="bi bi-pen"></i></button>
                                 </td>
                             </tr>
                         </thead>
