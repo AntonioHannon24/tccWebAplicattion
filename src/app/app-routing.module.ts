@@ -30,6 +30,7 @@ import { ListaServicosComponent } from './administrativo/lista-servicos/lista-se
 import { ListaContatosComponent } from './administrativo/lista-contatos/lista-contatos.component';
 import { EditContatosComponent } from './administrativo/edit-contatos/edit-contatos.component';
 import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.component';
+import { ListaFechadosComponent } from './estabelecimentos/lista-fechados/lista-fechados.component';
 
 const routes: Routes = [
 
@@ -70,7 +71,7 @@ const routes: Routes = [
   {path: 'lista-noticias', component:ListaNoticiasComponent,canActivate: [admGuard]},
   {path: 'edit-noticias/:id', component:EditNoticiasComponent,canActivate: [admGuard]},
   {path: 'edit-agendas/:id', component:EditAgendaComponent},
-
+  {path: 'lista-fechados', component:ListaFechadosComponent },
 ];
 
 @NgModule({

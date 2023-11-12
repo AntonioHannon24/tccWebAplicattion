@@ -57,7 +57,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="agenda"
-                        routerLinkActive="active-link">Agenda</a>
+                        routerLinkActive="active-link">Agendas pendentes</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="logado && tipo=='Estab'" routerLink="lista-fechados"
+                        routerLinkActive="active-link">Agendas fechadas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="logado && tipo=='Estab'"  routerLink="servicos"

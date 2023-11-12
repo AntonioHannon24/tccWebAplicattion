@@ -51,6 +51,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatNativeDateModule} from '@angular/material/core';
 import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.component';
 import { FormAgendamentoComponent } from './estabelecimentos/formularios/form-agendamento/form-agendamento.component';
+import { ListaFechadosComponent } from './estabelecimentos/lista-fechados/lista-fechados.component';
 
 
 
@@ -95,6 +96,7 @@ import { FormAgendamentoComponent } from './estabelecimentos/formularios/form-ag
     EditContatosComponent,
     EditAgendaComponent,
     FormAgendamentoComponent,
+    ListaFechadosComponent,
   ],
   imports: [
     BrowserModule,
