@@ -17,6 +17,8 @@ export class AgendaService {
   private agendaEstabelecimentos = `${this.baseApiUrl}api/agendaEstabelecimentos`
   private agendaFuncionarios = `${this.baseApiUrl}api/agendaFuncionarios`
   private agendaDataEstabelecimentos = `${this.baseApiUrl}api/agendaDataEstabelecimento`
+  private agendaEstabelecimentosFechados = `${this.baseApiUrl}api/agendaEstabelecimentosFechado`
+
 
   constructor(
     private http:HttpClient,
@@ -34,6 +36,7 @@ export class AgendaService {
 
   updateAgenda(id:number,formData:FormData):Observable<FormData>{
 
+    console.log(formData)
     
     const url =`${this.apiUrl}/${id}`
     console.log(url)
@@ -51,6 +54,11 @@ export class AgendaService {
 
   agendaDataEstabelecimento(id:number,date:string):Observable<Response<Agenda[]>>{
     const url =`${this.agendaDataEstabelecimentos}/${id}/${date}`
+    return this.http.get<Response<Agenda[]>>(url)
+  }
+
+  agendaEstabelecimentosFechado(id:number):Observable<Response<Agenda[]>>{
+    const url =`${this.agendaEstabelecimentosFechados}/${id}`
     return this.http.get<Response<Agenda[]>>(url)
   }
 

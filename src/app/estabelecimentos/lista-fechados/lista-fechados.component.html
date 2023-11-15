@@ -1,1 +1,31 @@
-<p>lista-fechados works!</p>
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="title">
+            <h1>Lista de serviços cadastrados</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <td>Status</td>
+                    <td>PET</td>
+                    <td>Funcionario</td>
+                    <td>Painel</td>
+                </tr>
+                <tr *ngFor="let agend of agendas! | paginate: { itemsPerPage:15, currentPage: p }">
+                    <th>{{ agend.data_hora }}</th>
+                    <td>{{ agend.status }}</td>
+                    <td>{{ agend.pet_id }}</td>
+                    <td>{{agend.funcionario_id}}</td>
+                    <td>
+                        <button class="botoes" (click)="botaEditar(agend.id)"><i class="bi bi-pen"></i></button>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

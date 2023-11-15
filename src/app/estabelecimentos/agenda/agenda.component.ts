@@ -23,8 +23,8 @@ export class AgendaComponent implements OnInit {
     private authService: AuthService,
     private modalService: BsModalService,
     private petService: PetsService,
-    private router:Router,
-    private funcionarioService:FuncionarioService
+    private router: Router,
+    private funcionarioService: FuncionarioService
 
   ) { }
 
@@ -44,20 +44,16 @@ export class AgendaComponent implements OnInit {
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
 
-
-
       this.FullAgenda.forEach((agend) => {
 
-        if(agend.funcionario_id ==null){
-          agend.funcionario_id = "sem funcionários";
-        }else{
-          this.funcionarioService.getFuncionario(Number(agend.funcionario_id)).subscribe(func=>{
-            agend.funcionario_id =func.data.nome
-          })
-        }
+        
+
+        agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
+          .subscribe(func => { agend.funcionario_id = func.data.nome })
 
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
           agend.pet_id = pet.data.nome
+          agend.status = "Fechado"
         })
       });
 
@@ -71,16 +67,16 @@ export class AgendaComponent implements OnInit {
     const month = (this.selected!.getMonth() + 1).toString().padStart(2, '0');
     const day = this.selected!.getDate().toString().padStart(2, '0');
     const teste = `${year}-${month}-${day}`;
-  
+
     const agendaData$ = this.agendaService.agendaDataEstabelecimento(this.id, teste);
-  
+
     agendaData$.subscribe(item => {
       this.agenda = item.data;
-  
+
       const observables = this.agenda.map(agend => {
         if (agend.funcionario_id !== null) {
           const funcionario$ = this.funcionarioService.getFuncionario(Number(agend.funcionario_id));
-  
+
           return funcionario$.pipe(
             map(funcionario => {
               agend.funcionario_id = funcionario.data.nome;
@@ -92,7 +88,7 @@ export class AgendaComponent implements OnInit {
           return of(agend);
         }
       });
-  
+
       forkJoin(observables).subscribe(agenda => {
         this.agenda = agenda;
         this.modalRef = this.modalService.show(this.myModal);
@@ -105,7 +101,7 @@ export class AgendaComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  botaEditar(id:number){
+  botaEditar(id: number) {
     this.router.navigate([`edit-agendas/${id}`])
   }
 }

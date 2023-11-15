@@ -4,10 +4,9 @@ import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 import { PetsService } from 'src/app/Services/pets/pets.service';
 import { UsuariosService } from 'src/app/Services/usuarios/usuarios.service';
 import { Agenda } from 'src/app/interfaces/Agenda';
-import { firstValueFrom, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { Response } from 'src/app/interfaces/Response';
 
 
 
@@ -25,6 +24,7 @@ export class EditAgendaComponent {
   petId!:string;
   userId!:string;
   estabId!: string;
+  dataHora!: string;
 
   constructor(
     private agendaService: AgendaService,
@@ -48,6 +48,7 @@ export class EditAgendaComponent {
       this.petId = agendaLoad.pet_id
       this.userId = agendaLoad.servico_id
       this.estabId = agendaLoad.estabelecimento_id
+      this.dataHora = agendaLoad.data_hora
 
 
       petResult = this.petService.getPet(Number(agendaLoad.pet_id));
@@ -76,7 +77,7 @@ export class EditAgendaComponent {
 
     const formData = new FormData()
 
-    formData.append('data_hora', agendaData.data_hora)
+    formData.append('dataHora', this.dataHora)
     formData.append('status', agendaData.status)
     formData.append("servico_id", this.servId)
     formData.append("usuario_id", this.petId)
