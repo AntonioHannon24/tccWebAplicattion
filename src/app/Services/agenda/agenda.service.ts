@@ -18,7 +18,11 @@ export class AgendaService {
   private agendaFuncionarios = `${this.baseApiUrl}api/agendaFuncionarios`
   private agendaDataEstabelecimentos = `${this.baseApiUrl}api/agendaDataEstabelecimento`
   private agendaEstabelecimentosFechados = `${this.baseApiUrl}api/agendaEstabelecimentosFechado`
-
+  private reabrirAgenda = `${this.baseApiUrl}api/reabrirAgenda`
+  private agendaEstabelecimentosNovos = `${this.baseApiUrl}api/agendaEstabelecimentosNovos`
+  private aceitarAgenda = `${this.baseApiUrl}api/aceitarAgenda`
+  private fecharAgenda = `${this.baseApiUrl}api/fecharAgenda`
+  private emAtendimento = `${this.baseApiUrl}api/emAtendimentoAgenda`
 
   constructor(
     private http:HttpClient,
@@ -29,6 +33,7 @@ export class AgendaService {
     const url = `${this.apiUrl}/${id}`
     return this.http.delete(url)
   }
+
   getAgenda(id:number):Observable<Response<Agenda>>{
     const url =`${this.apiUrl}/${id}`
     return this.http.get<Response<Agenda>>(url)
@@ -47,9 +52,10 @@ export class AgendaService {
     const url =`${this.agendaEstabelecimentos}/${id}`
     return this.http.get<Response<Agenda[]>>(url)
   }
-  getAgendaFuncionario(id:number):Observable<Response<Agenda>>{
+
+  getAgendaFuncionario(id:number):Observable<Response<Agenda[]>>{
     const url =`${this.agendaFuncionarios}/${id}`
-    return this.http.get<Response<Agenda>>(url)
+    return this.http.get<Response<Agenda[]>>(url)
   }
 
   agendaDataEstabelecimento(id:number,date:string):Observable<Response<Agenda[]>>{
@@ -62,6 +68,32 @@ export class AgendaService {
     return this.http.get<Response<Agenda[]>>(url)
   }
 
+  reabrirAgendas(id:number):any{
+    const url =`${this.reabrirAgenda}/${id}`
+    return this.http.get<FormData>(url)
+  }
 
+  agendaEstabelecimentosNovo(id:number):Observable<Response<Agenda[]>>{
+    const url =`${this.agendaEstabelecimentosNovos}/${id}`
+    return this.http.get<Response<Agenda[]>>(url)
+
+  }
+
+  aceitarAgendas(id:number):any{
+    const url =`${this.aceitarAgenda}/${id}`
+    return this.http.get<FormData>(url)
+  }
+
+  fecharAgendas(id:number):any{
+    const url =`${this.fecharAgenda}/${id}`
+    return this.http.get<FormData>(url)
+  }
+
+  emAtendimentoAgenda(id:number):any{
+
+    const url =`${this.emAtendimento}/${id}`
+    return this.http.get<FormData>(url)
+
+  }
 
 }

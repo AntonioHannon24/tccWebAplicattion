@@ -33,6 +33,7 @@ export class AgendaComponent implements OnInit {
   id: any;
   FullAgenda: Agenda[] = []
   agenda: Agenda[] = []
+  p:number = 1;
 
   ngOnInit(): void {
 
@@ -41,20 +42,27 @@ export class AgendaComponent implements OnInit {
 
     });
 
+    
+
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
 
+      
+
       this.FullAgenda.forEach((agend) => {
+       
 
+        agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
         
-
         agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe(func => { agend.funcionario_id = func.data.nome })
 
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
           agend.pet_id = pet.data.nome
-          agend.status = "Fechado"
         })
+
+
+
       });
 
     });
@@ -96,7 +104,7 @@ export class AgendaComponent implements OnInit {
     });
   }
 
-
+  
   fecharModal(): void {
     this.modalRef.hide();
   }
