@@ -31,6 +31,10 @@ export class AgendaFuncionarioComponent {
 
   ngOnInit(): void {
 
+    const mensagem = localStorage.getItem('mensagem')
+    
+    if(mensagem){this.messageService.add(mensagem); localStorage.removeItem('mensagem');}
+
     const id = localStorage.getItem('id')
 
     this.agendaService.getAgendaFuncionario(Number(id)).subscribe((item) => {
@@ -54,15 +58,21 @@ export class AgendaFuncionarioComponent {
 
   botaoFechar(id: number) {
     this.agendaService.fecharAgendas(id).subscribe((item: any) => {
-      this.messageService.add(item.msg)
-      this.router.navigate(['agenda-funcionarios'])
+      
+      console.log(item.msg)
+      localStorage.setItem('mensagem', item.msg);
+
+      window.location.reload();
     })
   }
   botaoEmAtendimento(id: number) {
     this.agendaService.emAtendimentoAgenda(id).subscribe((item: any) => {
       
-      this.messageService.add(item.msg)
-      window.location.reload()
+
+      console.log(item.msg)
+      localStorage.setItem('mensagem', item.msg);
+
+      window.location.reload();
     })
   }
 

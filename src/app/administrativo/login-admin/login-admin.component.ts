@@ -41,6 +41,7 @@ export class LoginAdminComponent {
      if(e.message){
         this.route.navigate([''])
      }
+     this.authservice.startTimer();
     })
 
 

@@ -38,6 +38,7 @@ const routes: Routes = [
 
   //Rotas sem autenticação
   {path: '', component:HomeComponent },
+
   {path: 'noticias', component:NoticiasComponent },
   {path: 'estabelecimentos', component:EstabelecimentosComponent },
   {path: 'contato', component:ContatoComponent },

@@ -3,6 +3,8 @@ import { HttpClient, } from '@angular/common/http';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MessageService } from '../MessageServices/message.service';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,8 @@ import { MessageService } from '../MessageServices/message.service';
 export class AuthService {
 
 
+  private tokenExpirationTime = 1800000;
+  private timer: any;
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
   private _tipo = new BehaviorSubject<string|null>(null)
   public _id = new BehaviorSubject<Number>(0)
@@ -23,7 +27,8 @@ export class AuthService {
   private apiUrlFunc = `${this.baseApiUrl}api/loginFuncionarios`
   private apiUrlAdmin = `${this.baseApiUrl}api/loginAdmin`
 
-  constructor(private http: HttpClient, private messageService: MessageService) {
+  constructor(private http: HttpClient, private messageService: MessageService,
+              private route:Router) {
 
     const token = localStorage.getItem('auth')
     const tipo = localStorage.getItem('tipo')
@@ -108,12 +113,7 @@ export class AuthService {
 
   }
 
-  async logoff() {
 
-    localStorage.clear()
-    return true;
-
-  }
   admin(value: any): boolean {
     if (value == "Admin") {
       return true
@@ -130,5 +130,20 @@ export class AuthService {
     this.messageService.add(`${message}`);
   }
 
+  startTimer() {
+    this.timer = setTimeout(() => {
+      this.logoff();
+    }, this.tokenExpirationTime);
+  }
+  
+  async logoff() {
+    localStorage.clear();
+    
+
+    this.route.navigate(['']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 400);
+  }
 
 }

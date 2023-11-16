@@ -41,6 +41,8 @@ export class LoginComponent {
      if(e.message){
         this.route.navigate([''])
      }
+
+     this.authservice.startTimer();
     })
 
 
