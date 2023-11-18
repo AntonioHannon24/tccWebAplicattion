@@ -21,6 +21,7 @@ export class AgendaService {
   private reabrirAgenda = `${this.baseApiUrl}api/reabrirAgenda`
   private agendaEstabelecimentosNovos = `${this.baseApiUrl}api/agendaEstabelecimentosNovos`
   private aceitarAgenda = `${this.baseApiUrl}api/aceitarAgenda`
+  private recusarAgenda = `${this.baseApiUrl}api/recusarAgenda`
   private fecharAgenda = `${this.baseApiUrl}api/fecharAgenda`
   private emAtendimento = `${this.baseApiUrl}api/emAtendimentoAgenda`
 
@@ -79,8 +80,8 @@ export class AgendaService {
 
   }
 
-  aceitarAgendas(id:number):any{
-    const url =`${this.aceitarAgenda}/${id}`
+  aceitarAgendas(id:number,idFuncionario:number):any{
+    const url =`${this.aceitarAgenda}/${id}/${idFuncionario}`
     return this.http.get<FormData>(url)
   }
 
@@ -89,8 +90,12 @@ export class AgendaService {
     return this.http.get<FormData>(url)
   }
 
+  recusarAgendas(id:number):any{
+    const url =`${this.recusarAgenda}/${id}`
+    return this.http.get<FormData>(url)
+  }
+  
   emAtendimentoAgenda(id:number):any{
-
     const url =`${this.emAtendimento}/${id}`
     return this.http.get<FormData>(url)
 

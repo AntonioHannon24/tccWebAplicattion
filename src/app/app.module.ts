@@ -47,7 +47,7 @@ import { EditContatosComponent } from './administrativo/edit-contatos/edit-conta
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
-
+import { FormsModule } from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.component';
 import { FormAgendamentoComponent } from './estabelecimentos/formularios/form-agendamento/form-agendamento.component';
@@ -113,6 +113,7 @@ import { AgendaFuncionarioComponent } from './funcionarios/agenda-funcionario/ag
     MatCardModule,
     MatNativeDateModule,
     ModalModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

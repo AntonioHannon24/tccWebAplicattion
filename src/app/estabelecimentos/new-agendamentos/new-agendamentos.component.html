@@ -1,7 +1,7 @@
 <div class="fundoForm">
     <div class="container containerForm">
         <div class="title">
-            <h1>Lista de serviços cadastrados</h1>
+            <h1>Lista de novos agendamentos</h1>
         </div>
         <table class="table">
             <thead>
@@ -18,7 +18,10 @@
                     <td>{{ agend.pet_id }}</td>
                     <td>{{agend.funcionario_id}}</td>
                     <td>
-                        <button class="botoes" (click)="botaoAceitar(agend.id)"><i class="bi bi-pen"></i></button>
+                        <button class="botoesList" (click)="botaoAceitar(agend.id)"><i
+                                class="bi bi-arrow-right-circle"></i> Aceitar</button>
+                        <button class="botoesList" (click)="recusarAgendas(agend.id)"><i class="bi bi-x-circle"></i>
+                            Recusar</button>
                     </td>
                 </tr>
             </thead>
@@ -28,4 +31,46 @@
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
+
+
+    <ng-template class="modal" #myModal>
+
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Selecione um funcionário</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table" (ngSubmit)="submit()">
+                <thead>
+                    <tr>
+
+                        <td>Data</td>
+                        <td>Status</td>
+                        <td>Pet</td>
+                        <td>Funcionario</td>
+                    </tr>
+                    <tr>
+                        <td>{{agenda.data_hora}}</td>
+                        <td>{{agenda.status}}</td>
+                        <td>{{agenda.pet_id}}</td>
+
+                        <select class="form-select my-1" [(ngModel)]="funcionarioSelecionado">
+                            <option *ngFor="let func of funcionarios" [value]="func.id">{{func.nome}}</option>
+                        </select>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="submit()">Fechar</button>
+        </div>
+
+
+
+    </ng-template>
+
+
+
+
+
 </div>
