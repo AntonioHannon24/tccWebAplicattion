@@ -6,6 +6,7 @@ import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabe
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { Location } from '@angular/common';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 @Component({
   selector: 'app-servicos',
@@ -25,10 +26,18 @@ export class ServicosComponent {
     private estabelecimentoService: EstabelecimentoService,
     private authService: AuthService,
     private servicoService: ServiceService,
-    private location: Location
+    private location: Location,
+    private messageService:MessageService,
+    
   ) { }
 
   ngOnInit(): void {
+
+    const mensagem = localStorage.getItem('message')
+
+    if(mensagem){this.messageService.add(mensagem); localStorage.removeItem('message');}
+
+
 
     this.authService._id.subscribe(valor => {
       this.idEstab = valor;
@@ -38,8 +47,13 @@ export class ServicosComponent {
     });
   }
   async removeServico(servicoId: number) {
-    await this.servicoService.removeServico(servicoId).subscribe(() => {
-      window.location.reload();
+    await this.servicoService.removeServico(servicoId).subscribe((item:any) => {
+     
+     localStorage.setItem('message',item.message) 
+     window.location.reload();
+
+
+
     });
   }
   editServico(servicoId: number) {
