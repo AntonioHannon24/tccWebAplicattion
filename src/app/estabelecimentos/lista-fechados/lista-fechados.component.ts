@@ -52,7 +52,7 @@ export class ListaFechadosComponent implements OnInit {
 
   }
 
-  botaEditar(id: number) {
+  reabrirAgenda(id: number) {
     this.agendaService.reabrirAgendas(id).subscribe((item:any)=>{
       this.router.navigate(['agenda'])
       this.messageService.add(item.msg)

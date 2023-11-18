@@ -18,9 +18,10 @@
                     <td>{{ func.email }}</td>
                     <td>{{ func.funcao }}</td>
                     <td>
-                        <button class="botoes" (click)="removeFuncionario(func.id!)"><i
-                                class="bi bi-trash"></i></button>
-                        <button class="botoes" (click)="editFuncionario(func.id!)"><i class="bi bi-pen"></i></button>
+                        <button class="botoesList" (click)="editFuncionario(func.id)"><i class="bi bi-pen"></i>
+                            Editar</button>
+                        <button class="botoesList" (click)="removeFuncionario(func.id)"><i class="bi bi-trash"></i>
+                            Remover</button>
                     </td>
                 </tr>
             </thead>

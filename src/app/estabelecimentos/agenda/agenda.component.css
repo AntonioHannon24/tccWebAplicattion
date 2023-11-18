@@ -2,8 +2,6 @@
     width: 500px;
     height: 600px;
     opacity: .9;
-}.modal{
-    width: 1000px;
 }
 .divLista{
     width: 500px;
@@ -13,15 +11,6 @@
     border-radius: 5px;
 }
 
-.botoes {
-    border: 0;
-    background-color: transparent;
-    margin-left: 10px;
-}
-.botoes:hover {
-    color: var(--primary-color);
-    transition: 1s;
-}
 .tabela {
     min-height: 600px;
 }

@@ -33,7 +33,7 @@ export class AgendaComponent implements OnInit {
   id: any;
   FullAgenda: Agenda[] = []
   agenda: Agenda[] = []
-  p:number = 1;
+  p: number = 1;
 
   ngOnInit(): void {
 
@@ -42,18 +42,18 @@ export class AgendaComponent implements OnInit {
 
     });
 
-    
+
 
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
 
-      
+
 
       this.FullAgenda.forEach((agend) => {
-       
+
 
         agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
-        
+
         agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe(func => { agend.funcionario_id = func.data.nome })
 
@@ -71,45 +71,40 @@ export class AgendaComponent implements OnInit {
   }
 
   async dataSelecionada(event: any): Promise<void> {
+    
     const year = this.selected!.getFullYear();
     const month = (this.selected!.getMonth() + 1).toString().padStart(2, '0');
     const day = this.selected!.getDate().toString().padStart(2, '0');
     const teste = `${year}-${month}-${day}`;
 
-    const agendaData$ = this.agendaService.agendaDataEstabelecimento(this.id, teste);
+    this.agendaService.agendaDataEstabelecimento(this.id, teste).subscribe(item => {
 
-    agendaData$.subscribe(item => {
-      this.agenda = item.data;
+      this.agenda = item.data
 
-      const observables = this.agenda.map(agend => {
-        if (agend.funcionario_id !== null) {
-          const funcionario$ = this.funcionarioService.getFuncionario(Number(agend.funcionario_id));
+      this.agenda.forEach((agend) => {
 
-          return funcionario$.pipe(
-            map(funcionario => {
-              agend.funcionario_id = funcionario.data.nome;
-              return agend;
-            })
-          );
-        } else {
-          agend.funcionario_id = "Sem funcionário";
-          return of(agend);
-        }
+        agend.status=="1"?agend.status="Aceito":agend.status="Em andamento"
+
+        agend.funcionario_id==null?agend.funcionario_id="Sem funcionários":
+          this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
+            .subscribe(func=>{agend.funcionario_id=func.data.nome})
+
+        this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
+          agend.pet_id = pet.data.nome
+        })
+
       });
-
-      forkJoin(observables).subscribe(agenda => {
-        this.agenda = agenda;
-        this.modalRef = this.modalService.show(this.myModal);
-      });
+      this.modalRef=this.modalService.show(this.myModal,{class:'modal-lg'});
     });
   }
 
-  
+
   fecharModal(): void {
     this.modalRef.hide();
   }
 
   botaEditar(id: number) {
     this.router.navigate([`edit-agendas/${id}`])
+    this.fecharModal()
   }
 }

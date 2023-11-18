@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
-import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 @Component({
   selector: 'app-funcionarios',
@@ -24,16 +24,17 @@ export class FuncionariosComponent {
     private router: Router,
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
-    private authService: AuthService,
-    private location: Location
+    private location: Location,
+    private messageService:MessageService,
   ) { }
 
   ngOnInit(): void {
 
+    const mensagem = localStorage.getItem('message')
 
-    this.authService._id.subscribe(valor => {
-      this.idEstab = valor;
-    });
+    if(mensagem){this.messageService.add(mensagem); localStorage.removeItem('message');}
+
+    this.idEstab = localStorage.getItem('id');
 
     this.estabelecimentoService.getEstabelecimento(this.idEstab).subscribe(item => {
       this.estabelecimento = item.data;
@@ -41,8 +42,9 @@ export class FuncionariosComponent {
   }
 
   async removeFuncionario(idFuncNumber: number) {
-    await this.funcionarioService.removeFuncionario(idFuncNumber).subscribe(() => {
-      window.location.reload();
+    await this.funcionarioService.removeFuncionario(idFuncNumber).subscribe((item: any) => {
+      localStorage.setItem('message',item.message)
+      window.location.reload()
     })
 
   }

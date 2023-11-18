@@ -19,10 +19,12 @@
                     <tr *ngFor="let agenda of agenda">
                         <td>{{agenda.data_hora}}</td>
                         <td>{{agenda.status}}</td>
-                        <td>{{agenda.funcionario_id}}</td>
                         <td>{{agenda.pet_id}}</td>
+                        <td>{{agenda.funcionario_id}}</td>
+   
                         <td>
-                            <button class="botoes" (click)="botaEditar(agenda.id)"><i class="bi bi-pen"></i></button>
+                            <button class="botoesList" (click)="botaEditar(agenda.id)"><i
+                                class="bi bi-pen"></i> Editar</button>
                         </td>
                     </tr>
                 </thead>
@@ -65,14 +67,14 @@
                                 <td>Funcionario</td>
                                 <td>Editar</td>
                             </tr>
-                            <tr *ngFor="let agenda of FullAgenda | paginate: { itemsPerPage:9, currentPage: p }">
+                            <tr *ngFor="let agenda of FullAgenda | paginate: { itemsPerPage:6, currentPage: p }">
                                 <td>{{agenda.data_hora}}</td>
                                 <td>{{agenda.status}}</td>
                                 <td>{{agenda.pet_id}}</td>
                                 <td>{{agenda.funcionario_id}}</td>
                                 <td>
-                                    <button class="botoes" (click)="botaEditar(agenda.id)"><i
-                                            class="bi bi-pen"></i></button>
+                                    <button class="botoesList" (click)="botaEditar(agenda.id)"><i
+                                        class="bi bi-pen"></i> Editar</button>
                                 </td>
                             </tr>
                         </thead>
