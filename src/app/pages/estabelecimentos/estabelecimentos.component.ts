@@ -28,7 +28,7 @@ export class EstabelecimentosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.estabelecimentoService.getAllEstabelecimentos().subscribe((items) => {
+    this.estabelecimentoService.allEstabelecimentoSemLogar().subscribe((items) => {
       const data = items.data
       data.map((items) => {
         items.created_at = new Date(items.created_at!).toLocaleDateString('pt-br')

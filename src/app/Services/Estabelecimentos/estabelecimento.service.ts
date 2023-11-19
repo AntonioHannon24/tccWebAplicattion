@@ -14,6 +14,7 @@ export class EstabelecimentoService {
   
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/estabelecimentos`
+  private allEstabelecimentosSemLogar = `${this.baseApiUrl}/allEstabelecimentosSemLogar`
   
 
   constructor(
@@ -23,6 +24,11 @@ export class EstabelecimentoService {
 
   getAllEstabelecimentos(): Observable<Response<Estabelecimento[]>> {
     
+    return this.http.get<Response<Estabelecimento[]>>(this.apiUrl)
+  }
+
+  allEstabelecimentoSemLogar(): Observable<Response<Estabelecimento[]>>{
+
     return this.http.get<Response<Estabelecimento[]>>(this.apiUrl)
   }
 
