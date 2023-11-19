@@ -55,6 +55,7 @@ export class FormEstabelecimentoComponent implements OnInit{
       cep: new FormControl(this.estabdata ? this.estabdata.cep : '', [Validators.required]),
       email: new FormControl(this.estabdata ? this.estabdata.email : '', [Validators.required]),
       password:new FormControl(this.estabdata ? this.estabdata.password: '',[Validators.required]),
+      password2:new FormControl(),
       cidade_id: new FormControl(this.estabdata ? this.estabdata.cidade_id: '', [Validators.required],),
 
 

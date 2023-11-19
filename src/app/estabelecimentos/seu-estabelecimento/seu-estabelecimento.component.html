@@ -1,8 +1,10 @@
 <div *ngIf="estabelecimento" class="fundoForm">
     <div class="container containerFormRow">
         <div class="row">
-            <div class="col-lg-6">
-                <h1 class="h1 text-center">{{estabelecimento.nome}}</h1><br><br>
+            <div class="col-lg-12 text-center">
+                <h1 class="h1">{{estabelecimento.nome}}</h1><br><br>
+            </div>
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
                 <div class="icone-celular">
                     <p><i class="bi bi-telephone-fill"></i> {{estabelecimento.telefone}}</p>
                 </div><br>
@@ -15,15 +17,13 @@
                 <div class="icone-endereco">
                     <p><i class="bi bi-geo-alt"></i> {{estabelecimento.endereco}}</p>
                 </div>
-
-                <div class="icone-endereco mt-5">
-                    <a href="edit-seuEstabelecimento/{{estabelecimento.id}}">Editar estabelecimento</a>
-                </div>
             </div>
-            <div class="col-lg-6 mt-2">
-                <img src="{{baseApiUrl}}uploads//{{estabelecimento.logo}}" alt="" class="imagempromo" />
+            <div class="col-lg-6 mt-2 d-flex justify-content-center align-items-center">
+                <img src="{{baseApiUrl}}uploads//{{estabelecimento.logo}}" alt="Logo do estabelecimento" class="imagempromo" />
+            </div>
+            <div class="col-lg-12 text-center mt-5">
+                <a href="edit-seuEstabelecimento/{{estabelecimento.id}}" class="link-editar">Editar estabelecimento</a>
             </div>
         </div>
     </div>
 </div>
-

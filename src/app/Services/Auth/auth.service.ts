@@ -80,7 +80,7 @@ export class AuthService {
 
         
       }), catchError((err: any): any => {
-        this.handleError(err.error)
+        this.handleError(err.error.message)
         return of()
       })
     )

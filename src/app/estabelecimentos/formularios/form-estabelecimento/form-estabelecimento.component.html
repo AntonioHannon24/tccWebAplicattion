@@ -6,40 +6,40 @@
                 <h1 class="h1 text-center">{{title}}</h1>
                 <h2 class="text-center h2">Bem vindo PetHelper</h2>
 
-                <input type="hidden" formControlName="id"><!--id-->
-              
-                <div class="mb-3 campos"><!--razao social-->
+                <input type="hidden" formControlName="id">
+
+                <div class="mb-3 campos">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" formControlName="nome" required />
                     <div *ngIf="nome.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
                 </div>
 
-                <div class="mb-3 campos"><!--cnpj-->
+                <div class="mb-3 campos">
                     <label for="cnpj">CNPJ</label>
                     <input type="text" class="form-control" formControlName="cnpj" required />
                     <div *ngIf="cnpj.invalid && formDir.submitted" class="form-text">O CPPJ é obrigatório</div>
                 </div>
-                <div class="mb-3 campos"><!--endereco-->
+                <div class="mb-3 campos">
                     <label for="endereco">Endereço</label>
                     <input type="text" class="form-control" formControlName="endereco" required />
                     <div *ngIf="endereco.invalid && formDir.submitted" class="form-text">O endereço é obrigatorio</div>
                 </div>
-                <div class="mb-3 campos"><!--cep-->
+                <div class="mb-3 campos">
                     <label for="cep">Cep</label>
                     <input type="text" class="form-control" formControlName="cep" required />
                     <div *ngIf="cep.invalid && formDir.submitted" class="form-text">O Cep é obrigatorio</div>
                 </div>
-                <div class="mb-3 campos"><!--telefone-->
+                <div class="mb-3 campos">
                     <label for="telefone">Telefone</label>
                     <input type="text" class="form-control" formControlName="telefone" required />
                     <div *ngIf="telefone.invalid && formDir.submitted" class="form-text">O Telefone é obrigatorio</div>
                 </div>
-                <div class="mb-3 campos"><!--email-->
+                <div class="mb-3 campos">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="text" class="form-control" formControlName="email" required>
                     <div class="form-text" *ngIf="email.invalid && formDir.submitted">O E-mail é obrigatório</div>
                 </div>
-                <div class="mb-3 campos"><!--logo-->
+                <div class="mb-3 campos">
                     <label for="logo">Logo</label>
                     <input type="file" style="margin-left: 5%;" (change)="onFileSelected($event)">
                 </div>
@@ -48,22 +48,27 @@
                     <input type="password" class="form-control" formControlName="password" required />
                 </div>
                 <div class="mb-3 campos">
-                    <label for="exampleInputPassword1" class="form-label">Confirmar Senha</label>
+                    <label for="password2" class="form-label">Confirmar Senha</label>
                     <input type="password" class="form-control" formControlName="password2" required />
-                    <div *ngIf="(formDir.submitted && conferir() != true)" class="form-text">As senhas não coencidem</div>
+                    <div *ngIf="(formDir.submitted && conferir() != true)" class="form-text">As senhas não coencidem
+                    </div>
                 </div>
-                <div class="mb-3 campos"><!--cidade-->
+                <div class="mb-3 campos">
                     <label for="cidade_id">Cidade</label>
                     <select class="form-select" formControlName="cidade_id">
                         <option *ngFor="let city of cidades" value="{{city.id}}">{{city.nome}}</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" (click)="submit">{{btnText}}</button><br>
-
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary" (click)="voltar()">Voltar</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">{{btnText}}</button>
+                    </div>
+                </div>
 
             </form>
-            <button (click)="voltar()" class="botaoVoltar">Voltar</button>
         </div>
     </div>
 </div>
-

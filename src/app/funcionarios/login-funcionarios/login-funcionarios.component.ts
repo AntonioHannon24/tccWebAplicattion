@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 @Component({
   selector: 'app-login-funcionarios',
@@ -13,13 +14,13 @@ export class LoginFuncionariosComponent {
 
   LoginForm!: FormGroup;
 
-  constructor(private authservice: AuthService,
+  constructor(
+    private authservice: AuthService,
     private route: Router,
-   ) { }
+    private messageService:MessageService
+  ) { }
 
   ngOnInit(): void {
-
-
     this.LoginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -31,19 +32,18 @@ export class LoginFuncionariosComponent {
       return;
     }
     const formData = new FormData();
-
     formData.append("email", this.LoginForm.get('email')?.value)
     formData.append("password", this.LoginForm.get('password')?.value);
 
 
-    (await this.authservice.loginFuncionarios(formData)).subscribe((e) => {
-  
-     if(e.message){
-        this.route.navigate([''])
-     }
-    })
+      (await this.authservice.loginFuncionarios(formData)).subscribe((e) => {
+        this.authservice.startTimer();
+        if (e.message) {
+          this.route.navigate([''])
+        }
+      })
 
-    this.authservice.startTimer();
+
 
   }
 
