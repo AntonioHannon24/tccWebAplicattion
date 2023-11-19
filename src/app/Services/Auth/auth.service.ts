@@ -131,6 +131,7 @@ export class AuthService {
   }
 
   startTimer() {
+  
     this.timer = setTimeout(() => {
       this.logoff();
     }, this.tokenExpirationTime);
@@ -138,7 +139,6 @@ export class AuthService {
   
   async logoff() {
     localStorage.clear();
-    
 
     this.route.navigate(['']);
     setTimeout(() => {

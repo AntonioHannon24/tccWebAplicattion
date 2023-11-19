@@ -1,7 +1,7 @@
 <div class="fundoForm">
     <div class="container containerForm">
         <div class="title">
-            <h1>Lista de serviços cadastrados</h1>
+            <h1>Seus agendamentos cadastrados</h1>
         </div>
         <table class="table">
             <thead>
@@ -18,8 +18,10 @@
                     <td>{{ agend.pet_id }}</td>
                     <td>{{agend.funcionario_id}}</td>
                     <td>
-                        <button class="botoes" (click)="botaoFechar(agend.id)"><i class="bi bi-x-octagon"></i></button>
-                        <button class="botoes" (click)="botaoEmAtendimento(agend.id)"><i class="bi bi-forward"></i></button>
+                        <button class="botoesList" (click)="botaoFechar(agend.id)"><i class="bi bi-backspace-reverse-fill"></i>
+                            Fechar</button>
+                        <button class="botoesList" (click)="botaoEmAtendimento(agend.id)"><i class="bi bi-building-fill-check"></i>
+                            Em atendimento</button>
                     </td>
                 </tr>
             </thead>

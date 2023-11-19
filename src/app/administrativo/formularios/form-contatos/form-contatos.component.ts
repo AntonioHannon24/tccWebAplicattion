@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contato } from 'src/app/interfaces/Contato';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-contatos',
@@ -21,7 +21,9 @@ export class FormContatosComponent {
   estado:string = ""
   opcaoSelecionada:string = ""
   
-  constructor() { }
+  constructor(
+    private location:Location
+  ) { }
 
   ngOnInit(): void {
     this.contatoForm = new FormGroup({
@@ -62,6 +64,10 @@ export class FormContatosComponent {
   }
   get mensagem() {
     return this.contatoForm.get('mensagem')!;
+  }
+
+  botaoVoltar(){
+    this.location.back()
   }
 
 }
