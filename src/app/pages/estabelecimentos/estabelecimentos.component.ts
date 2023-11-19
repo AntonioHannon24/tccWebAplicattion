@@ -1,23 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { environment } from 'src/environments/environment';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CidadeService } from 'src/app/Services/cidade/cidade.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-estabelecimentos',
   templateUrl: './estabelecimentos.component.html',
   styleUrls: ['./estabelecimentos.component.css']
 })
-export class EstabelecimentosComponent implements OnInit{
 
-  
+export class EstabelecimentosComponent implements OnInit {
+  @ViewChild('myModal') myModal: any;
+  modalRef!: BsModalRef;
   allEstabs: Estabelecimento[] = []
   estabelecimentos: Estabelecimento[] = [];
+  estabelecimento!: Estabelecimento
   baseApiUrl = environment.baseApiUrl;
-  p:number = 1;
+  p: number = 1;
 
   constructor(
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    private modalService: BsModalService,
+    private cidadeService: CidadeService,
   ) { }
 
   ngOnInit(): void {
@@ -26,8 +33,8 @@ export class EstabelecimentosComponent implements OnInit{
       data.map((items) => {
         items.created_at = new Date(items.created_at!).toLocaleDateString('pt-br')
       })
-      this.allEstabs = data
       this.estabelecimentos = data
+      this.allEstabs = data
     })
   }
 
@@ -36,10 +43,28 @@ export class EstabelecimentosComponent implements OnInit{
     const target = event.target as HTMLInputElement
     const value = target.value
 
-    this.estabelecimentos = this.allEstabs.filter((estab) => 
+    this.estabelecimentos = this.allEstabs.filter((estab) =>
       estab.nome.toLocaleLowerCase().includes(value)
     )
 
   }
+  fecharModal = () => {
+    this.modalRef.hide()
+  }
 
+  abrirModal = (id: number) => {
+    this.estabelecimentoService.getEstabelecimento(id).subscribe((item) => {
+      const estabelecimentoLoad = item.data
+      let cidadeResult = this.cidadeService.getCidade(estabelecimentoLoad.cidade_id)
+      forkJoin({
+        cidade: cidadeResult
+      }).subscribe(results => {
+        this.estabelecimento = {
+          ...estabelecimentoLoad,
+          cidade_id: results.cidade.data.nome
+        }
+        this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
+      })
+    })
+  }
 }

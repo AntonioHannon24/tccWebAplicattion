@@ -5,22 +5,44 @@
         </div>
         <div class="my-4 d-flex justify-content-center">
             <form>
-                <span class="mx-2"><i class="bi bi-search"></i></span> <input type="text" placeholder=" Busque Aqui!!" (input)="search($event)">
+                <span class="mx-2"><i class="bi bi-search"></i></span> <input type="text" placeholder=" Busque Aqui!!"
+                    (input)="search($event)">
             </form>
         </div>
-        <div class="card mx-4 my-5" style="width: 18rem;" *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage:6, currentPage: p }">
+        <div class="card mx-4 my-5" style="width: 18rem;"
+            *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage:6, currentPage: p }">
             <img src="{{baseApiUrl}}uploads//{{estab.logo}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{estab.nome}}</h5>
                 <p class="card-text">
                 <p>Endereço: {{estab.endereco}}</p>
                 <p>Cidade: {{estab.cidade_id}}</p>
-                <a href="info-estab/{{estab.id}}" class="btn btn-primary" >Veja mais</a>
+                <a class="btn btn-primary" (click)="abrirModal(estab.id!)">Veja mais</a>
             </div>
-            
+
         </div>
         <div class="paginator">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>
+
+<ng-template class="modal" #myModal>
+                <div class="card">
+                    <div class="card-header text-center">
+                        Informações do Pet Shop
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Nome:</strong> {{estabelecimento.nome }} </li>
+                            <li class="list-group-item"><strong>Email:</strong> {{estabelecimento.email }} </li>
+                            <li class="list-group-item"><strong>Telefone:</strong> {{estabelecimento.telefone }} </li>
+                            <li class="list-group-item"><strong>CNPJ:</strong> {{estabelecimento.cnpj }} </li>
+                            <li class="list-group-item"><strong>Endereço:</strong> {{estabelecimento.cnpj }} </li>
+                            <li class="list-group-item"><strong>Cidade ID:</strong> {{estabelecimento.cidade_id }} </li>
+                        </ul>
+                    </div>
+                </div>
+    <button type="button" class="botoesList" (click)="fecharModal()">Fechar</button>
+
+</ng-template>
