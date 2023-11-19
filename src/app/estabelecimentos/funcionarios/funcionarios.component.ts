@@ -6,6 +6,7 @@ import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.ser
 import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
+import { Funcionario } from 'src/app/interfaces/Funcionario';
 
 @Component({
   selector: 'app-funcionarios',
@@ -14,36 +15,43 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
 })
 export class FuncionariosComponent {
 
-
   estabelecimento?: Estabelecimento;
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any;
   p: number = 1;
+  funcionarios:Funcionario[] = []
 
   constructor(
     private router: Router,
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
     private location: Location,
-    private messageService:MessageService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
-
     const mensagem = localStorage.getItem('message')
-
-    if(mensagem){this.messageService.add(mensagem); localStorage.removeItem('message');}
-
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
     this.idEstab = localStorage.getItem('id');
-
     this.estabelecimentoService.getEstabelecimento(this.idEstab).subscribe(item => {
-      this.estabelecimento = item.data;
+      const  teste = item.data.funcionario
+      teste?.forEach((item)=>{
+        item.status == 1 ? item.status = "Ativo": item.status = "Desativado"
+        this.funcionarios.push(item)
+      })
     });
   }
 
-  async removeFuncionario(idFuncNumber: number) {
-    await this.funcionarioService.removeFuncionario(idFuncNumber).subscribe((item: any) => {
-      localStorage.setItem('message',item.message)
+  async desativarFuncionario(idFuncNumber: number) {
+    await this.funcionarioService.desativarFuncionario(idFuncNumber).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
+      window.location.reload()
+    })
+
+  }
+  async ativarFuncionario(idFuncNumber: number) {
+    await this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
       window.location.reload()
     })
 
@@ -52,6 +60,7 @@ export class FuncionariosComponent {
   async editFuncionario(idFuncNumber: number) {
     this.router.navigate(["edit-funcionarios/" + idFuncNumber])
   }
+  
   voltar() {
     this.location.back()
   }

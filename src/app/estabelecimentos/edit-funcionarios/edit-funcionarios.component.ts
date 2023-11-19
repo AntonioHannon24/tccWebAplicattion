@@ -49,7 +49,7 @@ export class EditFuncionariosComponent {
     formData.append("funcao",funcionarioData.funcao)
     formData.append("foto",funcionarioData.foto)
     formData.append("cidade_id",funcionarioData.cidade_id)
-    formData.append("password",funcionarioData.password)
+    formData.append("password",funcionarioData.password!)
 
    
     await this.funcionarioService.updateFuncionario(id!,formData).subscribe(()=>{this.goHome()})

@@ -40,7 +40,7 @@ export class NewFuncionariosComponent {
     formData.append("funcao",funcionario.funcao)
     formData.append("estabelecimento_id",funcionario.estabelecimento_id)
     formData.append("cidade_id",funcionario.cidade_id)
-    formData.append("password",funcionario.password)
+    formData.append("password",funcionario.password!)
     await this.funcionarioService.createFuncionario(formData).subscribe(()=>{this.message();this.voltar()})
   }
 

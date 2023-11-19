@@ -15,9 +15,11 @@ export interface Estabelecimento {
     funcionario?:[{
             id: number,
             email:string,
+            status:any,
             cidade_id:number,
             estabelecimento_id:number,
             foto:string,
+            password: null | undefined,
             nome:string,
             funcao:string,
             created_at?:string,
