@@ -57,6 +57,9 @@ export class ListaComponent implements OnInit{
   listaServicos(id:number){
     this.router.navigate([`/lista-servicos/${id}`])
   }
+  listaAgenda(id:number){
+    this.router.navigate([`/lista-agenda/${id}`])
+  }
 
 }
 

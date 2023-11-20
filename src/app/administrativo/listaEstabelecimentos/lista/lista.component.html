@@ -9,18 +9,23 @@
                     <th scope="row">ID</th>
                     <td>Nome</td>
                     <td>CNPJ</td>
-                    <td>Painel</td>
+                    <td class="text-center">Painel</td>
                 </tr>
                 <tr *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage: 15, currentPage: p }">
                     <th scope="row">{{ estab.id }}</th>
                     <td>{{ estab.nome }}</td>
                     <td>{{ estab.cnpj }}</td>
                     <td>
-                        <button class="botoes" (click)="removeEstab(estab.id!)"><i class="bi bi-trash"></i></button>
-                        <button class="botoes" (click)="editar(estab.id!)"><i class="bi bi-pen"></i></button>
-                        <button class="botoes" (click)="listaFuncionarios(estab.id!)"><i class="bi bi-people"></i></button>
-                        <button class="botoes" (click)="listaFuncionarios(estab.id!)"><i class="bi bi-calendar-check"></i></button>
-                        <button class="botoes" (click)="listaServicos(estab.id!)"><i class="bi bi-list-columns"></i></button>
+                        <button class="botoesList" (click)="editar(estab.id!)"><i class="bi bi-pen"></i>
+                            Editar</button>
+                        <button class="botoesList" (click)="removeEstab(estab.id!)"><i class="bi bi-x-circle-fill"></i>
+                            Remover</button>
+                        <button class="botoesList" (click)="listaFuncionarios(estab.id!)"><i class="bi bi-people-fill"></i>
+                            Funcionarios</button>
+                        <button class="botoesList" (click)="listaAgenda(estab.id!)"><i class="bi bi-calendar-date"></i>
+                            Agenda</button>
+                        <button class="botoesList" (click)="listaServicos(estab.id!)"><i class="bi bi-award-fill"></i>
+                            Servicos</button>
                     </td>
                 </tr>
             </thead>

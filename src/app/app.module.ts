@@ -54,6 +54,7 @@ import { FormAgendamentoComponent } from './estabelecimentos/formularios/form-ag
 import { ListaFechadosComponent } from './estabelecimentos/lista-fechados/lista-fechados.component';
 import { NewAgendamentosComponent } from './estabelecimentos/new-agendamentos/new-agendamentos.component';
 import { AgendaFuncionarioComponent } from './funcionarios/agenda-funcionario/agenda-funcionario.component';
+import { ListaAgendaComponent } from './administrativo/lista-agenda/lista-agenda.component';
 
 
 
@@ -101,6 +102,7 @@ import { AgendaFuncionarioComponent } from './funcionarios/agenda-funcionario/ag
     ListaFechadosComponent,
     NewAgendamentosComponent,
     AgendaFuncionarioComponent,
+    ListaAgendaComponent,
   ],
   imports: [
     BrowserModule,

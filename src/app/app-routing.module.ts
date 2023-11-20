@@ -33,6 +33,7 @@ import { EditAgendaComponent } from './estabelecimentos/edit-agenda/edit-agenda.
 import { ListaFechadosComponent } from './estabelecimentos/lista-fechados/lista-fechados.component';
 import { NewAgendamentosComponent } from './estabelecimentos/new-agendamentos/new-agendamentos.component';
 import { AgendaFuncionarioComponent } from './funcionarios/agenda-funcionario/agenda-funcionario.component';
+import { ListaAgendaComponent } from './administrativo/lista-agenda/lista-agenda.component';
 
 const routes: Routes = [
 
@@ -76,7 +77,7 @@ const routes: Routes = [
   {path: 'edit-agendas/:id', component:EditAgendaComponent},
   {path: 'lista-fechados', component:ListaFechadosComponent },
   {path: 'lista-abertos', component:NewAgendamentosComponent },
-
+  {path:  'lista-agenda/:id',component:ListaAgendaComponent },
 
   /**           Funcionários */
   {path: 'agenda-funcionarios', component:AgendaFuncionarioComponent },

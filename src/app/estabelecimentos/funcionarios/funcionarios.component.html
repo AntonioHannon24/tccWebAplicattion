@@ -22,10 +22,12 @@
                     <td>
                         <button class="botoesList" (click)="editFuncionario(func.id)"><i class="bi bi-pen"></i>
                             Editar</button>
-                        <button class="botoesList" (click)="desativarFuncionario(func.id)"><i class="bi bi-trash"></i>
+                        <button class="botoesList" *ngIf="func.status =='Ativo'"
+                            (click)="desativarFuncionario(func.id)"><i class="bi bi-trash"></i>
                             Desativar Funcionário</button>
-                            <button class="botoesList" (click)="ativarFuncionario(func.id)"><i class="bi bi-trash"></i>
-                                Ativar Funcionário</button>
+                        <button class="botoesList" *ngIf="func.status =='Desativado'"
+                            (click)="ativarFuncionario(func.id)"><i class="bi bi-trash"></i>
+                            Ativar Funcionário</button>
                     </td>
                 </tr>
             </thead>

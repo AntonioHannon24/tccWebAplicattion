@@ -19,7 +19,7 @@ export class FuncionariosComponent {
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any;
   p: number = 1;
-  funcionarios:Funcionario[] = []
+  funcionarios: Funcionario[] = []
 
   constructor(
     private router: Router,
@@ -30,13 +30,16 @@ export class FuncionariosComponent {
   ) { }
 
   ngOnInit(): void {
+
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
     this.idEstab = localStorage.getItem('id');
+
     this.estabelecimentoService.getEstabelecimento(this.idEstab).subscribe(item => {
-      const  teste = item.data.funcionario
-      teste?.forEach((item)=>{
-        item.status == 1 ? item.status = "Ativo": item.status = "Desativado"
+      const teste = item.data.funcionario
+      teste?.forEach((item) => {
+        item.status == 1 ? item.status = "Ativo" : item.status = "Desativado"
         this.funcionarios.push(item)
       })
     });
@@ -60,7 +63,7 @@ export class FuncionariosComponent {
   async editFuncionario(idFuncNumber: number) {
     this.router.navigate(["edit-funcionarios/" + idFuncNumber])
   }
-  
+
   voltar() {
     this.location.back()
   }
