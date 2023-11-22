@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-funcionarios',
@@ -19,7 +20,12 @@ export class FuncionariosComponent {
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any;
   p: number = 1;
+
   funcionarios: Funcionario[] = []
+  @ViewChild('myModal') myModal: any;
+  @ViewChild('myModalEdit') myModalEdit: any;
+  modalRef!: BsModalRef<any>
+  func!:number
 
   constructor(
     private router: Router,
@@ -27,6 +33,7 @@ export class FuncionariosComponent {
     private funcionarioService: FuncionarioService,
     private location: Location,
     private messageService: MessageService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -60,12 +67,18 @@ export class FuncionariosComponent {
 
   }
 
-  async editFuncionario(idFuncNumber: number) {
-    this.router.navigate(["edit-funcionarios/" + idFuncNumber])
+  fecharModal(): void {
+    this.modalRef.hide();
   }
 
-  voltar() {
-    this.location.back()
+  novoFuncionario() {
+    this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
   }
+
+  editarFuncionario(servicoId: number) {
+    this.func = servicoId
+    this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
+  };
 }
+
 

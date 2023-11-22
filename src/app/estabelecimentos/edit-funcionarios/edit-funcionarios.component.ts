@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
-import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-funcionarios',
@@ -17,25 +14,18 @@ export class EditFuncionariosComponent {
   funcionario!:Funcionario
   btnText:string = "Editar"
   title:string = "Editar Funcionario"
-
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private funcionarioService:FuncionarioService,
-    private route:ActivatedRoute,
-    private message:MessageService,
-    private router:Router,
-    private location:Location
-
   ) { }
 
   ngOnInit(): void {
 
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-
+    const id = Number(localStorage.getItem('id'))
 
     this.funcionarioService.getFuncionario(id).subscribe(item=>{
       this.funcionario = item.data;
-    
     })
   }
   async editHandler(funcionarioData:Funcionario){
@@ -51,17 +41,11 @@ export class EditFuncionariosComponent {
     formData.append("cidade_id",funcionarioData.cidade_id)
     formData.append("password",funcionarioData.password!)
 
-   
-    await this.funcionarioService.updateFuncionario(id!,formData).subscribe(()=>{this.goHome()})
+    await this.funcionarioService.updateFuncionario(id!,formData).subscribe(()=>{
+      localStorage.setItem('message', "Funcionário editado com sucesso!!")
+      window.location.reload()
+      this.formularioEnviado.emit();
+    })
   }
-  goHome(){
-    this.voltar()
-    this.message.add("Funcionario editado com sucesso!!")
-  }
-  voltar(){
-    this.location.back()
-  }
-
-  
 
 }

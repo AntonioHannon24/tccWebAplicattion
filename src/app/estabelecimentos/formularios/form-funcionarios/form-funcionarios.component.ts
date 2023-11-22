@@ -26,6 +26,7 @@ export class FormFuncionariosComponent {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.id)
 
     this.funcionarioForm = new FormGroup({
       id: new FormControl(''),
@@ -33,7 +34,7 @@ export class FormFuncionariosComponent {
       email: new FormControl(this.funcionarioData ? this.funcionarioData.email : ''),
       funcao: new FormControl(this.funcionarioData ? this.funcionarioData.funcao : ''),
       cidade_id: new FormControl(this.funcionarioData ? this.funcionarioData.cidade_id : ''),
-      password:new FormControl(this.funcionarioData ? this.funcionarioData.password: ''),
+      password: new FormControl(this.funcionarioData ? this.funcionarioData.password : ''),
       password2: new FormControl(),
       foto: new FormControl(''),
 
@@ -52,8 +53,12 @@ export class FormFuncionariosComponent {
 
     if (this.funcionarioForm.invalid) {
       return;
+    } else if (this.conferir() !== true) {
+      window.alert("As senhas não conferem!!")
+      return;
+    } else {
+      this.onSubmit.emit(this.funcionarioForm.value)
     }
-    this.onSubmit.emit(this.funcionarioForm.value)
   }
 
   voltar() {

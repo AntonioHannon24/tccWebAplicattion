@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-funcionarios',
@@ -12,43 +10,42 @@ import { Location } from '@angular/common';
 })
 export class NewFuncionariosComponent {
 
-  title:string = "Novo Funcionario"
-  btnText:string = 'Criar'
-  id!:number
+  title: string = "Novo Funcionario"
+  btnText: string = 'Criar'
+  id!: number
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
 
   constructor(
-    private funcionarioService:FuncionarioService,
-    private router:ActivatedRoute,
-    public messageService:MessageService,
-    private location:Location
+    private funcionarioService: FuncionarioService,
+    public messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
-    this.id = Number(this.router.snapshot.paramMap.get('id'))
+    this.id = Number(localStorage.getItem('id'))
   }
 
-  async createHandle(funcionario:Funcionario){
-    
+  async createHandle(funcionario: Funcionario) {
+
     const formData = new FormData();
 
-    formData.append("id",funcionario.id)
+    formData.append("id", funcionario.id)
 
-    formData.append("nome",funcionario.nome)
-    formData.append("email",funcionario.email)
-    formData.append("foto",funcionario.foto)
-    formData.append("funcao",funcionario.funcao)
-    formData.append("estabelecimento_id",funcionario.estabelecimento_id)
-    formData.append("cidade_id",funcionario.cidade_id)
-    formData.append("password",funcionario.password!)
-    await this.funcionarioService.createFuncionario(formData).subscribe(()=>{this.message();this.voltar()})
+    formData.append("nome", funcionario.nome)
+    formData.append("email", funcionario.email)
+    formData.append("foto", funcionario.foto)
+    formData.append("funcao", funcionario.funcao)
+    formData.append("estabelecimento_id", funcionario.estabelecimento_id)
+    formData.append("cidade_id", funcionario.cidade_id)
+    formData.append("password", funcionario.password!)
+    await this.funcionarioService.createFuncionario(formData).subscribe(() => {
+
+      localStorage.setItem('message', "Funcionário criado com sucesso!!")
+      window.location.reload()
+      this.formularioEnviado.emit();
+
+    })
   }
 
-  message():void{
-    this.messageService.add('Funcionario criado com sucesso!!')
-  }
-  voltar(){
-    this.location.back()
-  }
 
 }
