@@ -12,7 +12,6 @@ import { Location } from '@angular/common';
 })
 export class FormEstabelecimentoComponent implements OnInit{
 
-
   @Output() onSubmit = new EventEmitter<Estabelecimento>()
   @Input() title!: string
   @Input() btnText!: string
@@ -23,8 +22,6 @@ export class FormEstabelecimentoComponent implements OnInit{
 
   allCidades: Cidade[] = []
   cidades: Cidade[] = []
- 
-
 
   constructor(
     private cidadeService: CidadeService,
@@ -33,7 +30,6 @@ export class FormEstabelecimentoComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-
 
     this.cidadeService.getAllCidades().subscribe((items) => {
       const data = items.data
@@ -57,27 +53,28 @@ export class FormEstabelecimentoComponent implements OnInit{
       password:new FormControl(this.estabdata ? this.estabdata.password: '',[Validators.required]),
       password2:new FormControl(),
       cidade_id: new FormControl(this.estabdata ? this.estabdata.cidade_id: '', [Validators.required],),
-
-
     })
   }
+
   submit() {
     if (this.estabForm.invalid) {
       return;
+    }else if(this.conferir() !== true){
+      window.alert('As senhas não conferem!!!')
+      return;
+    }else{
+      this.onSubmit.emit(this.estabForm.value)
     }
-    this.onSubmit.emit(this.estabForm.value)
+    
   }
 
   onFileSelected(event:any){
-
     const file: File = event.target.files[0];
     this.estabForm.patchValue({logo:file})
-
   }
   voltar(){
     this.location.back()
   }
-
 
   get nome() {
     return this.estabForm.get('nome')!;
@@ -104,11 +101,9 @@ export class FormEstabelecimentoComponent implements OnInit{
   get cidade_id() {
     return this.estabForm.get('cidade_id')!;
   }
-
   get usuario_id() {
     return this.estabForm.get('usuario_id')!;
   }
-
   get password() {
     return this.estabForm.get('password')!;
   }

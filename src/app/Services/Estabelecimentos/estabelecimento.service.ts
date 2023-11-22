@@ -48,11 +48,12 @@ export class EstabelecimentoService {
 
       tap((response: any): any => {
 
-        this.log(response.message)
+       window.alert(response.message)
         
       }),
       catchError(err => {
-      this.handleError(err.error)
+        console.log(err)
+        window.alert(err.error.message)
       return of()
     }))
 

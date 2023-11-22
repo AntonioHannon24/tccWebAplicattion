@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
 
   LoginForm!: FormGroup;
+  @ViewChild('myModal') myModal:any;
+
+  modalRef!:BsModalRef<any>;
 
   constructor(private authservice: AuthService,
     private route: Router,
-    private location: Location) { }
+    private location: Location,
+    private modalService: BsModalService,
+    ) { }
 
   ngOnInit(): void {
 
@@ -26,7 +32,7 @@ export class LoginComponent {
     })
   }
 
-  async submit() {
+  async submitLogin() {
     if (this.LoginForm.invalid) {
       return;
     }
@@ -48,7 +54,9 @@ export class LoginComponent {
 
 
   }
-
+  fecharModal(): void {
+    this.modalRef.hide();
+  }
 
   
   voltar() {
@@ -62,6 +70,10 @@ export class LoginComponent {
   get password() {
 
     return this.LoginForm.get('password')!;
+  }
+
+  teste(){
+    this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
   }
 
 

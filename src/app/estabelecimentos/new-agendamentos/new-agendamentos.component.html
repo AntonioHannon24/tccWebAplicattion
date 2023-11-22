@@ -32,9 +32,7 @@
         </div>
     </div>
 
-
     <ng-template class="modal" #myModal>
-
         <div class="modal-header">
             <h4 class="modal-title pull-left">Selecione um funcionário</h4>
         </div>
@@ -42,7 +40,6 @@
             <table class="table" (ngSubmit)="submit()">
                 <thead>
                     <tr>
-
                         <td>Data</td>
                         <td>Status</td>
                         <td>Pet</td>
@@ -52,11 +49,9 @@
                         <td>{{agenda.data_hora}}</td>
                         <td>{{agenda.status}}</td>
                         <td>{{agenda.pet_id}}</td>
-
                         <select class="form-select my-1" [(ngModel)]="funcionarioSelecionado">
                             <option *ngFor="let func of funcionarios" [value]="func.id">{{func.nome}}</option>
                         </select>
-
                     </tr>
                 </thead>
             </table>
@@ -64,13 +59,6 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="submit()">Enviar</button>
         </div>
-
-
-
     </ng-template>
-
-
-
-
 
 </div>

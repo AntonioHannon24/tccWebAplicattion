@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-seu-estabelecimento',
@@ -14,11 +15,14 @@ export class SeuEstabelecimentoComponent {
   
   baseApiUrl = environment.baseApiUrl;
   id!:number
+  @ViewChild('myModal') myModal:any;
+  modalRef!:BsModalRef<any>
  
   
   constructor(
     private estabelecimentoService:EstabelecimentoService,
     private authService:AuthService,
+    private modalService:BsModalService
     
   ) { }
 
@@ -34,7 +38,13 @@ export class SeuEstabelecimentoComponent {
     })
   
   }
+  editar(){
+    this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
+  }
 
 
-
+  fecharModal(): void {
+    console.log('teste')
+    this.modalRef.hide();
+  }
 }

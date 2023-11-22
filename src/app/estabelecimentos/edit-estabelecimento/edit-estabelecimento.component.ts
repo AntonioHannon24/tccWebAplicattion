@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { ActivatedRoute,Router } from '@angular/router';
@@ -17,18 +17,17 @@ export class EditEstabelecimentoComponent {
   estabelecimento!:Estabelecimento
   btnText:string = "Editar"
   title:string = "Edite seu Estabelecimento"
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private estabelecimentoService:EstabelecimentoService,
     private route:ActivatedRoute,
-    private message:MessageService,
-    private router:Router,
   ) { }
 
   ngOnInit(): void {
 
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.estabelecimentoService.getEstabelecimento(id).subscribe(item=>{
+    const id = localStorage.getItem('id')
+    this.estabelecimentoService.getEstabelecimento(Number(id)).subscribe(item=>{
       this.estabelecimento = item.data;
     })
   
@@ -49,19 +48,11 @@ export class EditEstabelecimentoComponent {
     formData.append("cidadeId",estabelecimento.cidade_id)
 
    
-    await this.estabelecimentoService.updateEstab(id!,formData).subscribe(()=>{this.goHome(),this.sucesso()})
+    await this.estabelecimentoService.updateEstab(id!,formData).subscribe(()=>{
+      this.formularioEnviado.emit();
+    })
     
   }
-
-  goHome(){
-    this.router.navigate(['/home'])
-  }
-  
-  sucesso(){
-    this.message.add("Estabelecimento Editado com sucesso!!")
-  }
-
-
 
 
 }

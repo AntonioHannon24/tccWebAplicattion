@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
-import { Router } from '@angular/router';
-import { MessageService } from 'src/app/Services/MessageServices/message.service';
-
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-new-estabelecimento',
@@ -13,15 +11,13 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
 export class NewEstabelecimentoComponent implements OnInit {
 
 
-
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
   title: string = "Novo Petshop"
   btnText: string = "Novo Estabelecimento"
 
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
-    private route: Router,
-    private messageService: MessageService
   ) { }
 
   ngOnInit(): void { }
@@ -45,12 +41,11 @@ export class NewEstabelecimentoComponent implements OnInit {
 
 
 
-    await this.estabelecimentoService.createEstab(formData).subscribe(() => { this.goHome() })
+    await this.estabelecimentoService.createEstab(formData).subscribe(() => {
+      this.formularioEnviado.emit();
+    })
   }
 
-  goHome() {
-    this.route.navigate([''])
-  }
 
 }
 
