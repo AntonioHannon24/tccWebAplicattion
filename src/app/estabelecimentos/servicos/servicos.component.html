@@ -27,11 +27,18 @@
             </thead>
         </table>
         <div>
-            <a routerLink="/new-servico/{{idEstab}}">Cadastre seus serviços</a><br>
+            <button class="botoesList" (click)="novoServico()">Novo serviço</button>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
-        <button (click)="voltar()" class="botaoVoltar">Voltar</button>
     </div>
 </div>
+
+<ng-template class="modal" #myModal>
+    <app-new-services (formularioEnviado)="fecharModal()"></app-new-services>
+</ng-template>
+
+<ng-template class="modal" #myModalEdit>
+    <app-edit-servicos [id]="serv" (formularioEnviado)="fecharModal()"></app-edit-servicos>
+</ng-template>

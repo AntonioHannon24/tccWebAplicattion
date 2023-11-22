@@ -17,7 +17,6 @@ export class SeuEstabelecimentoComponent {
   id!:number
   @ViewChild('myModal') myModal:any;
   modalRef!:BsModalRef<any>
- 
   
   constructor(
     private estabelecimentoService:EstabelecimentoService,
@@ -44,7 +43,6 @@ export class SeuEstabelecimentoComponent {
 
 
   fecharModal(): void {
-    console.log('teste')
     this.modalRef.hide();
   }
 }

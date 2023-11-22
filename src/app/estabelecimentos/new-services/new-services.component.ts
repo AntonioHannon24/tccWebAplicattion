@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Servicos } from 'src/app/interfaces/Servicos';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-services',
@@ -15,16 +13,15 @@ export class NewServicesComponent {
   title:string = "Novo Serviço"
   btnText:string = 'Criar'
   id!:number
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private servicosService:ServiceService,
-    private router:ActivatedRoute,
-    private location:Location,
     public messageService:MessageService
   ) { }
 
   ngOnInit(): void {
-    this.id = Number(this.router.snapshot.paramMap.get('id'))
+    this.id = Number(localStorage.getItem('id'))
   }
 
   async createHandle(servico:Servicos){
@@ -36,12 +33,11 @@ export class NewServicesComponent {
     formData.append("descricao",servico.descricao)
     formData.append("estabelecimento_id",servico.estabelecimento_id)
    
-    await this.servicosService.createServico(formData).subscribe(()=>{this.message();this.voltar()})
+    await this.servicosService.createServico(formData).subscribe(()=>{
+      localStorage.setItem('message','Servico criado com sucesso!!')
+      window.location.reload()
+      this.formularioEnviado.emit();
+    })
   }
-  message():void{
-    this.messageService.add('Servico criado com sucesso!!')
-  }
-  voltar():void{
-    this.location.back()
-  }
+
 }

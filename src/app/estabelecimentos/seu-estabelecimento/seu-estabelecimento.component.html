@@ -19,7 +19,8 @@
                 </div>
             </div>
             <div class="col-lg-6 mt-2 d-flex justify-content-center align-items-center">
-                <img src="{{baseApiUrl}}uploads//{{estabelecimento.logo}}" alt="Logo do estabelecimento" class="imagempromo" />
+                <img src="{{baseApiUrl}}uploads//{{estabelecimento.logo}}" alt="Logo do estabelecimento"
+                    class="imagempromo" />
             </div>
             <div>
                 <button class="botoesList" (click)="editar()">Cadastrar</button>
@@ -31,3 +32,4 @@
 <ng-template class="modal" #myModal>
     <app-edit-estabelecimento (formularioEnviado)="fecharModal()"></app-edit-estabelecimento>
 </ng-template>
+
