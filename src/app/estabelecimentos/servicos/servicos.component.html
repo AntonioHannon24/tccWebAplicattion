@@ -10,18 +10,25 @@
                     <td>Nome</td>
                     <td>Descrição</td>
                     <td>Valor</td>
+                    <td>Status</td>
                     <td>Painel</td>
                 </tr>
-                <tr *ngFor="let serv of estabelecimento?.servico! | paginate: { itemsPerPage:15, currentPage: p }">
+                <tr *ngFor="let serv of servico | paginate: { itemsPerPage:15, currentPage: p }">
                     <th scope="row">{{ serv.id }}</th>
                     <td>{{ serv.nome }}</td>
                     <td>{{ serv.descricao }}</td>
                     <td>{{ serv.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+                    <td>{{serv.status}}</td>
                     <td>
                         <button class="botoesList" (click)="editServico(serv.id)"><i class="bi bi-pen"></i>
                             Editar</button>
-                        <button class="botoesList" (click)="removeServico(serv.id)"><i class="bi bi-trash"></i>
-                            Remover</button>
+                            <button class="botoesList" *ngIf="serv.status =='Ativo'"
+                            (click)="desativarServico(serv.id)"><i class="bi bi-trash"></i>
+                            Desativar Servico</button>
+                        <button class="botoesList" *ngIf="serv.status =='Desativado'"
+                            (click)="ativarServico(serv.id)"><i class="bi bi-trash"></i>
+                            Ativar Servico</button>
+
                     </td>
                 </tr>
             </thead>

@@ -29,6 +29,8 @@ export interface Estabelecimento {
             id:number,
             nome:string,
             valor:string,
+            status:any,
+            estabelecimento_id:number,
             descricao:string,
             created_at?: string,
             update_at?: string,

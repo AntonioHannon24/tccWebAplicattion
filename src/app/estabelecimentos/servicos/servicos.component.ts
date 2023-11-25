@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { environment } from 'src/environments/environment';
-import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
-import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { Location } from '@angular/common';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Servicos } from 'src/app/interfaces/Servicos';
 
 @Component({
   selector: 'app-servicos',
@@ -16,7 +14,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class ServicosComponent {
 
 
-  estabelecimento?: Estabelecimento;
+  servico: Servicos[] = []
   usuarioId?: number;
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any
@@ -27,8 +25,6 @@ export class ServicosComponent {
   serv!: number
 
   constructor(
-    private estabelecimentoService: EstabelecimentoService,
-    private authService: AuthService,
     private servicoService: ServiceService,
     private location: Location,
     private messageService: MessageService,
@@ -42,20 +38,18 @@ export class ServicosComponent {
 
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
 
-    this.authService._id.subscribe(valor => {
-      this.idEstab = valor;
-    });
-    this.estabelecimentoService.getEstabelecimento(this.idEstab).subscribe(item => {
-      this.estabelecimento = item.data;
+    this.idEstab = localStorage.getItem('id')
+
+    this.servicoService.servicoEstab(this.idEstab).subscribe(item => {
+      const servicos = item.data
+      servicos?.forEach((item) => {
+        item.status == 1 ? item.status = "Ativo" : item.status = "Desativado"
+        this.servico.push(item)
+      })
     });
   }
 
-  async removeServico(servicoId: number) {
-    await this.servicoService.removeServico(servicoId).subscribe((item: any) => {
-      localStorage.setItem('message', item.message)
-      window.location.reload();
-    });
-  }
+
   editServico(servicoId: number) {
     this.serv = servicoId
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
@@ -71,5 +65,20 @@ export class ServicosComponent {
 
   fecharModal(): void {
     this.modalRef.hide();
+  }
+
+  async desativarServico(servId: number) {
+    this.servicoService.desativarServico(servId).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
+      window.location.reload()
+    })
+  }
+  async ativarServico(idServ: number) {
+
+    await this.servicoService.ativarServico(idServ).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
+      window.location.reload()
+    })
+
   }
 }

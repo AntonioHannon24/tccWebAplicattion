@@ -52,13 +52,8 @@ export class FuncionariosComponent {
 
   async desativarFuncionario(idFuncNumber: number) {
 
-
     this.agendaSerive.getAgendaFuncionario(idFuncNumber).subscribe((item) => {
-
       const agendaNumber = item.data.length
-      console.log(agendaNumber)
-
-
       if (agendaNumber >= 1) {
         window.alert("O funcionário está atrelado a um atendimento em andamento!!!")
       } else {
@@ -68,9 +63,6 @@ export class FuncionariosComponent {
         })
       }
     })
-
-    console.log(idFuncNumber)
-
   }
   async ativarFuncionario(idFuncNumber: number) {
 
