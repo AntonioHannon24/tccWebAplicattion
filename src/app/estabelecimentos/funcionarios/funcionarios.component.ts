@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { environment } from 'src/environments/environment';
-import { Location } from '@angular/common';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 
 @Component({
   selector: 'app-funcionarios',
@@ -25,15 +24,14 @@ export class FuncionariosComponent {
   @ViewChild('myModal') myModal: any;
   @ViewChild('myModalEdit') myModalEdit: any;
   modalRef!: BsModalRef<any>
-  func!:number
+  func!: number
 
   constructor(
-    private router: Router,
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
-    private location: Location,
     private messageService: MessageService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private agendaSerive: AgendaService,
   ) { }
 
   ngOnInit(): void {
@@ -53,13 +51,29 @@ export class FuncionariosComponent {
   }
 
   async desativarFuncionario(idFuncNumber: number) {
-    await this.funcionarioService.desativarFuncionario(idFuncNumber).subscribe((item: any) => {
-      localStorage.setItem('message', item.msg)
-      window.location.reload()
+
+
+    this.agendaSerive.getAgendaFuncionario(idFuncNumber).subscribe((item) => {
+
+      const agendaNumber = item.data.length
+      console.log(agendaNumber)
+
+
+      if (agendaNumber >= 1) {
+        window.alert("O funcionário está atrelado a um atendimento em andamento!!!")
+      } else {
+        this.funcionarioService.desativarFuncionario(idFuncNumber).subscribe((item: any) => {
+          localStorage.setItem('message', item.msg)
+          window.location.reload()
+        })
+      }
     })
+
+    console.log(idFuncNumber)
 
   }
   async ativarFuncionario(idFuncNumber: number) {
+
     await this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
@@ -76,7 +90,7 @@ export class FuncionariosComponent {
   }
 
   editarFuncionario(funcId: number) {
-   
+
     this.func = funcId
     console.log(this.func)
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })

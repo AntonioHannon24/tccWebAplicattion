@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { PetsService } from 'src/app/Services/pets/pets.service';
-import { Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { Agenda } from 'src/app/interfaces/Agenda';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-agenda-funcionario',
@@ -24,8 +22,6 @@ export class AgendaFuncionarioComponent {
     private agendaService: AgendaService,
     private funcionarioService: FuncionarioService,
     private petService: PetsService,
-    private router: Router,
-    private location: Location,
     private messageService: MessageService,
   ) { }
 

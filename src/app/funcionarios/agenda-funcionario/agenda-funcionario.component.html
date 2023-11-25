@@ -20,7 +20,7 @@
                     <td>
                         <button class="botoesList" (click)="botaoFechar(agend.id)"><i class="bi bi-backspace-reverse-fill"></i>
                             Fechar</button>
-                        <button class="botoesList" (click)="botaoEmAtendimento(agend.id)"><i class="bi bi-building-fill-check"></i>
+                        <button class="botoesList" *ngIf="agend.status !=='Em andamento' " (click)="botaoEmAtendimento(agend.id)"><i class="bi bi-building-fill-check"></i>
                             Em atendimento</button>
                     </td>
                 </tr>
