@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 
@@ -14,6 +14,7 @@ export class EditFuncionariosComponent {
   funcionario!:Funcionario
   btnText:string = "Editar"
   title:string = "Editar Funcionario"
+  @Input() id!: number
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -22,9 +23,9 @@ export class EditFuncionariosComponent {
 
   ngOnInit(): void {
 
-    const id = Number(localStorage.getItem('id'))
 
-    this.funcionarioService.getFuncionario(id).subscribe(item=>{
+
+    this.funcionarioService.getFuncionario(this.id).subscribe(item=>{
       this.funcionario = item.data;
     })
   }

@@ -75,8 +75,10 @@ export class FuncionariosComponent {
     this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
   }
 
-  editarFuncionario(servicoId: number) {
-    this.func = servicoId
+  editarFuncionario(funcId: number) {
+   
+    this.func = funcId
+    console.log(this.func)
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
 }
