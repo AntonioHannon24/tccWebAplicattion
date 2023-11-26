@@ -81,7 +81,6 @@ export class AuthService {
         
       }), catchError((err: any): any => {
         this.handleError(err.error)
-        console.log(err.error)
         return of()
       })
     )

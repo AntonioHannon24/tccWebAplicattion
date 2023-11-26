@@ -14,8 +14,9 @@ export class EstabelecimentoService {
   
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/estabelecimentos`
-  private allEstabelecimentosSemLogar = `${this.baseApiUrl}/allEstabelecimentosSemLogar`
-  
+  private ativarEstab = `${this.baseApiUrl}api/ativarEstab` 
+  private desativarEstab = `${this.baseApiUrl}api/desativarEstab`
+  private allSemLogar = `${this.baseApiUrl}api/allEstabelecimentosSemLogar`
 
   constructor(
     private http: HttpClient,
@@ -29,7 +30,7 @@ export class EstabelecimentoService {
 
   allEstabelecimentoSemLogar(): Observable<Response<Estabelecimento[]>>{
 
-    return this.http.get<Response<Estabelecimento[]>>(this.apiUrl)
+    return this.http.get<Response<Estabelecimento[]>>(this.allSemLogar)
   }
 
   getEstabelecimento(id: number): Observable<Response<Estabelecimento>> {
@@ -74,6 +75,15 @@ export class EstabelecimentoService {
   
   private log(message: string) {
     this.messageService.add(`${message}`);
+  }
+
+  desativarEstabelecimentos(id: number) {
+    const url = `${this.desativarEstab}/${id}`
+    return this.http.get(url)
+  }
+  ativarEstabelecimentos(id: number) {
+    const url = `${this.ativarEstab}/${id}`
+    return this.http.get(url)
   }
 
 
