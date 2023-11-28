@@ -1,5 +1,6 @@
 <div class="fundoForm">
     <div class="container containerForm">
+        <div class="containerList">
         <div class="title">
             <h1>Lista de funcionarios cadastrados</h1>
         </div>
@@ -13,7 +14,7 @@
                     <td>Ativo</td>
                     <td>Painel</td>
                 </tr>
-                <tr *ngFor="let func of funcionarios | paginate: { itemsPerPage:15, currentPage: p }">
+                <tr *ngFor="let func of funcionarios | paginate: { itemsPerPage:6, currentPage: p }">
                     <th scope="row">{{ func.id }}</th>
                     <td>{{ func.nome }}</td>
                     <td>{{ func.email }}</td>
@@ -33,6 +34,7 @@
         <div>
             <button class="botoesList" (click)="novoFuncionario()">
                 Novo funcionario</button>
+        </div>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

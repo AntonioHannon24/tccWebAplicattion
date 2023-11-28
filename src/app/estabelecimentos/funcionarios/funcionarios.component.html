@@ -1,44 +1,47 @@
 <div class="fundoForm">
     <div class="container containerForm">
-        <div class="title">
-            <h1>Lista de funcionarios cadastrados</h1>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="row">ID</th>
-                    <td>Nome</td>
-                    <td>E-mail</td>
-                    <td>Função</td>
-                    <td>Ativo</td>
-                    <td>Painel</td>
-                </tr>
-                <tr *ngFor="let func of funcionarios | paginate: { itemsPerPage:15, currentPage: p }">
-                    <th scope="row">{{ func.id }}</th>
-                    <td>{{ func.nome }}</td>
-                    <td>{{ func.email }}</td>
-                    <td>{{ func.funcao }}</td>
-                    <td>{{func.status}}</td>
-                    <td>
-                        <button class="botoesList" (click)="editarFuncionario(func.id)"><i class="bi bi-pen"></i>
-                            Editar</button>
-                        <button class="botoesList" *ngIf="func.status =='Ativo'"
-                            (click)="desativarFuncionario(func.id)"><i class="bi bi-trash"></i>
-                            Desativar Funcionário</button>
-                        <button class="botoesList" *ngIf="func.status =='Desativado'"
-                            (click)="ativarFuncionario(func.id)"><i class="bi bi-trash"></i>
-                            Ativar Funcionário</button>
-                    </td>
-                </tr>
-            </thead>
-        </table>
-        <div>
-            <button class="botoesList" (click)="novoFuncionario()">Novo funcionário</button>
+        <div class="containerList">
+            <div class="title">
+                <h1>Lista de funcionarios cadastrados</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>Nome</td>
+                        <td>E-mail</td>
+                        <td>Função</td>
+                        <td>Ativo</td>
+                        <td>Painel</td>
+                    </tr>
+                    <tr *ngFor="let func of funcionarios | paginate: { itemsPerPage:6, currentPage: p }">
+                        <th scope="row">{{ func.id }}</th>
+                        <td>{{ func.nome }}</td>
+                        <td>{{ func.email }}</td>
+                        <td>{{ func.funcao }}</td>
+                        <td>{{func.status}}</td>
+                        <td>
+                            <button class="botoesList" (click)="editarFuncionario(func.id)"><i class="bi bi-pen"></i>
+                                Editar</button>
+                            <button class="botoesList" *ngIf="func.status =='Ativo'"
+                                (click)="desativarFuncionario(func.id)"><i class="bi bi-trash"></i>
+                                Desativar Funcionário</button>
+                            <button class="botoesList" *ngIf="func.status =='Desativado'"
+                                (click)="ativarFuncionario(func.id)"><i class="bi bi-trash"></i>
+                                Ativar Funcionário</button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <div>
+                <button class="botoesList" (click)="novoFuncionario()">Novo funcionário</button>
+            </div>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
+
 </div>
 
 <ng-template class="modal" #myModal>

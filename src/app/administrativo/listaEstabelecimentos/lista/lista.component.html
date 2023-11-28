@@ -1,42 +1,46 @@
 <div class="fundoForm">
     <div class="container containerForm ">
-        <div class="title">
-            <h1>Lista de estabelecimentos cadastrados</h1>
+        <div class="containerList">
+            <div class="title">
+                <h1>Lista de estabelecimentos cadastrados</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>Nome</td>
+                        <td>CNPJ</td>
+                        <td>Status</td>
+                        <td class="text-center">Painel</td>
+                    </tr>
+                    <tr *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage: 6, currentPage: p }">
+                        <th scope="row">{{ estab.id }}</th>
+                        <td>{{ estab.nome }}</td>
+                        <td>{{ estab.cnpj }}</td>
+                        <td>{{estab.status}}</td>
+                        <td>
+                            <button class="botoesList" (click)="editar(estab.id!)"><i class="bi bi-pen"></i>
+                                Editar</button>
+                            <button class="botoesList" *ngIf="estab.status =='Ativo'"
+                                (click)="desativarEstabelecimento(estab.id!)"><i class="bi bi-trash"></i>
+                                Desativar Estabelecimento</button>
+                            <button class="botoesList" *ngIf="estab.status =='Desativado'"
+                                (click)="ativarEstabelecimento(estab.id!)"><i class="bi bi-trash"></i>
+                                Ativar Estabelecimento</button>
+                            <button class="botoesList" (click)="listaFuncionarios(estab.id!)"><i
+                                    class="bi bi-people-fill"></i>
+                                Funcionarios</button>
+                            <button class="botoesList" (click)="listaAgenda(estab.id!)"><i
+                                    class="bi bi-calendar-date"></i>
+                                Agenda</button>
+                            <button class="botoesList" (click)="listaServicos(estab.id!)"><i
+                                    class="bi bi-award-fill"></i>
+                                Servicos</button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="row">ID</th>
-                    <td>Nome</td>
-                    <td>CNPJ</td>
-                    <td>Status</td>
-                    <td class="text-center">Painel</td>
-                </tr>
-                <tr *ngFor="let estab of estabelecimentos | paginate: { itemsPerPage: 15, currentPage: p }">
-                    <th scope="row">{{ estab.id }}</th>
-                    <td>{{ estab.nome }}</td>
-                    <td>{{ estab.cnpj }}</td>
-                    <td>{{estab.status}}</td>
-                    <td>
-                        <button class="botoesList" (click)="editar(estab.id!)"><i class="bi bi-pen"></i>
-                            Editar</button>
-                        <button class="botoesList" *ngIf="estab.status =='Ativo'" (click)="desativarEstabelecimento(estab.id!)"><i
-                                class="bi bi-trash"></i>
-                            Desativar Estabelecimento</button>
-                        <button class="botoesList" *ngIf="estab.status =='Desativado'"
-                            (click)="ativarEstabelecimento(estab.id!)"><i class="bi bi-trash"></i>
-                            Ativar Estabelecimento</button>
-                        <button class="botoesList" (click)="listaFuncionarios(estab.id!)"><i
-                                class="bi bi-people-fill"></i>
-                            Funcionarios</button>
-                        <button class="botoesList" (click)="listaAgenda(estab.id!)"><i class="bi bi-calendar-date"></i>
-                            Agenda</button>
-                        <button class="botoesList" (click)="listaServicos(estab.id!)"><i class="bi bi-award-fill"></i>
-                            Servicos</button>
-                    </td>
-                </tr>
-            </thead>
-        </table>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>

@@ -39,6 +39,13 @@ body {
     border-radius: 5px;
     box-shadow: 10px 6px 2px var(--secondary-color);
 }
+.containerList{
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .containerFormRow {
 
     display: flex;
@@ -75,7 +82,7 @@ body {
 
 .roller {
     width: 100%;
-    margin-top: 300px;
+    margin-top: 50px;
 }
 
 /*==================================Listas cards*/

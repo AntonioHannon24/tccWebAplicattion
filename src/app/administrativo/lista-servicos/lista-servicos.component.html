@@ -1,39 +1,41 @@
 <div class="fundoForm">
     <div class="container containerForm">
-        <div class="title">
-            <h1>Lista de serviços cadastrados</h1>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="row">ID</th>
-                    <td>Nome</td>
-                    <td>Descrição</td>
-                    <td>Valor</td>
-                    <td>Status</td>
-                    <td>Painel</td>
-                </tr>
-                <tr *ngFor="let serv of servicos | paginate: { itemsPerPage:15, currentPage: p }">
-                    <th scope="row">{{ serv.id }}</th>
-                    <td>{{ serv.nome }}</td>
-                    <td>{{ serv.descricao }}</td>
-                    <td>{{ serv.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
-                    <td>{{serv.status}}</td>
-                    <td>
-                        <button class="botoesList" (click)="editServico(serv.id)"><i class="bi bi-pen"></i>
-                            Editar</button>
+        <div class="containerList">
+            <div class="title">
+                <h1>Lista de serviços cadastrados</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>Nome</td>
+                        <td>Descrição</td>
+                        <td>Valor</td>
+                        <td>Status</td>
+                        <td>Painel</td>
+                    </tr>
+                    <tr *ngFor="let serv of servicos | paginate: { itemsPerPage:6, currentPage: p }">
+                        <th scope="row">{{ serv.id }}</th>
+                        <td>{{ serv.nome }}</td>
+                        <td>{{ serv.descricao }}</td>
+                        <td>{{ serv.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+                        <td>{{serv.status}}</td>
+                        <td>
+                            <button class="botoesList" (click)="editServico(serv.id)"><i class="bi bi-pen"></i>
+                                Editar</button>
                             <button class="botoesList" *ngIf="serv.status =='Ativo'"
-                            (click)="desativarServico(serv.id)"><i class="bi bi-trash"></i>
-                            Desativar Servico</button>
-                        <button class="botoesList" *ngIf="serv.status =='Desativado'"
-                            (click)="ativarServico(serv.id)"><i class="bi bi-trash"></i>
-                            Ativar Servico</button>
-                    </td>
-                </tr>
-            </thead>
-        </table>
-        <div>
-            <button class="botoesList" (click)="novoServico()">Novo serviço</button>
+                                (click)="desativarServico(serv.id)"><i class="bi bi-trash"></i>
+                                Desativar Servico</button>
+                            <button class="botoesList" *ngIf="serv.status =='Desativado'"
+                                (click)="ativarServico(serv.id)"><i class="bi bi-trash"></i>
+                                Ativar Servico</button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <div>
+                <button class="botoesList" (click)="novoServico()">Novo serviço</button>
+            </div>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -1,32 +1,33 @@
 <div class="fundoForm">
     <div class="container containerForm">
-        <div class="title">
-            <h1>Lista de novos agendamentos</h1>
+        <div class="containerList">
+            <div class="title">
+                <h1>Lista de novos agendamentos</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <td>Status</td>
+                        <td>PET</td>
+                        <td>Funcionario</td>
+                        <td>Painel</td>
+                    </tr>
+                    <tr *ngFor="let agend of agendas! | paginate: { itemsPerPage:6, currentPage: p }">
+                        <th>{{ agend.data_hora }}</th>
+                        <td>{{ agend.status }}</td>
+                        <td>{{ agend.pet_id }}</td>
+                        <td>{{agend.funcionario_id}}</td>
+                        <td>
+                            <button class="botoesList" (click)="botaoAceitar(agend.id)"><i
+                                    class="bi bi-arrow-right-circle"></i> Aceitar</button>
+                            <button class="botoesList" (click)="recusarAgendas(agend.id)"><i class="bi bi-x-circle"></i>
+                                Recusar</button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <td>Status</td>
-                    <td>PET</td>
-                    <td>Funcionario</td>
-                    <td>Painel</td>
-                </tr>
-                <tr *ngFor="let agend of agendas! | paginate: { itemsPerPage:15, currentPage: p }">
-                    <th>{{ agend.data_hora }}</th>
-                    <td>{{ agend.status }}</td>
-                    <td>{{ agend.pet_id }}</td>
-                    <td>{{agend.funcionario_id}}</td>
-                    <td>
-                        <button class="botoesList" (click)="botaoAceitar(agend.id)"><i
-                                class="bi bi-arrow-right-circle"></i> Aceitar</button>
-                        <button class="botoesList" (click)="recusarAgendas(agend.id)"><i class="bi bi-x-circle"></i>
-                            Recusar</button>
-                    </td>
-                </tr>
-            </thead>
-        </table>
-
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>

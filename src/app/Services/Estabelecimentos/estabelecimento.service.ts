@@ -16,7 +16,7 @@ export class EstabelecimentoService {
   private apiUrl = `${this.baseApiUrl}api/estabelecimentos`
   private ativarEstab = `${this.baseApiUrl}api/ativarEstab` 
   private desativarEstab = `${this.baseApiUrl}api/desativarEstab`
-  private allSemLogar = `${this.baseApiUrl}api/allEstabelecimentosSemLogar`
+  private allSemLogar = `${this.baseApiUrl}api/allEstabelecimentosClientes`
 
   constructor(
     private http: HttpClient,
