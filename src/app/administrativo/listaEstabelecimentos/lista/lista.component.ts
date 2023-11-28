@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -20,12 +21,16 @@ export class ListaComponent implements OnInit {
   estabelecimentos: Estabelecimento[] = [];
   userId?: any
   p: number = 1;
+  @ViewChild('myModal') myModal:any;
+  @ViewChild('myModalEdit') myModalEdit: any;
+  modalRef!:BsModalRef<any>
 
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
     private router: Router,
     public messageService: MessageService,
+    private modalService:BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -65,7 +70,9 @@ export class ListaComponent implements OnInit {
 
   }
   editar(id: number) {
-    this.router.navigate([`/edit-estabelecimentos/${id}`])
+    
+    this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
+    //this.router.navigate([`/edit-estabelecimentos/${id}`])
   }
   listaFuncionarios(id: number) {
     this.router.navigate([`/lista-funcionarios/${id}`])
@@ -75,6 +82,9 @@ export class ListaComponent implements OnInit {
   }
   listaAgenda(id: number) {
     this.router.navigate([`/lista-agenda/${id}`])
+  }
+  fecharModal(): void {
+    this.modalRef.hide();
   }
 
 }

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
+
 @Component({
   selector: 'app-seu-estabelecimento',
   templateUrl: './seu-estabelecimento.component.html',

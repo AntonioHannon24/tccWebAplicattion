@@ -49,6 +49,8 @@ export class EditEstabelecimentoComponent {
 
    
     await this.estabelecimentoService.updateEstab(id!,formData).subscribe(()=>{
+      localStorage.setItem('message',"Serviço editado com sucesso!!") 
+      window.location.reload()
       this.formularioEnviado.emit();
     })
     

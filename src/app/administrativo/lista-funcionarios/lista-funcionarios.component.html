@@ -20,7 +20,7 @@
                     <td>{{ func.funcao }}</td>
                     <td>{{func.status}}</td>
                     <td>
-                        <button class="botoesList" (click)="editFuncionario(func.id)"><i class="bi bi-pen"></i>
+                        <button class="botoesList" (click)="editarFuncionario(func.id)"><i class="bi bi-pen"></i>
                             Editar</button>
                         <button class="botoesList" *ngIf="func.status=='Ativo' " (click)="desativarFuncionario(func.id)"><i class="bi bi-trash"></i>
                             Desativar Funcionário</button>
@@ -31,7 +31,8 @@
             </thead>
         </table>
         <div>
-            <a routerLink="/new-funcionario/{{id}}">Cadastre seus Funcionarios</a><br>
+            <button class="botoesList" (click)="novoFuncionario()">
+                Novo funcionario</button>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -39,3 +40,12 @@
         <button (click)="voltar()" class="botaoVoltar">Voltar</button>
     </div>
 </div>
+
+<ng-template class="modal" #myModal>
+    <app-new-funcionarios (formularioEnviado)="fecharModal()"></app-new-funcionarios>
+</ng-template>
+
+
+<ng-template class="modal" #myModalEdit>
+    <app-edit-funcionarios [id]="func" (formularioEnviado)="fecharModal()"></app-edit-funcionarios>
+</ng-template>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-lista-funcionarios',
@@ -17,18 +18,23 @@ export class ListaFuncionariosComponent implements OnInit {
 
 
   estabelecimento?: Estabelecimento;
+  modalRef!: BsModalRef<any>
   baseApiUrl = environment.baseApiUrl;
   id!: number;
   p: number = 1;
   funcionarios: Funcionario[] = [];
+  @ViewChild('myModal') myModal: any;
+  @ViewChild('myModalEdit') myModalEdit: any;
+  func!:number
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
     private messageService:MessageService,
-    private location: Location
+    private location: Location,   
+    private modalService: BsModalService,
+
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +50,7 @@ export class ListaFuncionariosComponent implements OnInit {
         this.funcionarios.push(item)
       })
     });
+
   }
 
   async desativarFuncionario(idFuncNumber: number) {
@@ -61,13 +68,22 @@ export class ListaFuncionariosComponent implements OnInit {
 
   }
 
-  async editFuncionario(idFuncNumber: number) {
-    this.router.navigate(["edit-funcionarios/" + idFuncNumber])
-  }
+   editarFuncionario(funcId: number) {
+
+    this.func = funcId
+    console.log(this.func)
+    this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
+  };
 
   voltar() {
     this.location.back()
   }
+  novoFuncionario() {
+    this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
+  }
 
+  fecharModal(): void {
+    this.modalRef.hide();
+  }
 }
 

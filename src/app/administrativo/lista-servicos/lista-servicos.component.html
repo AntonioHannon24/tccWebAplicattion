@@ -10,22 +10,30 @@
                     <td>Nome</td>
                     <td>Descrição</td>
                     <td>Valor</td>
+                    <td>Status</td>
                     <td>Painel</td>
                 </tr>
-                <tr *ngFor="let serv of estabelecimento?.servico! | paginate: { itemsPerPage:15, currentPage: p }">
+                <tr *ngFor="let serv of servicos | paginate: { itemsPerPage:15, currentPage: p }">
                     <th scope="row">{{ serv.id }}</th>
                     <td>{{ serv.nome }}</td>
                     <td>{{ serv.descricao }}</td>
-                    <td>{{ serv.valor }}</td>
+                    <td>{{ serv.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+                    <td>{{serv.status}}</td>
                     <td>
-                        <button class="botoes" (click)="removeServico(serv.id!)"><i class="bi bi-trash"></i></button>
-                        <button class="botoes" (click)="editServico(serv.id!)"><i class="bi bi-pen"></i></button>
+                        <button class="botoesList" (click)="editServico(serv.id)"><i class="bi bi-pen"></i>
+                            Editar</button>
+                            <button class="botoesList" *ngIf="serv.status =='Ativo'"
+                            (click)="desativarServico(serv.id)"><i class="bi bi-trash"></i>
+                            Desativar Servico</button>
+                        <button class="botoesList" *ngIf="serv.status =='Desativado'"
+                            (click)="ativarServico(serv.id)"><i class="bi bi-trash"></i>
+                            Ativar Servico</button>
                     </td>
                 </tr>
             </thead>
         </table>
         <div>
-            <a routerLink="/new-servicos/{{this.idEstab!}}">Cadastre seus serviços</a><br>
+            <button class="botoesList" (click)="novoServico()">Novo serviço</button>
         </div>
         <div class="paginator roller">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -33,3 +41,11 @@
         <button (click)="voltar()" class="botaoVoltar">Voltar</button>
     </div>
 </div>
+
+<ng-template class="modal" #myModal>
+    <app-new-services (formularioEnviado)="fecharModal()"></app-new-services>
+</ng-template>
+
+<ng-template class="modal" #myModalEdit>
+    <app-edit-servicos [id]="serv" (formularioEnviado)="fecharModal()"></app-edit-servicos>
+</ng-template>
