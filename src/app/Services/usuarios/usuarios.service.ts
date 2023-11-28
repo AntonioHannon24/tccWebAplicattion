@@ -15,6 +15,8 @@ export class UsuariosService {
 
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/usuarios`
+  private desativarUsuarios = `${this.baseApiUrl}api/desativarUsuario`
+  private ativarUsuarios = `${this.baseApiUrl}api/ativarUsuario`
 
   constructor(
     private http: HttpClient,
@@ -46,6 +48,19 @@ export class UsuariosService {
     const url = `${this.apiUrl}/${id}`
     return this.http.put<FormData>(url, formData)
   }
+
+  ativarUsuario(id:number){
+
+    const url = `${this.ativarUsuarios}/${id}`
+    return this.http.get(url)
+
+  }
+
+  desativarUsuario(id:number){
+    const url = `${this.desativarUsuarios}/${id}`
+    return this.http.get(url)
+  }
+  
   private handleError(errorMessage: string) {
 
     this.log(errorMessage);

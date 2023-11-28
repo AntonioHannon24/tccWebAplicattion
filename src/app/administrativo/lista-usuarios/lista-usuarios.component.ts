@@ -29,10 +29,19 @@ export class ListaUsuariosComponent {
 
   ngOnInit(): void {
 
+    const mensagem = localStorage.getItem('message')
+
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
     this.usuarioService.getAllUsuarios().subscribe((items) => {
       const data = items.data
       data.map((items) => {
         items.created_at = new Date(items.created_at!).toLocaleDateString('pt-BR')
+      })
+
+      data.forEach((item)=>{
+        item.status == 1 ? item.status = "Ativo" : item.status = "Desativado"
+        this.usuarios.push(item)
       })
       this.allUsers = data
       this.usuarios = data
@@ -40,10 +49,18 @@ export class ListaUsuariosComponent {
 
   }
 
-  async removeUser(id: number) {
-    await this.usuarioService.removeUser(id).subscribe();
-    this.router.navigate(['']);
-    this.messageService.add('Usuário deletado com sucesso!!')
+  async desativarEstabelecimento(servId: number) {
+    this.usuarioService.desativarUsuario(servId).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
+      window.location.reload()
+    })
+  }
+  async ativarEstabelecimento(idServ: number) {
+
+    await this.usuarioService.ativarUsuario(idServ).subscribe((item: any) => {
+      localStorage.setItem('message', item.msg)
+      window.location.reload()
+    })
 
   }
   editar(id: number) {

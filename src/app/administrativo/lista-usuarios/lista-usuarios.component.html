@@ -9,20 +9,24 @@
                     <th scope="row">ID</th>
                     <td>Nome</td>
                     <td>E-mail</td>
-                    <td>Tipo</td>
+                    <td>Status</td>
                     <td>Painel</td>
                 </tr>
                 <tr *ngFor="let user of usuarios | paginate: { itemsPerPage:15, currentPage: p }">
                     <th scope="row">{{ user.id }}</th>
                     <td>{{ user.nome }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.tipo_usuario }}</td>
+                    <td>{{user.status}}</td>
                     <td>
 
                         <button class="botoesList" (click)="editar(user.id!)"><i class="bi bi-pen"></i>
                             Editar</button>
-                        <button class="botoesList" (click)="removeUser(user.id!)"><i class="bi bi-trash"></i>
-                            Remover</button>
+                        <button class="botoesList" *ngIf="user.status =='Ativo'"
+                            (click)="desativarEstabelecimento(user.id!)"><i class="bi bi-trash"></i>
+                            Desativar Usuário</button>
+                        <button class="botoesList" *ngIf="user.status =='Desativado'"
+                            (click)="ativarEstabelecimento(user.id!)"><i class="bi bi-trash"></i>
+                            Ativar Usuário</button>
 
                     </td>
                 </tr>
