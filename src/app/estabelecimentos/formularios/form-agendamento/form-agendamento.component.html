@@ -1,48 +1,41 @@
-<div class="fundoForm d-flex justify-content-center align-items-center">
-    <div class="row container containerForm">
-        <h1 class="text-center">{{title}}</h1>
-        <form (ngSubmit)="submit()" [formGroup]="agendaForm" #formDir="ngForm">
-            
-            <div class="mb-3">
-                <label for="data_hora" class="form-label">Data-Hora</label>
-                <input class="form-control" type="text" formControlName="data_hora" aria-label="readonly input example" readonly>
-            </div>
-
-            <div class="mb-3 campos">
-                <label for="status">Status</label>
-                <select class="form-select" formControlName="status" [(ngModel)]="opcaoSelecionadaStatus">
-                    <option value="1" selected >{{statusInit}}</option>
-                    <option value="2">Em atendimento</option>
-                    <option value="3">Finalizado</option>
-                    <p *ngIf="status.invalid && formDir.submitted">Altere o status</p>
-                </select>
-            </div>
-
-            <div class="mb-3 campos">
-                <label for="funcionario_id">Funcionarios</label>
-                <select class="form-select" formControlName="funcionario_id">
-                    <option *ngFor="let func of funcionarios" value="{{func.id}}">{{func.nome}}</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="servico_id" class="form-label">Serviço</label>
-                <input class="form-control" type="text" formControlName="servico_id" aria-label="readonly input example" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="usuario_id" class="form-label">Usuário</label>
-                <input class="form-control" type="text" formControlName="usuario_id" aria-label="readonly input example" readonly>
-            </div>
-
-
-            <div class="mb-3">
-                <label for="pet_id" class="form-label">Pet</label>
-                <input class="form-control" type="text" formControlName="pet_id" aria-label="readonly input example" readonly>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-        <button (click)="voltar()" class="botaoVoltar">Voltar</button>
-    </div>
+<div class="row container">
+    <h1 class="text-center">{{title}}</h1>
+    <form (ngSubmit)="submit()" [formGroup]="agendaForm" #formDir="ngForm">
+        <div class="mb-3">
+            <label for="data_hora" class="form-label">Data-Hora</label>
+            <input class="form-control" type="text" formControlName="data_hora" aria-label="readonly input example"
+                readonly>
+        </div>
+        <div class="mb-3 campos">
+            <label for="status">Status</label>
+            <select class="form-select" formControlName="status" [(ngModel)]="opcaoSelecionadaStatus">
+                <option value="1">Aceito</option>
+                <option value="2">Em atendimento</option>
+                <option value="3">Finalizado</option>
+                <p *ngIf="status.invalid && formDir.submitted">Altere o status</p>
+            </select>
+        </div>
+        <div class="mb-3 campos">
+            <label for="funcionario_id">Funcionarios</label>
+            <select class="form-select" formControlName="funcionario_id">
+                <option *ngFor="let func of funcionarios" value="{{func.id}}">{{func.nome}}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="servico_id" class="form-label">Serviço</label>
+            <input class="form-control" type="text" formControlName="servico_id" aria-label="readonly input example"
+                readonly>
+        </div>
+        <div class="mb-3">
+            <label for="usuario_id" class="form-label">Usuário</label>
+            <input class="form-control" type="text" formControlName="usuario_id" aria-label="readonly input example"
+                readonly>
+        </div>
+        <div class="mb-3">
+            <label for="pet_id" class="form-label">Pet</label>
+            <input class="form-control" type="text" formControlName="pet_id" aria-label="readonly input example"
+                readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
 </div>

@@ -3,19 +3,16 @@
     height: 600px;
     opacity: .9;
 }
-
 .divLista {
-    width: 500px;
+    width: 550px;
     height: 600px;
     background-color: white;
     opacity: .9;
     border-radius: 5px;
 }
-
 .tabela {
     min-height: 600px;
 }
-
 .title {
     padding: 20px;
 }

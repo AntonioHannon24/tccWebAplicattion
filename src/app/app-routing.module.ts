@@ -74,7 +74,7 @@ const routes: Routes = [
   {path: 'lista-funcionarios/:id', component:ListaFuncionariosComponent,canActivate: [admGuard]},
   {path: 'lista-noticias', component:ListaNoticiasComponent,canActivate: [admGuard]},
   {path: 'edit-noticias/:id', component:EditNoticiasComponent,canActivate: [admGuard]},
-  {path: 'edit-agendas/:id', component:EditAgendaComponent},
+  {path: 'edit-agenda', component:EditAgendaComponent},
   {path: 'lista-fechados', component:ListaFechadosComponent },
   {path: 'lista-abertos', component:NewAgendamentosComponent },
   {path:  'lista-agenda/:id',component:ListaAgendaComponent },

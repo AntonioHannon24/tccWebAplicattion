@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
-import { ActivatedRoute,Router } from '@angular/router';
-import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 
 @Component({
@@ -10,7 +8,7 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
   templateUrl: './edit-estabelecimento.component.html',
   styleUrls: ['./edit-estabelecimento.component.css']
 })
-export class EditEstabelecimentoComponent {
+export class EditEstabelecimentoComponent implements OnInit {
 
 
 
@@ -21,7 +19,7 @@ export class EditEstabelecimentoComponent {
 
   constructor(
     private estabelecimentoService:EstabelecimentoService,
-    private route:ActivatedRoute,
+
   ) { }
 
   ngOnInit(): void {

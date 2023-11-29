@@ -4,8 +4,8 @@ import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 import { Agenda } from 'src/app/interfaces/Agenda';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PetsService } from 'src/app/Services/pets/pets.service';
-import { Router } from '@angular/router';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 @Component({
   selector: 'app-agenda',
@@ -16,14 +16,16 @@ import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.ser
 export class AgendaComponent implements OnInit {
 
   @ViewChild('myModal') myModal: any;
+  @ViewChild('myModalEdit') myModalEdit: any;
   teste: string = "";
+  agend!:number
 
   constructor(public agendaService: AgendaService,
     private authService: AuthService,
     private modalService: BsModalService,
     private petService: PetsService,
-    private router: Router,
-    private funcionarioService: FuncionarioService
+    private funcionarioService: FuncionarioService,
+    private messageService:MessageService
 
   ) { }
   selected: Date | null | undefined;
@@ -35,6 +37,10 @@ export class AgendaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const mensagem = localStorage.getItem('message')
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
+
     this.authService._id.subscribe((valor) => {
       this.id = valor;
     });
@@ -42,7 +48,7 @@ export class AgendaComponent implements OnInit {
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
       this.FullAgenda.forEach((agend) => {
-        agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
+        //agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
         agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe(func => { agend.funcionario_id = func.data.nome })
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
@@ -77,7 +83,7 @@ export class AgendaComponent implements OnInit {
     this.modalRef.hide();
   }
   botaEditar(id: number) {
-    this.router.navigate([`edit-agendas/${id}`])
-    this.fecharModal()
+    this.agend = id
+    this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   }
 }

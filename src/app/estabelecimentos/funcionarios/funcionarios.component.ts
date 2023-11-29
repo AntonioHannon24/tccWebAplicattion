@@ -15,6 +15,7 @@ import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 })
 export class FuncionariosComponent {
 
+
   estabelecimento?: Estabelecimento;
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any;
@@ -84,7 +85,6 @@ export class FuncionariosComponent {
   editarFuncionario(funcId: number) {
 
     this.func = funcId
-    console.log(this.func)
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
 }

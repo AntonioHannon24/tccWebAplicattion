@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 import { PetsService } from 'src/app/Services/pets/pets.service';
 import { UsuariosService } from 'src/app/Services/usuarios/usuarios.service';
@@ -17,6 +16,8 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
 })
 export class EditAgendaComponent {
 
+  
+  @Input() id!: number
   agenda!: Agenda
   btnText: string = "Editar"
   title: string = "Editar Agenda"
@@ -25,23 +26,22 @@ export class EditAgendaComponent {
   userId!:string;
   estabId!: string;
   dataHora!: string;
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(
     private agendaService: AgendaService,
-    private route: ActivatedRoute,
     private petService: PetsService,
     private usuarioService: UsuariosService,
     private serviceServices: ServiceService,
     public messageService:MessageService,
-    private router:Router,
-
   ) { }
 
   ngOnInit(): void {
 
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    
     let petResult, usuarioResult, servicoResult;
-    this.agendaService.getAgenda(id).subscribe(agendaResult => {
+    this.agendaService.getAgenda(this.id).subscribe(agendaResult => {
       const agendaLoad = agendaResult.data;
 
       this.servId = agendaLoad.servico_id
@@ -86,9 +86,10 @@ export class EditAgendaComponent {
     formData.append("estabelecimento_id", this.estabId)
 
     this.agendaService.updateAgenda(id!, formData).subscribe((item:any)=>{
-      
-      this.messageService.add(item.message)
-      this.router.navigate(['agenda'])
+      localStorage.setItem('message',"Agenda editada com sucesso!!") 
+      window.location.reload()
+      this.formularioEnviado.emit();
+  
     })
      
   }

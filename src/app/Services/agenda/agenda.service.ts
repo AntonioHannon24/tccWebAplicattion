@@ -24,6 +24,8 @@ export class AgendaService {
   private recusarAgenda = `${this.baseApiUrl}api/recusarAgenda`
   private fecharAgenda = `${this.baseApiUrl}api/fecharAgenda`
   private emAtendimento = `${this.baseApiUrl}api/emAtendimentoAgenda`
+  private allAgendamentosEstabs = `${this.baseApiUrl}api/allAgendamentosEstab`
+
 
   constructor(
     private http:HttpClient,
@@ -51,6 +53,11 @@ export class AgendaService {
 
   getAgendaEstabelecimento(id:number):Observable<Response<Agenda[]>>{
     const url =`${this.agendaEstabelecimentos}/${id}`
+    return this.http.get<Response<Agenda[]>>(url)
+  }
+
+  allAgendamentosEstab(id:number):Observable<Response<Agenda[]>>{
+    const url =`${this.allAgendamentosEstabs}/${id}`
     return this.http.get<Response<Agenda[]>>(url)
   }
 

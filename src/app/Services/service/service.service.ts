@@ -17,7 +17,7 @@ export class ServiceService {
   private ativarServ = `${this.baseApiUrl}api/ativarServico`
   private desativarServ = `${this.baseApiUrl}api/desativarServico`
   private servicosEst = `${this.baseApiUrl}api/servicoEstab`
-
+  
   constructor(
     private http: HttpClient,
   ) { }

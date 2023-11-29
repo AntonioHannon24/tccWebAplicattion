@@ -1,1 +1,38 @@
-<p>lista-agenda works!</p>
+<div class="fundoForm">
+    <div class="container containerForm">
+        <div class="containerList">
+            <div class="title">
+                <h1>Lista de todos os agendamentos</h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <td>Status</td>
+                        <td>PET</td>
+                        <td>Funcionario</td>
+                        <td>Painel</td>
+                    </tr>
+                    <tr *ngFor="let agend of agendas! | paginate: { itemsPerPage:6, currentPage: p }">
+                        <th>{{ agend.data_hora }}</th>
+                        <td>{{ agend.status }}</td>
+                        <td>{{ agend.pet_id }}</td>
+                        <td>{{agend.funcionario_id}}</td>
+                        <td>
+                            <button class="botoesList" (click)="botaEditar(agend.id)">
+                                     Editar</button>
+
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="paginator roller">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <button (click)="botaoVoltar()" class="botaoVoltar">Voltar</button>
+    </div>
+    
+<ng-template class="modal" #myModalEdit>
+    <app-edit-agenda [id]="agend" (formularioEnviado)="fecharModal()"></app-edit-agenda>
+</ng-template>
