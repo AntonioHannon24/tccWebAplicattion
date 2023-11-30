@@ -18,14 +18,14 @@ export class AgendaComponent implements OnInit {
   @ViewChild('myModal') myModal: any;
   @ViewChild('myModalEdit') myModalEdit: any;
   teste: string = "";
-  agend!:number
+  agend!: number
 
   constructor(public agendaService: AgendaService,
     private authService: AuthService,
     private modalService: BsModalService,
     private petService: PetsService,
     private funcionarioService: FuncionarioService,
-    private messageService:MessageService
+    private messageService: MessageService
 
   ) { }
   selected: Date | null | undefined;
@@ -68,20 +68,24 @@ export class AgendaComponent implements OnInit {
     this.agendaService.agendaDataEstabelecimento(this.id, teste).subscribe(item => {
       this.agenda = item.data
       this.agenda.forEach((agend) => {
-        agend.status=="1"?agend.status="Aceito":agend.status="Em andamento"
-        agend.funcionario_id==null?agend.funcionario_id="Sem funcionários":
+        agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
+        agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" :
           this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
-            .subscribe(func=>{agend.funcionario_id=func.data.nome})
+            .subscribe(func => { agend.funcionario_id = func.data.nome })
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
           agend.pet_id = pet.data.nome
         })
       });
-      this.modalRef=this.modalService.show(this.myModal,{class:'modal-lg'});
+      this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' });
     });
   }
   fecharModal(): void {
-    this.modalRef.hide();
+    if (this.modalRef) {
+      this.modalRef.hide();
+    }
   }
+
+
   botaEditar(id: number) {
     this.agend = id
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
