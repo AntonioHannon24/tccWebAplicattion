@@ -10,34 +10,46 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
 })
 export class NewServicesComponent {
 
-  title:string = "Novo Serviço"
-  btnText:string = 'Criar'
-  id!:number
+  title: string = "Novo Serviço"
+  btnText: string = 'Criar'
+  id!: number
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private servicosService:ServiceService,
-    public messageService:MessageService
+    private servicosService: ServiceService,
+    public messageService: MessageService
   ) { }
 
   ngOnInit(): void {
     this.id = Number(localStorage.getItem('id'))
   }
 
-  async createHandle(servico:Servicos){
-    
+  async createHandle(servico: Servicos) {
+
     const formData = new FormData();
-    formData.append("id",servico.id)
-    formData.append("nome",servico.nome)
-    formData.append("valor",servico.valor)
-    formData.append("descricao",servico.descricao)
-    formData.append("estabelecimento_id",servico.estabelecimento_id)
-   
-    await this.servicosService.createServico(formData).subscribe(()=>{
-      localStorage.setItem('message','Servico criado com sucesso!!')
-      window.location.reload()
-      this.formularioEnviado.emit();
-    })
+    formData.append("id", servico.id)
+    formData.append("nome", servico.nome)
+    formData.append("valor", servico.valor)
+    formData.append("descricao", servico.descricao)
+    formData.append("estabelecimento_id", servico.estabelecimento_id)
+
+    await this.servicosService.createServico(formData)
+
+      .subscribe(
+        {
+          next: (response: any) => {
+            localStorage.setItem('message', response.message);
+            window.location.reload();
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
+
+          }
+        }
+      )
   }
+
 
 }

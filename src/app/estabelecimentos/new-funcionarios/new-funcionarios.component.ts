@@ -3,6 +3,7 @@ import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.service';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
+
 @Component({
   selector: 'app-new-funcionarios',
   templateUrl: './new-funcionarios.component.html',
@@ -38,13 +39,23 @@ export class NewFuncionariosComponent {
     formData.append("estabelecimento_id", funcionario.estabelecimento_id)
     formData.append("cidade_id", funcionario.cidade_id)
     formData.append("password", funcionario.password!)
-    await this.funcionarioService.createFuncionario(formData).subscribe(() => {
 
-      localStorage.setItem('message', "Funcionário criado com sucesso!!")
-      window.location.reload()
-      this.formularioEnviado.emit();
+    this.funcionarioService.createFuncionario(formData)
+      .subscribe(
+        {
+          next: (response: any) => {
+            localStorage.setItem('message', response.message);
+            window.location.reload();
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
 
-    })
+          }
+        }
+      )
+
   }
 
 

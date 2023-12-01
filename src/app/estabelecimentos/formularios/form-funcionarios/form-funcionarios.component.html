@@ -31,12 +31,9 @@
         </div>
         <div class="mb-3 campos">
             <label for="cidade_id">Cidade</label>
-            <input type="text" class="form-control" formControlName="cidade_id" required />
-            <div *ngIf="cidade_id.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
-        </div>
-        <div class="mb-3 campos">
-            <label for="foto">Foto</label>
-            <input type="file" style="margin-left: 5%;" (change)="onFileSelected($event)">
+            <select class="form-select" formControlName="cidade_id">
+                <option *ngFor="let city of cidades" value="{{city.id}}">{{city.nome}}</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">{{btnText}}</button>
     </form>

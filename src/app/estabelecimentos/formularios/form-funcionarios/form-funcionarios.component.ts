@@ -3,13 +3,15 @@ import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { CidadeService } from 'src/app/Services/cidade/cidade.service';
+import { Cidade } from 'src/app/interfaces/Cidade';
 
 @Component({
   selector: 'app-form-funcionarios',
   templateUrl: './form-funcionarios.component.html',
   styleUrls: ['./form-funcionarios.component.css']
 })
-export class FormFuncionariosComponent {
+export class FormFuncionariosComponent implements OnInit {
 
 
   @Output() onSubmit = new EventEmitter<Funcionario>()
@@ -17,16 +19,24 @@ export class FormFuncionariosComponent {
   @Input() title!: string
   @Input() funcionarioData: Funcionario | null = null;
   @Input() id!: number
+  cidades:Cidade[] = []
 
   baseApiUrl = environment.baseApiUrl
   funcionarioForm!: FormGroup;
 
   constructor(
-    private location: Location
+    private location: Location,
+    private cidadeService:CidadeService,
   ) { }
 
   ngOnInit(): void {
     console.log(this.id)
+
+
+    this.cidadeService.getAllCidades().subscribe((items) => {
+      this.cidades = items.data
+    })
+
 
     this.funcionarioForm = new FormGroup({
       id: new FormControl(''),
@@ -36,8 +46,6 @@ export class FormFuncionariosComponent {
       cidade_id: new FormControl(this.funcionarioData ? this.funcionarioData.cidade_id : ''),
       password: new FormControl(this.funcionarioData ? this.funcionarioData.password : ''),
       password2: new FormControl(),
-      foto: new FormControl(''),
-
       estabelecimento_id: new FormControl(this.id),
 
     })

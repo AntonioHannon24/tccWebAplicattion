@@ -42,13 +42,22 @@ export class EditServicosComponent {
     formData.append("descricao", servico.descricao)
     formData.append("estabelecimento_id", servico.estabelecimento_id)
 
-    await this.servicosService.updateServico(id!, formData).subscribe(() => {
-   
-     localStorage.setItem('message',"Serviço editado com sucesso!!") 
-     window.location.reload()
-     this.formularioEnviado.emit();
-      
-    })
+    await this.servicosService.updateServico(id!, formData)
+
+      .subscribe(
+        {
+          next: (response: any) => {
+            localStorage.setItem('message', response.message);
+            window.location.reload();
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
+
+          }
+        }
+      )
   }
 
 }

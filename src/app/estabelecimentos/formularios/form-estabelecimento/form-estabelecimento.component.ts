@@ -4,6 +4,7 @@ import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { CidadeService } from 'src/app/Services/cidade/cidade.service';
 import { Cidade } from 'src/app/interfaces/Cidade';
 import { Location } from '@angular/common';
+import { cnpj } from 'cpf-cnpj-validator';
 
 @Component({
   selector: 'app-form-estabelecimento',
@@ -62,7 +63,10 @@ export class FormEstabelecimentoComponent implements OnInit{
     }else if(this.conferir() !== true){
       window.alert('As senhas não conferem!!!')
       return;
-    }else{
+    }else if(this.conferirCnpj() !== true){
+      window.alert('Cnpj Invalido')
+    }
+    else{
       this.onSubmit.emit(this.estabForm.value)
     }
     
@@ -106,6 +110,11 @@ export class FormEstabelecimentoComponent implements OnInit{
   }
   get password() {
     return this.estabForm.get('password')!;
+  }
+
+  conferirCnpj(){
+    const cnpjValue = this.estabForm.get('cnpj')!.value
+    return cnpj.isValid(cnpjValue)
   }
 
   conferir() {

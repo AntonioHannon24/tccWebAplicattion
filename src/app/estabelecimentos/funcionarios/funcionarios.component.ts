@@ -8,6 +8,7 @@ import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 
+
 @Component({
   selector: 'app-funcionarios',
   templateUrl: './funcionarios.component.html',
@@ -27,18 +28,23 @@ export class FuncionariosComponent {
   modalRef!: BsModalRef<any>
   func!: number
 
+
   constructor(
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
     private messageService: MessageService,
     private modalService: BsModalService,
     private agendaSerive: AgendaService,
+ 
   ) { }
 
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
+
+
 
     this.idEstab = localStorage.getItem('id');
 
