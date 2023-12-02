@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsuariosService } from 'src/app/Services/usuarios/usuarios.service';
 import { Usuario } from 'src/app/interfaces/Usuario';
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 
 @Component({
@@ -17,23 +14,21 @@ export class EditUserComponent implements OnInit{
   usuario!:Usuario
   btnText:string = "Editar"
   title:string = "Editar usuário"
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
+  @Input() id!:number
 
   constructor(
     private usuarioService:UsuariosService,
-    private route:ActivatedRoute,
-    private message:MessageService,
-    private router:Router,
   ) { }
 
   ngOnInit(): void {
 
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.usuarioService.getUsuario(id).subscribe(item=>{
+   
+    this.usuarioService.getUsuario(this.id).subscribe(item=>{
       this.usuario = item.data;
     })
   }
   async editHandler(usuarioData:Usuario){
-    
     
     const id = this.usuario.id
     const formData = new FormData()
@@ -43,12 +38,20 @@ export class EditUserComponent implements OnInit{
     formData.append("password",usuarioData.password)
     formData.append("cidade_id",usuarioData.cidade_id)
     
-    await this.usuarioService.updateUsuario(id!,formData).subscribe(()=>{this.goHome()})
-    
-  }
-  goHome(){
-    this.router.navigate(['/'])
-    this.message.add("O usuário foi editado com sucesso!!")
-  }
+    this.usuarioService.updateUsuario(id!,formData)
+    .subscribe(
+      {
+        next: (response: any) => {
+          localStorage.setItem('message', response.message);
+          window.location.reload();
+          this.formularioEnviado.emit();
+        },
+        error: error => {
+          console.log(error)
+          window.alert(error.error.message);
 
+        }
+      }
+    )
+  }
 }

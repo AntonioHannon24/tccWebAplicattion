@@ -42,7 +42,7 @@ export class EditFuncionariosComponent {
     formData.append("cidade_id", funcionarioData.cidade_id)
     formData.append("password", funcionarioData.password!)
 
-    await this.funcionarioService.updateFuncionario(id!, formData)
+    this.funcionarioService.updateFuncionario(id!, formData)
       .subscribe(
         {
           next: (response: any) => {

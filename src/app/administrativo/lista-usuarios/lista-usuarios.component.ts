@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UsuariosService } from 'src/app/Services/usuarios/usuarios.service';
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -19,11 +20,15 @@ export class ListaUsuariosComponent {
   allUsers: Usuario[] = []
   usuarios: Usuario[] = []
   p: number = 1;
+  modalRef!: BsModalRef<any>
+  @ViewChild('myModal') myModal: any;
+  userId!: number;
 
   constructor(
     private usuarioService: UsuariosService,
     public messageService: MessageService,
     private router: Router,
+    private modalService: BsModalService,
 
   ) { }
 
@@ -64,8 +69,11 @@ export class ListaUsuariosComponent {
 
   }
   editar(id: number) {
-    this.router.navigate([`edit-usuario/${id}`])
+    this.userId = id
+    this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
   }
-
+  fecharModal(): void {
+    this.modalRef.hide();
+  }
 
 }

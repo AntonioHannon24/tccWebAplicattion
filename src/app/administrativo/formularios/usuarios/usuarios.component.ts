@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/interfaces/Usuario';
 import { CidadeService } from 'src/app/Services/cidade/cidade.service';
 import { Cidade } from 'src/app/interfaces/Cidade';
 import { Location } from '@angular/common';
+import { cpf } from 'cpf-cnpj-validator'; 
 
 @Component({
   selector: 'app-usuarios',
@@ -78,36 +79,9 @@ export class UsuariosComponent implements OnInit{
     }
   }
   conferirCpf() {
-    const cpf = this.userForm.value.cpf
-
-    if (cpf.length !== 11) {
-      return false;
-    }
-    let total = 0;
-    for (let i = 0; i < 9; i++) {
-      total += parseInt(cpf.charAt(i)) * (10 - i);
-    }
-    let digitoVerificador1 = 11 - (total % 11);
-    if (digitoVerificador1 > 9) {
-      digitoVerificador1 = 0;
-    }
-    if (parseInt(cpf.charAt(9)) !== digitoVerificador1) {
-      return false;
-    }
-    total = 0;
-    for (let i = 0; i < 10; i++) {
-      total += parseInt(cpf.charAt(i)) * (11 - i);
-    }
-    let digitoVerificador2 = 11 - (total % 11);
-    if (digitoVerificador2 > 9) {
-      digitoVerificador2 = 0;
-    }
-
-    if (parseInt(cpf.charAt(10)) !== digitoVerificador2) {
-      return false;
-    }
-    return true;
-}
+    const cpfNumber = this.userForm.value.cpf
+    return cpf.isValid(cpfNumber)
+  }
   get nome() {
     return this.userForm.get('nome')!;
   }
