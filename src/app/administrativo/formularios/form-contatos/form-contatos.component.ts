@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contato } from 'src/app/interfaces/Contato';
 import { Location } from '@angular/common';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ContatoService } from 'src/app/Services/contato/contato.service';
 
 @Component({
   selector: 'app-form-contatos',
@@ -12,62 +15,90 @@ export class FormContatosComponent {
 
 
   contatoForm!: FormGroup;
+  respostaForm!: FormGroup
 
-  @Output() onSubmit = new EventEmitter<Contato>()
+
   @Input() btnText!: string
   @Input() title!: string
   @Input() contatoData: Contato | null = null;
+  @ViewChild('myModal') myModal: any;
+  modalRef!: BsModalRef<any>
 
-  estado:string = ""
-  opcaoSelecionada:string = ""
-  
+  estado: string = ""
+  opcaoSelecionada: string = ""
+
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
+
+  assunt!: string
+  emai!: string
+  id!: number
+
   constructor(
-    private location:Location
+    private location: Location,
+    private modalService: BsModalService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private contatoService: ContatoService
   ) { }
 
   ngOnInit(): void {
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'))
+
     this.contatoForm = new FormGroup({
-      nome: new FormControl(this.contatoData ? this.contatoData.nome :'', [Validators.required]),
-      email: new FormControl(this.contatoData ? this.contatoData.email :'', [Validators.required]),
-      assunto: new FormControl(this.contatoData ? this.contatoData.assunto :'', [Validators.required]),
-      mensagem: new FormControl(this.contatoData ? this.contatoData.mensagem :'', [Validators.required]),
+      nome: new FormControl(this.contatoData ? this.contatoData.nome : '', [Validators.required]),
+      email: new FormControl(this.contatoData ? this.contatoData.email : '', [Validators.required]),
+      assunto: new FormControl(this.contatoData ? this.contatoData.assunto : '', [Validators.required]),
+      mensagem: new FormControl(this.contatoData ? this.contatoData.mensagem : '', [Validators.required]),
       estado: new FormControl(''),
     })
 
-    this.estado= this.contatoData?.estado == "1" ? "Novo" : ""
+    this.estado = this.contatoData?.estado == "1" ? "Novo" : ""
     this.opcaoSelecionada = "1"
   }
-
-  async submit() {
-    if (this.contatoForm.invalid) {
-      return;
-    }
-    const formData = new FormData();
-
-    formData.append("nome", this.contatoForm.get('nome')?.value)
-    formData.append("email", this.contatoForm.get('email')?.value)
-    formData.append("assunto", this.contatoForm.get('assunto')?.value)
-    formData.append("mensagem", this.contatoForm.get('mensagem')?.value);
-    formData.append("estado", this.contatoForm.get('estado')?.value);
-    this.onSubmit.emit(this.contatoForm.value)
+  fecharModal(): void {
+    this.modalRef.hide();
   }
 
+  responder() {
+    this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
+    this.assunt = this.contatoData!.assunto
+    this.emai = this.contatoData!.email
+  }
 
-  get nome() {
-    return this.contatoForm.get('nome')!;
-  }
-  get email() {
-    return this.contatoForm.get('email')!;
-  }
-  get assunto() {
+  get assunto(): any {
     return this.contatoForm.get('assunto')!;
   }
-  get mensagem() {
-    return this.contatoForm.get('mensagem')!;
+
+
+
+  botaoVoltar() {
+    this.location.back()
   }
 
-  botaoVoltar(){
-    this.location.back()
+  async editHandler(contato: any) {
+
+    const formData = new FormData()
+    formData.append("email", contato.email)
+    formData.append("assunto", contato.assunto)
+    formData.append("mensagemResposta", contato.mensagemResposta)
+
+    this.contatoService.resposta(this.id, formData)
+      .subscribe(
+        {
+          next: (response: any) => {
+            this.fecharModal();
+            localStorage.setItem('message', response.message);
+            this.router.navigate(['lista-contatos'])
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
+
+          }
+        }
+      )
   }
 
 }

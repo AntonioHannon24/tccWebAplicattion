@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Response } from 'src/app/interfaces/Response';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, tap } from 'rxjs';
-import { MessageService } from 'src/app/Services/MessageServices/message.service';
-import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
+import {  Observable } from 'rxjs';
 import { Contato } from 'src/app/interfaces/Contato';
 
 
@@ -15,12 +13,12 @@ export class ContatoService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
   ) { }
 
 
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/contato`
+  private resp = `${this.baseApiUrl}api/resposta`
 
   getAllContato():Observable<Response<Contato[]>>{
     return this.http.get<Response<Contato[]>>(this.apiUrl)
@@ -38,13 +36,9 @@ export class ContatoService {
     const url =`${this.apiUrl}/${id}`
     return this.http.put<FormData>(url,formData)
   }
-
-  private handleError(errorMessage: string) {
-
-    this.log(errorMessage);
-  }
-  private log(message: string) {
-    this.messageService.add(`${message}`);
+  resposta(id:number,formData:FormData){
+    const url =`${this.resp}/${id}`
+    return this.http.post<FormData>(url,formData)
   }
 
 

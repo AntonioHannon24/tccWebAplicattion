@@ -1,40 +1,34 @@
 <div class="fundoForm d-flex justify-content-center align-items-center">
     <div class="row container containerForm">
         <h1 class="text-center">{{title}}</h1>
-        <form (ngSubmit)="submit()" [formGroup]="contatoForm" #formDir="ngForm">
-            
-            <div class="mb-3 campos">
-                <label for="estado">Estado</label>
-                <select class="form-select" formControlName="estado" [(ngModel)]="opcaoSelecionada">
-                    <option value="1" selected >{{estado}}</option>
-                    <option value="2">Fechar</option>
-                </select>
-            </div>
+        <form [formGroup]="contatoForm" #formDir="ngForm">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input class="form-control" type="text" formControlName="nome" aria-label="readonly input example" readonly>
-                <p *ngIf="nome.invalid && formDir.submitted">O nome é obrigatório</p>
+                <input class="form-control" type="text" formControlName="nome" aria-label="readonly input example"
+                    readonly>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
-                <input class="form-control" type="text" formControlName="email" aria-label="readonly input example" readonly>
-                <p *ngIf="email.invalid && formDir.submitted">O e-mail é obrigatório</p>
+                <input class="form-control" type="text" formControlName="email" aria-label="readonly input example"
+                    readonly>
             </div>
             <div class="mb-3">
                 <label for="assunto" class="form-label">Assunto</label>
-                <input class="form-control" type="text" formControlName="assunto" aria-label="readonly input example" readonly>
-                
-                <p *ngIf="assunto.invalid && formDir.submitted">O assunto é obrigatório</p>
-            </div>
-            
+                <input class="form-control" type="text" formControlName="assunto" aria-label="readonly input example"
+                    readonly>
 
+            </div>
             <div class="mb-3">
                 <label for="mensagem" class="form-label">Mensagem</label>
-                <textarea class="form-control" formControlName="mensagem" rows="5" placeholder="Sua Mensagem" aria-label="readonly input example" readonly></textarea>
-                <p *ngIf="mensagem.invalid && formDir.submitted">A mensagem é obrigatória</p>
+                <textarea class="form-control" formControlName="mensagem" rows="5" placeholder="Sua Mensagem"
+                    aria-label="readonly input example" readonly></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button (click)="responder()" class="btn btn-primary">Responder</button>
         </form>
         <button (click)="botaoVoltar()" class="botaoVoltar">Voltar</button>
     </div>
 </div>
+
+<ng-template class="modal" #myModal>
+    <app-resposta-contato [assunto]="assunt" [email]="emai" (onSubmit)="editHandler($event)"></app-resposta-contato>
+</ng-template>

@@ -71,7 +71,6 @@ export class ListaFuncionariosComponent implements OnInit {
    editarFuncionario(funcId: number) {
 
     this.func = funcId
-    console.log(this.func)
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
 

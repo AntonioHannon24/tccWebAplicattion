@@ -24,6 +24,11 @@ export class ListaContatosComponent implements OnInit{
               ){}
 
   ngOnInit(): void {
+
+    const mensagem = localStorage.getItem('message')
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
+
     this.contatoService.getAllContato().subscribe((items)=>{
       const data = items.data
       data.map((items)=>{
