@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +22,16 @@ export class LoginComponent {
     private route: Router,
     private location: Location,
     private modalService: BsModalService,
+    private messageService:MessageService
     ) { }
 
   ngOnInit(): void {
+    
+
+
+    const mensagem = localStorage.getItem('message')
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
 
 
     this.LoginForm = new FormGroup({

@@ -48,12 +48,22 @@ export class AgendaComponent implements OnInit {
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
       this.FullAgenda.forEach((agend) => {
-        //agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
+     
         agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe(func => { agend.funcionario_id = func.data.nome })
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
           agend.pet_id = pet.data.nome
         })
+        if (agend.status == "0") {
+          agend.status = "Novo";
+        } else if (agend.status == "1") {
+          agend.status = "Aceito";
+        } else if (agend.status == "2") {
+          agend.status = "Em atendimento";
+        } else if (agend.status == "3") {
+          agend.status = "Fechado";
+        }
+        
       });
     });
 

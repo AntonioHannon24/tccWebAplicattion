@@ -45,36 +45,13 @@ export class EstabelecimentoService {
 
   createEstab(formData: FormData): Observable<FormData> {
 
-    return this.http.post<FormData>(this.apiUrl, formData).pipe(
-
-      tap((response: any): any => {
-
-       window.alert(response.message)
-        
-      }),
-      catchError(err => {
-        console.log(err)
-        window.alert(err.error.message)
-      return of()
-    }))
+    return this.http.post<FormData>(this.apiUrl, formData)
 
   }
   updateEstab(id: number, formData: FormData): Observable<FormData> {
 
     const url = `${this.apiUrl}/${id}`
-    return this.http.put<FormData>(url, formData).pipe(catchError(err => {
-      this.handleError(err.error)
-      return of()
-    }))
-  }
-
-  private handleError(errorMessage: string) {
-
-    this.log(errorMessage);
-  }
-  
-  private log(message: string) {
-    this.messageService.add(`${message}`);
+    return this.http.put<FormData>(url, formData)
   }
 
   desativarEstabelecimentos(id: number) {

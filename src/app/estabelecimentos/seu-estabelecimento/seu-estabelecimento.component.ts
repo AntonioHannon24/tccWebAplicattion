@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MessageService } from 'src/app/Services/MessageServices/message.service';
 
 
 @Component({
@@ -22,11 +23,16 @@ export class SeuEstabelecimentoComponent {
   constructor(
     private estabelecimentoService:EstabelecimentoService,
     private authService:AuthService,
-    private modalService:BsModalService
+    private modalService:BsModalService,
+    private messageService:MessageService,
     
   ) { }
 
   ngOnInit(): void {
+
+    const mensagem = localStorage.getItem('message')
+    if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
+
     
 
     this.authService._id.subscribe((valor: any | undefined)=>{

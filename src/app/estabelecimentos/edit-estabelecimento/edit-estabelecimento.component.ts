@@ -12,46 +12,56 @@ export class EditEstabelecimentoComponent implements OnInit {
 
 
 
-  estabelecimento!:Estabelecimento
-  btnText:string = "Editar"
-  title:string = "Edite seu Estabelecimento"
+  estabelecimento!: Estabelecimento
+  btnText: string = "Editar"
+  title: string = "Edite seu Estabelecimento"
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private estabelecimentoService:EstabelecimentoService,
+    private estabelecimentoService: EstabelecimentoService,
 
   ) { }
 
   ngOnInit(): void {
 
     const id = localStorage.getItem('id')
-    this.estabelecimentoService.getEstabelecimento(Number(id)).subscribe(item=>{
+    this.estabelecimentoService.getEstabelecimento(Number(id)).subscribe(item => {
       this.estabelecimento = item.data;
     })
-  
+
   }
 
-  async editHandler(estabelecimento:Estabelecimento){
+  async editHandler(estabelecimento: Estabelecimento) {
 
     const id = this.estabelecimento.id
     const formData = new FormData();
-    
-    formData.append("nome",estabelecimento.nome)
-    formData.append("cnpj",estabelecimento.cnpj)
-    formData.append("endereco",estabelecimento.endereco)
-    formData.append("telefone",estabelecimento.telefone)
-    formData.append("logo",estabelecimento.logo)
-    formData.append("cep",estabelecimento.cep)
-    formData.append("email",estabelecimento.email)
-    formData.append("cidadeId",estabelecimento.cidade_id)
 
-   
-    await this.estabelecimentoService.updateEstab(id!,formData).subscribe(()=>{
-      localStorage.setItem('message',"Serviço editado com sucesso!!") 
-      window.location.reload()
-      this.formularioEnviado.emit();
-    })
-    
+    formData.append("nome", estabelecimento.nome)
+    formData.append("cnpj", estabelecimento.cnpj)
+    formData.append("endereco", estabelecimento.endereco)
+    formData.append("telefone", estabelecimento.telefone)
+    formData.append("logo", estabelecimento.logo)
+    formData.append("cep", estabelecimento.cep)
+    formData.append("email", estabelecimento.email)
+    formData.append("cidadeId", estabelecimento.cidade_id)
+
+
+    this.estabelecimentoService.updateEstab(id!, formData)
+      .subscribe(
+        {
+          next: (response: any) => {
+            localStorage.setItem('message', response.message);
+            window.location.reload();
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
+
+          }
+        }
+      )
+
   }
 
 

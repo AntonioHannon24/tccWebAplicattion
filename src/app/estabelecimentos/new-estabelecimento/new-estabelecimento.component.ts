@@ -41,9 +41,24 @@ export class NewEstabelecimentoComponent implements OnInit {
 
 
 
-    await this.estabelecimentoService.createEstab(formData).subscribe(() => {
-      this.formularioEnviado.emit();
-    })
+    this.estabelecimentoService.createEstab(formData)
+      .subscribe(
+        {
+          next: (response: any) => {
+            localStorage.setItem('message', response.message);
+            window.location.reload();
+            this.formularioEnviado.emit();
+          },
+          error: error => {
+            console.log(error)
+            window.alert(error.error.message);
+
+          }
+        }
+      )
+
+
+
   }
 
 
