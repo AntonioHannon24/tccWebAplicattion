@@ -48,5 +48,5 @@
 </div>
 
 <ng-template class="modal" #myModal>
-    <app-edit-estabelecimento (formularioEnviado)="fecharModal()"></app-edit-estabelecimento>
+    <app-edit-estabelecimento [id]="idEstab" (formularioEnviado)="fecharModal()"></app-edit-estabelecimento>
 </ng-template>

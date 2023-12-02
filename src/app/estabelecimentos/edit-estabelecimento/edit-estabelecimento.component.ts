@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
 import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 
@@ -16,6 +16,7 @@ export class EditEstabelecimentoComponent implements OnInit {
   btnText: string = "Editar"
   title: string = "Edite seu Estabelecimento"
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
+  @Input() id!: number
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
@@ -24,10 +25,21 @@ export class EditEstabelecimentoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const id = localStorage.getItem('id')
-    this.estabelecimentoService.getEstabelecimento(Number(id)).subscribe(item => {
-      this.estabelecimento = item.data;
-    })
+    const idStore = localStorage.getItem('id')
+    const tipo =localStorage.getItem('tipo')
+    if(tipo == "Admin"){
+
+      this.estabelecimentoService.getEstabelecimento(Number(this.id)).subscribe(item => {
+        this.estabelecimento = item.data;
+      })
+
+    }else{
+      this.estabelecimentoService.getEstabelecimento(Number(idStore)).subscribe(item => {
+        this.estabelecimento = item.data;
+      })
+    }
+
+
 
   }
 

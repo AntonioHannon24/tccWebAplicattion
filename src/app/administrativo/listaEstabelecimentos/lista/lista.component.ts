@@ -24,7 +24,7 @@ export class ListaComponent implements OnInit {
   @ViewChild('myModal') myModal:any;
   @ViewChild('myModalEdit') myModalEdit: any;
   modalRef!:BsModalRef<any>
-
+  idEstab!:number
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
@@ -70,7 +70,7 @@ export class ListaComponent implements OnInit {
 
   }
   editar(id: number) {
-    
+    this.idEstab = Number(id);
     this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
     //this.router.navigate([`/edit-estabelecimentos/${id}`])
   }
