@@ -15,8 +15,6 @@ export class ContatoComponent {
 
   title:string = "Entre em contato"
   btnText:string = 'Criar'
-
-
   contatoForm!: FormGroup;
 
   constructor(
@@ -36,11 +34,13 @@ export class ContatoComponent {
     formData.append("assunto",contato.assunto)
     formData.append("mensagem",contato.mensagem)
    
-    await this.contatoService.createContato(formData).subscribe(()=>{this.message();this.voltar()})
+    this.contatoService.createContato(formData).subscribe(()=>{this.message();this.voltar()})
   }
+
   message():void{
     this.messageService.add('Contato criado com sucesso!!')
   }
+
   voltar():void{
     this.location.back()
   }

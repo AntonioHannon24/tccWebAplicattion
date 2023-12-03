@@ -36,11 +36,8 @@ export class ServicosComponent {
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('message')
-
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
     this.idEstab = localStorage.getItem('id')
-
     this.servicoService.servicoEstab(this.idEstab).subscribe(item => {
       const servicos = item.data
       servicos?.forEach((item) => {
@@ -50,11 +47,11 @@ export class ServicosComponent {
     });
   }
 
-
   editServico(servicoId: number) {
     this.serv = servicoId
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
+
   voltar() {
     this.location.back()
   }
@@ -62,7 +59,6 @@ export class ServicosComponent {
   novoServico() {
     this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
   }
-
 
   fecharModal(): void {
     this.modalRef.hide();
@@ -74,6 +70,7 @@ export class ServicosComponent {
       window.location.reload()
     })
   }
+
   async ativarServico(idServ: number) {
 
     await this.servicoService.ativarServico(idServ).subscribe((item: any) => {
@@ -82,4 +79,5 @@ export class ServicosComponent {
     })
 
   }
+  
 }

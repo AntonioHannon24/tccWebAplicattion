@@ -13,6 +13,7 @@ import { forkJoin } from 'rxjs';
 })
 
 export class EstabelecimentosComponent implements OnInit {
+  
   @ViewChild('myModal') myModal: any;
   modalRef!: BsModalRef;
   allEstabs: Estabelecimento[] = []
@@ -43,12 +44,11 @@ export class EstabelecimentosComponent implements OnInit {
 
     const target = event.target as HTMLInputElement
     const value = target.value
-
     this.estabelecimentos = this.allEstabs.filter((estab) =>
       estab.nome.toLocaleLowerCase().includes(value)
     )
-
   }
+
   fecharModal = () => {
     this.modalRef.hide()
   }
@@ -68,4 +68,5 @@ export class EstabelecimentosComponent implements OnInit {
       })
     })
   }
+
 }

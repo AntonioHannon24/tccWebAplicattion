@@ -18,9 +18,7 @@ export class FormEstabelecimentoComponent implements OnInit{
   @Input() btnText!: string
   @Input() estabdata: Estabelecimento | null = null;
   @Input() id!: Number
-
   estabForm!: FormGroup
-
   allCidades: Cidade[] = []
   cidades: Cidade[] = []
 
@@ -40,9 +38,7 @@ export class FormEstabelecimentoComponent implements OnInit{
       this.allCidades = data
       this.cidades = data
     })
-
     this.estabForm = new FormGroup({
-
       id: new FormControl(Validators),
       nome: new FormControl(this.estabdata ? this.estabdata.nome : '', [Validators.required]),
       cnpj: new FormControl(this.estabdata ? this.estabdata.cnpj : '', [Validators.required]),
@@ -87,27 +83,35 @@ export class FormEstabelecimentoComponent implements OnInit{
   get email() {
     return this.estabForm.get('email')!;
   }
+  
   get cnpj() {
     return this.estabForm.get('cnpj')!;
   }
+
   get telefone() {
     return this.estabForm.get('telefone')!;
   }
+
   get descricao() {
     return this.estabForm.get('descricao')!;
   }
+
   get endereco() {
     return this.estabForm.get('endereco')!;
   }
+
   get cep() {
     return this.estabForm.get('cep')!;
   }
+
   get cidade_id() {
     return this.estabForm.get('cidade_id')!;
   }
+
   get usuario_id() {
     return this.estabForm.get('usuario_id')!;
   }
+
   get password() {
     return this.estabForm.get('password')!;
   }
@@ -126,6 +130,5 @@ export class FormEstabelecimentoComponent implements OnInit{
       return false
     }
   }
-
 
 }

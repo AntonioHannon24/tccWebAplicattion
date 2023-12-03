@@ -20,8 +20,7 @@
                         <td>{{agend.funcionario_id}}</td>
                         <td>
                             <button class="botoesList" (click)="botaEditar(agend.id)">
-                                     Editar</button>
-
+                                Editar</button>
                         </td>
                     </tr>
                 </thead>
@@ -32,7 +31,6 @@
         </div>
         <button (click)="botaoVoltar()" class="botaoVoltar">Voltar</button>
     </div>
-    
-<ng-template class="modal" #myModalEdit>
-    <app-edit-agenda [id]="agend" (formularioEnviado)="fecharModal()"></app-edit-agenda>
-</ng-template>
+    <ng-template class="modal" #myModalEdit>
+        <app-edit-agenda [id]="agend" (formularioEnviado)="fecharModal()"></app-edit-agenda>
+    </ng-template>

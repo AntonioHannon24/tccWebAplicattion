@@ -8,12 +8,12 @@ import { Funcionario } from 'src/app/interfaces/Funcionario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AgendaService } from 'src/app/Services/agenda/agenda.service';
 
-
 @Component({
   selector: 'app-funcionarios',
   templateUrl: './funcionarios.component.html',
   styleUrls: ['./funcionarios.component.css']
 })
+
 export class FuncionariosComponent {
 
 
@@ -21,7 +21,6 @@ export class FuncionariosComponent {
   baseApiUrl = environment.baseApiUrl;
   idEstab!: any;
   p: number = 1;
-
   funcionarios: Funcionario[] = []
   @ViewChild('myModal') myModal: any;
   @ViewChild('myModalEdit') myModalEdit: any;
@@ -35,19 +34,14 @@ export class FuncionariosComponent {
     private messageService: MessageService,
     private modalService: BsModalService,
     private agendaSerive: AgendaService,
- 
+
   ) { }
 
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
-
-
-
     this.idEstab = localStorage.getItem('id');
-
     this.estabelecimentoService.getEstabelecimento(this.idEstab).subscribe(item => {
       const teste = item.data.funcionario
       teste?.forEach((item) => {
@@ -58,7 +52,6 @@ export class FuncionariosComponent {
   }
 
   async desativarFuncionario(idFuncNumber: number) {
-
     this.agendaSerive.getAgendaFuncionario(idFuncNumber).subscribe((item) => {
       const agendaNumber = item.data.length
       if (agendaNumber >= 1) {
@@ -73,7 +66,7 @@ export class FuncionariosComponent {
   }
   async ativarFuncionario(idFuncNumber: number) {
 
-    await this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
+    this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
@@ -89,7 +82,6 @@ export class FuncionariosComponent {
   }
 
   editarFuncionario(funcId: number) {
-
     this.func = funcId
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };

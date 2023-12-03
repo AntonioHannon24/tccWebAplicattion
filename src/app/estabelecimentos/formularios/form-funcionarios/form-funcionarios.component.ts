@@ -20,7 +20,6 @@ export class FormFuncionariosComponent implements OnInit {
   @Input() funcionarioData: Funcionario | null = null;
   @Input() id!: number
   cidades:Cidade[] = []
-
   baseApiUrl = environment.baseApiUrl
   funcionarioForm!: FormGroup;
 
@@ -30,14 +29,9 @@ export class FormFuncionariosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.id)
-
-
     this.cidadeService.getAllCidades().subscribe((items) => {
       this.cidades = items.data
     })
-
-
     this.funcionarioForm = new FormGroup({
       id: new FormControl(''),
       nome: new FormControl(this.funcionarioData ? this.funcionarioData.nome : ''),
@@ -47,18 +41,15 @@ export class FormFuncionariosComponent implements OnInit {
       password: new FormControl(this.funcionarioData ? this.funcionarioData.password : ''),
       password2: new FormControl(),
       estabelecimento_id: new FormControl(this.id),
-
     })
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     this.funcionarioForm.patchValue({ foto: file })
-
   }
 
   submit() {
-
     if (this.funcionarioForm.invalid) {
       return;
     } else if (this.conferir() !== true) {
@@ -72,7 +63,6 @@ export class FormFuncionariosComponent implements OnInit {
   voltar() {
     this.location.back()
   }
-
   conferir() {
     const senha = this.funcionarioForm.get('password')!.value;
     const confirmarSenha = this.funcionarioForm.get('password2')!.value;
@@ -83,7 +73,6 @@ export class FormFuncionariosComponent implements OnInit {
     }
   }
 
-
   get nome() {
     return this.funcionarioForm.get('nome')!;
   }
@@ -91,9 +80,11 @@ export class FormFuncionariosComponent implements OnInit {
   get funcao() {
     return this.funcionarioForm.get('funcao')!;
   }
+  
   get email() {
     return this.funcionarioForm.get('email')!;
   }
+
   get cidade_id() {
     return this.funcionarioForm.get('cidade_id')!;
   }

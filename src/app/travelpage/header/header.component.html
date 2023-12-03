@@ -30,7 +30,6 @@
 
                 <!--Rotas com autenticação-->
 
-
                 <!--Administradores-->
 
                 <li class="nav-item">
@@ -78,18 +77,12 @@
                 </li>
 
                 <!--Funcionários-->
-
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="logado && tipo=='Func'" routerLink="agenda-funcionarios"
                         routerLinkActive="active-link">Sua agenda</a>
                 </li>
 
-
-
-
-
                 <!--Login-->
-
                 <li class="nav-item">
                     <a class="nav-link" routerLink="login" routerLinkActive="active-link"
                         *ngIf="logado != true; else loginOff">Sou estabelecimento</a>

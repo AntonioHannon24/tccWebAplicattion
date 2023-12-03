@@ -22,28 +22,22 @@ export class EditServicosComponent {
   ) { }
 
   ngOnInit(): void {
-
     this.servicosService.getServico(this.id).subscribe(item => {
       this.servico = item.data;
     })
 
   }
 
-
   async editHandler(servico: Servicos) {
 
     const id = this.servico.id
-
     const formData = new FormData();
-
     formData.append("id", servico.id)
     formData.append("nome", servico.nome)
     formData.append("valor", servico.valor)
     formData.append("descricao", servico.descricao)
     formData.append("estabelecimento_id", servico.estabelecimento_id)
-
     await this.servicosService.updateServico(id!, formData)
-
       .subscribe(
         {
           next: (response: any) => {

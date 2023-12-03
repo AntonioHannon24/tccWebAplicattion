@@ -19,6 +19,12 @@ export class AgendaComponent implements OnInit {
   @ViewChild('myModalEdit') myModalEdit: any;
   teste: string = "";
   agend!: number
+  selected: Date | null | undefined;
+  modalRef!: BsModalRef<any>;
+  id: any;
+  FullAgenda: Agenda[] = []
+  agenda: Agenda[] = []
+  p: number = 1;
 
   constructor(public agendaService: AgendaService,
     private authService: AuthService,
@@ -28,27 +34,16 @@ export class AgendaComponent implements OnInit {
     private messageService: MessageService
 
   ) { }
-  selected: Date | null | undefined;
-  modalRef!: BsModalRef<any>;
-  id: any;
-  FullAgenda: Agenda[] = []
-  agenda: Agenda[] = []
-  p: number = 1;
 
   ngOnInit(): void {
-
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
-
     this.authService._id.subscribe((valor) => {
       this.id = valor;
     });
-
     this.agendaService.getAgendaEstabelecimento(this.id).subscribe((valor) => {
       this.FullAgenda = valor.data;
       this.FullAgenda.forEach((agend) => {
-     
         agend.funcionario_id == null ? agend.funcionario_id = "Sem funcionários" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe(func => { agend.funcionario_id = func.data.nome })
         this.petService.getPet(Number(agend.pet_id)).subscribe((pet) => {
@@ -63,7 +58,6 @@ export class AgendaComponent implements OnInit {
         } else if (agend.status == "3") {
           agend.status = "Fechado";
         }
-        
       });
     });
 
@@ -89,12 +83,12 @@ export class AgendaComponent implements OnInit {
       this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' });
     });
   }
+
   fecharModal(): void {
     if (this.modalRef) {
       this.modalRef.hide();
     }
   }
-
 
   botaEditar(id: number) {
     this.agend = id

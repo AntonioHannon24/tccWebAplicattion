@@ -9,8 +9,6 @@ import { FuncionarioService } from 'src/app/Services/funcionario/funcionario.ser
 })
 export class EditFuncionariosComponent {
 
-
-
   funcionario!: Funcionario
   btnText: string = "Editar"
   title: string = "Editar Funcionario"
@@ -22,17 +20,14 @@ export class EditFuncionariosComponent {
   ) { }
 
   ngOnInit(): void {
-
-
-
     this.funcionarioService.getFuncionario(this.id).subscribe(item => {
       this.funcionario = item.data;
     })
   }
+
   async editHandler(funcionarioData: Funcionario) {
 
     const id = this.funcionario.id
-
     const formData = new FormData()
 
     formData.append('nome', funcionarioData.nome)

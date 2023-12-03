@@ -10,28 +10,24 @@ import { ContatoService } from 'src/app/Services/contato/contato.service';
   templateUrl: './lista-contatos.component.html',
   styleUrls: ['./lista-contatos.component.css']
 })
-export class ListaContatosComponent implements OnInit{
-
-
+export class ListaContatosComponent implements OnInit {
 
   allContato: Contato[] = [];
   contatos: Contato[] = [];
-  p:number = 1;
+  p: number = 1;
 
-  constructor(private contatoService:ContatoService,
-              private router:Router,
-              private messageService:MessageService
-              ){}
+  constructor(
+    private contatoService: ContatoService,
+    private router: Router,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
-
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
-
-    this.contatoService.getAllContato().subscribe((items)=>{
+    this.contatoService.getAllContato().subscribe((items) => {
       const data = items.data
-      data.map((items)=>{
+      data.map((items) => {
         items.created_at = new Date(items.created_at!).toLocaleDateString('pt-br')
       })
       this.allContato = data
@@ -39,7 +35,7 @@ export class ListaContatosComponent implements OnInit{
     })
   }
 
-  editar(id:number){
+  editar(id: number) {
     this.router.navigate([`/edit-contatos/${id}`])
   }
 

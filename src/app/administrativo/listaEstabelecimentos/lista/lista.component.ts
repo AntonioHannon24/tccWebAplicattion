@@ -12,9 +12,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.css']
 })
+
 export class ListaComponent implements OnInit {
-
-
 
   baseApiUrl = environment.baseApiUrl
   allEstabs: Estabelecimento[] = []
@@ -36,9 +35,7 @@ export class ListaComponent implements OnInit {
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('message')
-
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
 
     this.estabelecimentoService.getAllEstabelecimentos().subscribe((items) => {
       const data = items.data
@@ -49,7 +46,6 @@ export class ListaComponent implements OnInit {
         item.status == 1 ? item.status = "Ativo" : item.status = "Desativado"
         this.estabelecimentos.push(item)
       })
-
       this.allEstabs = data
       this.estabelecimentos = data
     })
@@ -61,28 +57,32 @@ export class ListaComponent implements OnInit {
       window.location.reload()
     })
   }
-  async ativarEstabelecimento(idServ: number) {
 
-    await this.estabelecimentoService.ativarEstabelecimentos(idServ).subscribe((item: any) => {
+  async ativarEstabelecimento(idServ: number) {
+    this.estabelecimentoService.ativarEstabelecimentos(idServ).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
 
   }
+
   editar(id: number) {
     this.idEstab = Number(id);
     this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
-    //this.router.navigate([`/edit-estabelecimentos/${id}`])
   }
+
   listaFuncionarios(id: number) {
     this.router.navigate([`/lista-funcionarios/${id}`])
   }
+
   listaServicos(id: number) {
     this.router.navigate([`/lista-servicos/${id}`])
   }
+
   listaAgenda(id: number) {
     this.router.navigate([`/lista-agenda/${id}`])
   }
+  
   fecharModal(): void {
     this.modalRef.hide();
   }

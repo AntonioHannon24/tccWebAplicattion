@@ -1,9 +1,7 @@
 .navbar-expand-lg .navbar-nav .nav-link{
   color: var(--secondary-color);
 }
-
 .navbar-expand-lg .navbar-nav .nav-link.active-link{
-  /*inspecionado no console o nome do component e usado tbm o active-link*/
   font-weight: bold;
   color: var(--primary-color);
   text-decoration: underline;

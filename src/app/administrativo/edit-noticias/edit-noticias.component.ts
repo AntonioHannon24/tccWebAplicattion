@@ -9,9 +9,8 @@ import { NoticiasService } from 'src/app/Services/noticias/noticias.service';
   templateUrl: './edit-noticias.component.html',
   styleUrls: ['./edit-noticias.component.css']
 })
+
 export class EditNoticiasComponent implements OnInit {
-
-
 
   noticia!:Noticias
   btnText:string = "Editar"
@@ -32,6 +31,7 @@ export class EditNoticiasComponent implements OnInit {
       this.noticia = item.data;
     })
   }
+  
   async editHandler(noticias:Noticias){
     
     const formData = new FormData()
@@ -42,9 +42,10 @@ export class EditNoticiasComponent implements OnInit {
     if(noticias.image){formData.append("image", noticias.image)}
 
 
-    await this.noticiasService.updateNoticias(this.noticia.id,formData).subscribe(()=>{this.goHome()})
+    this.noticiasService.updateNoticias(this.noticia.id,formData).subscribe(()=>{this.goHome()})
     
   }
+
   goHome(){
     this.router.navigate(['/'])
     this.message.add("A noticia foi editada com sucesso!!")

@@ -12,53 +12,46 @@ import { MessageService } from 'src/app/Services/MessageServices/message.service
   templateUrl: './lista-fechados.component.html',
   styleUrls: ['./lista-fechados.component.css']
 })
+
 export class ListaFechadosComponent implements OnInit {
 
   agendas: Agenda[] = [];
   p: number = 1;
   servId!: string;
 
-
-
-  constructor(private agendaService: AgendaService,
+  constructor(
+    private agendaService: AgendaService,
     private funcionarioService: FuncionarioService,
     private petService: PetsService,
-    private router:Router,
-    private location:Location,
-    private messageService:MessageService,
+    private router: Router,
+    private location: Location,
+    private messageService: MessageService,
   ) { }
+
   ngOnInit(): void {
 
     const id = localStorage.getItem('id')
-
-
-
-
     this.agendaService.agendaEstabelecimentosFechado(Number(id)).subscribe((item) => {
       this.agendas = item.data
-
       this.agendas.forEach((agend) => {
-        agend.status ="Fechado"
+        agend.status = "Fechado"
         agend.funcionario_id == null ? agend.funcionario_id = "Sem Funcionário" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe((item) => { agend.funcionario_id = item.data.nome })
-        
         this.petService.getPet(Number(agend.pet_id)).subscribe((item) => {
           agend.pet_id = item.data.nome
         })
       })
-
-
     })
 
   }
 
   reabrirAgenda(id: number) {
-    this.agendaService.reabrirAgendas(id).subscribe((item:any)=>{
+    this.agendaService.reabrirAgendas(id).subscribe((item: any) => {
       this.router.navigate(['agenda'])
       this.messageService.add(item.msg)
     })
   }
-  botaoVoltar(){
+  botaoVoltar() {
     this.location.back()
   }
 

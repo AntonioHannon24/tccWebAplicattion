@@ -13,15 +13,15 @@ export class RespostaContatoComponent implements OnInit {
 
   respostaForm!: FormGroup;
   @Output() onSubmit = new EventEmitter<Resposta>()
-  @Input() assunto!:string
-  @Input() email!:string
-  
+  @Input() assunto!: string
+  @Input() email!: string
+
 
   ngOnInit(): void {
     this.respostaForm = new FormGroup({
-      email: new FormControl(this.email? this.email : ''),
+      email: new FormControl(this.email ? this.email : ''),
       assunto: new FormControl(this.assunto ? this.assunto : ''),
-      mensagemResposta: new FormControl("",[Validators.required]),
+      mensagemResposta: new FormControl("", [Validators.required]),
     })
   }
 
@@ -32,9 +32,8 @@ export class RespostaContatoComponent implements OnInit {
     this.onSubmit.emit(this.respostaForm.value)
   }
 
-  get mensagemResposta(){
+  get mensagemResposta() {
     return this.respostaForm.get('mensagemResposta')!;
   }
- 
 
 }

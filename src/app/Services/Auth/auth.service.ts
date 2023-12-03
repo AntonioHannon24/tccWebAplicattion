@@ -15,20 +15,21 @@ export class AuthService {
   private tokenExpirationTime = 1800000;
   private timer: any;
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
-  private _tipo = new BehaviorSubject<string|null>(null)
+  private _tipo = new BehaviorSubject<string | null>(null)
   public _id = new BehaviorSubject<Number>(0)
-
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   id = this._id.asObservable()
   tipo = this._tipo.asObservable()
-
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/loginEstabelecimento`
   private apiUrlFunc = `${this.baseApiUrl}api/loginFuncionarios`
   private apiUrlAdmin = `${this.baseApiUrl}api/loginAdmin`
 
-  constructor(private http: HttpClient, private messageService: MessageService,
-              private route:Router) {
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService,
+    private route: Router
+  ) {
 
     const token = localStorage.getItem('auth')
     const tipo = localStorage.getItem('tipo')
@@ -42,19 +43,13 @@ export class AuthService {
 
     return this.http.post(this.apiUrl, formData).pipe(
       tap((response: any): any => {
-
         this._isLoggedIn$.next(true)
         this._id.next(response.user.id)
         this._tipo.next("Estab")
-        //this._role.next(this.admin(response.user.tipo_usuario))
-
         localStorage.setItem('auth', response.token.token)
         localStorage.setItem('tipo', "Estab")
         localStorage.setItem('id', response.user.id)
-
         this.log(response.message)
-
-        
       }), catchError((err: any): any => {
         this.handleError(err.error)
         return of()
@@ -62,34 +57,25 @@ export class AuthService {
     )
   }
 
-  async loginFuncionarios(formData:any): Promise<Observable<any>>{
+  async loginFuncionarios(formData: any): Promise<Observable<any>> {
 
     return this.http.post(this.apiUrlFunc, formData).pipe(
       tap((response: any): any => {
-
         this._isLoggedIn$.next(true)
         this._id.next(response.user.id)
         this._tipo.next("Func")
-        //this._role.next(this.admin(response.user.tipo_usuario))
-
         localStorage.setItem('auth', response.token.token)
         localStorage.setItem('tipo', "Func")
         localStorage.setItem('id', response.user.id)
-
         this.log(response.message)
-
-        
       }), catchError((err: any): any => {
         this.handleError(err.error)
         return of()
       })
     )
-
-
-
   }
 
-  async loginAdmin(formData:any): Promise<Observable<any>>{
+  async loginAdmin(formData: any): Promise<Observable<any>> {
 
     return this.http.post(this.apiUrlAdmin, formData).pipe(
       tap((response: any): any => {
@@ -97,8 +83,6 @@ export class AuthService {
         this._isLoggedIn$.next(true)
         this._id.next(response.user.id)
         this._tipo.next("Admin")
-        //this._role.next(this.admin(response.user.tipo_usuario))
-
         localStorage.setItem('auth', response.token.token)
         localStorage.setItem('tipo', "Admin")
         localStorage.setItem('id', response.user.id)
@@ -113,7 +97,6 @@ export class AuthService {
 
   }
 
-
   admin(value: any): boolean {
     if (value == "Admin") {
       return true
@@ -123,7 +106,6 @@ export class AuthService {
   }
 
   private handleError(errorMessage: string) {
-
     this.log(errorMessage);
   }
   private log(message: string) {
@@ -131,7 +113,6 @@ export class AuthService {
   }
 
   startTimer() {
-  
     this.timer = setTimeout(() => {
       this.logoff();
     }, this.tokenExpirationTime);

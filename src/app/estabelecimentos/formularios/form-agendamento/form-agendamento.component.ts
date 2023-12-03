@@ -18,7 +18,6 @@ export class FormAgendamentoComponent {
   @Input() btnText!: string
   @Input() title!: string
   @Input() agendaData: Agenda | null = null;
-
   opcaoSelecionadaStatus: string = ""
   statusInit!: number
   funcionarios: Funcionario[] = []
@@ -29,11 +28,9 @@ export class FormAgendamentoComponent {
   ) { }
 
   ngOnInit(): void {
-
     this.funcionariosService.funcionariosEstab(Number(this.agendaData?.estabelecimento_id)).subscribe((item) => {
       this.funcionarios = item.data
     })
-
     this.agendaForm = new FormGroup({
       id: new FormControl(this.agendaData ? this.agendaData.id : '', [Validators.required]),
       data_hora: new FormControl(this.agendaData ? this.agendaData.data_hora : '', [Validators.required]),
@@ -45,11 +42,7 @@ export class FormAgendamentoComponent {
       pet_id: new FormControl(this.agendaData ? this.agendaData.pet_id : '', [Validators.required]),
 
     })
-
     this.statusInit == 1 ? " Novo " : ""
-
-
-
   }
 
   async submit() {
@@ -57,19 +50,10 @@ export class FormAgendamentoComponent {
       return;
     }
     const formData = new FormData();
-
-
-
     formData.append("status", this.agendaForm.get('status')?.value)
-
-
     formData.append("funcionario_id", this.agendaForm.get('funcionario_id')?.value)
-
-
-
     this.onSubmit.emit(this.agendaForm.value)
   }
-
 
   get status() {
     return this.agendaForm.get('status')!;
@@ -78,9 +62,9 @@ export class FormAgendamentoComponent {
   get funcionario_id() {
     return this.agendaForm.get('funcionario_id')!;
   }
+
   voltar() {
     this.location.back()
   }
-
 
 }

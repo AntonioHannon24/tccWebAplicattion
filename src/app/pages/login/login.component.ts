@@ -15,10 +15,10 @@ export class LoginComponent {
 
   LoginForm!: FormGroup;
   @ViewChild('myModal') myModal:any;
-
   modalRef!:BsModalRef<any>;
 
-  constructor(private authservice: AuthService,
+  constructor(
+    private authservice: AuthService,
     private route: Router,
     private location: Location,
     private modalService: BsModalService,
@@ -27,12 +27,8 @@ export class LoginComponent {
 
   ngOnInit(): void {
     
-
-
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
-
 
     this.LoginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
@@ -45,28 +41,20 @@ export class LoginComponent {
       return;
     }
     const formData = new FormData();
-
     formData.append("email", this.LoginForm.get('email')?.value)
     formData.append("password", this.LoginForm.get('password')?.value);
-
-
     (await this.authservice.login(formData)).subscribe((e) => {
-  
      if(e.message){
         this.route.navigate([''])
      }
-
      this.authservice.startTimer();
     })
-
-
-
   }
+
   fecharModal(): void {
     this.modalRef.hide();
   }
 
-  
   voltar() {
     this.location.back()
   }
@@ -76,13 +64,11 @@ export class LoginComponent {
   }
 
   get password() {
-
     return this.LoginForm.get('password')!;
   }
-
+  
   teste(){
     this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
   }
-
 
 }

@@ -5,6 +5,7 @@
     background-size: cover;
     animation: backgroundAnimation 20s infinite linear;
   }
+  
   @keyframes backgroundAnimation {
     0% {
         background-image: url("../../../assets/img/pet1.jpg");

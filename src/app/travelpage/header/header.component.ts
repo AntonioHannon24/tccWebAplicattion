@@ -8,15 +8,15 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   logado?: boolean;
-  tipo!:any;
+  tipo!: any;
 
-  constructor(public authService: AuthService,
-              private router: Router,
-          
-              ) { }
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(valor => {
@@ -25,10 +25,11 @@ export class HeaderComponent implements OnInit{
 
     this.authService.tipo.subscribe(valor => {
       this.tipo = valor;
-  
+
     });
-    
+
   }
+  
   logoff() {
 
     this.authService.logoff().then(() => {

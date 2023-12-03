@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class NoticiasComponent implements OnInit {
 
 
-  noticias1: Noticias | null | undefined ;
+  noticias1: Noticias | null | undefined;
   noticias2: Noticias | null | undefined;
   noticias3: Noticias | null | undefined;
   noticias4: Noticias | null | undefined;
@@ -21,6 +21,7 @@ export class NoticiasComponent implements OnInit {
   baseApiUrl = environment.baseApiUrl;
 
   constructor(private noticiasService: NoticiasService) { }
+  
   ngOnInit(): void {
     this.noticiasService.getAllNoticias().subscribe((items) => {
       const todasNoticias = items.data;

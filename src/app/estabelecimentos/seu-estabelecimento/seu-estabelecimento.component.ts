@@ -33,23 +33,21 @@ export class SeuEstabelecimentoComponent {
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
 
-    
-
     this.authService._id.subscribe((valor: any | undefined)=>{
       this.id = valor;
     })
-
     this.estabelecimentoService.getEstabelecimento(this.id!).subscribe((item: { data: Estabelecimento | any; })=>{
       this.estabelecimento = item.data;
     })
-  
+
   }
+
   editar(){
     this.modalRef = this.modalService.show(this.myModal,{class:'modal-lg'})
   }
 
-
   fecharModal(): void {
     this.modalRef.hide();
   }
+  
 }

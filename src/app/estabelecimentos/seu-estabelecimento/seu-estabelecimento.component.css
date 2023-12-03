@@ -20,7 +20,7 @@ h1 {
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  display: inline-block; /* Para garantir que o link se ajuste ao conteúdo */
+  display: inline-block;
 }
 
 .link-editar:hover {

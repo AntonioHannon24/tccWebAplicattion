@@ -9,19 +9,19 @@ import { Location } from '@angular/common';
   templateUrl: './form-servicos.component.html',
   styleUrls: ['./form-servicos.component.css']
 })
-export class FormServicosComponent {
+export class FormServicosComponent implements OnInit {
 
   @Output() onSubmit = new EventEmitter<Servicos>()
   @Input() btnText!: string
   @Input() title!: string
   @Input() servicoData: Servicos | null = null;
   @Input() id!: number
-
   baseApiUrl = environment.baseApiUrl
-
   servicosForm!: FormGroup;
 
-  constructor(private location:Location) { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     this.servicosForm = new FormGroup({
@@ -41,7 +41,7 @@ export class FormServicosComponent {
     this.onSubmit.emit(this.servicosForm.value)
   }
 
-  voltar(){
+  voltar() {
     this.location.back()
   }
 
@@ -52,7 +52,6 @@ export class FormServicosComponent {
   get valor() {
     return this.servicosForm.get('valor')!;
   }
-
 
   get descricao() {
     return this.servicosForm.get('descricao')!;

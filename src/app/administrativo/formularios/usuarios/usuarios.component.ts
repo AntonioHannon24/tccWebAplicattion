@@ -13,22 +13,21 @@ import { cpf } from 'cpf-cnpj-validator';
 })
 export class UsuariosComponent implements OnInit{
 
-
   allCidades: Cidade[] = []
   cidades: Cidade[] = []
-
   @Output() onSubmit = new EventEmitter<Usuario>()
   @Input() btnText!: string
   @Input() title!: string
   @Input() userData: Usuario | null = null;
-
   userForm!: FormGroup;
   coencidem: number = 0
 
-  constructor(private cidadeService: CidadeService, private location:Location) { }
+  constructor(
+    private cidadeService: CidadeService, 
+    private location:Location
+    ) {}
 
   ngOnInit(): void {
-   
     this.cidadeService.getAllCidades().subscribe((items) => {
       const data = items.data
       data.map((items) => {
@@ -37,7 +36,6 @@ export class UsuariosComponent implements OnInit{
       this.allCidades = data
       this.cidades = data
     })
-
     this.userForm = new FormGroup({
       id: new FormControl(''),
       nome: new FormControl(this.userData ? this.userData.nome : '', [Validators.required]),
@@ -62,12 +60,9 @@ export class UsuariosComponent implements OnInit{
     }
   }
 
-
   voltar(){
     this.location.back()
   }
-
-
 
   conferir() {
     const senha = this.userForm.get('password')!.value;
@@ -78,10 +73,12 @@ export class UsuariosComponent implements OnInit{
       return false
     }
   }
+
   conferirCpf() {
     const cpfNumber = this.userForm.value.cpf
     return cpf.isValid(cpfNumber)
   }
+
   get nome() {
     return this.userForm.get('nome')!;
   }

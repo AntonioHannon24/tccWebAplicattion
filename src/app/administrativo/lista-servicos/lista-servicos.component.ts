@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EstabelecimentoService } from 'src/app/Services/Estabelecimentos/estabelecimento.service';
+import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/Services/service/service.service';
 import { Location } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -14,8 +12,8 @@ import { Servicos } from 'src/app/interfaces/Servicos';
   templateUrl: './lista-servicos.component.html',
   styleUrls: ['./lista-servicos.component.css']
 })
-export class ListaServicosComponent implements OnInit{
 
+export class ListaServicosComponent implements OnInit {
 
   servicos: Servicos[] = [];
   usuarioId?: number;
@@ -28,23 +26,19 @@ export class ListaServicosComponent implements OnInit{
   modalRef!: BsModalRef<any>
 
   constructor(
-
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private servicoService: ServiceService,
     private location: Location,
     private modalService: BsModalService,
-    private messageService:MessageService,
+    private messageService: MessageService,
 
   ) { }
 
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('message')
-
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
     this.idEstab = Number(this.route.snapshot.paramMap.get('id'))
-
     this.servicoService.servicoEstab(this.idEstab).subscribe(item => {
       const servicos = item.data
       servicos?.forEach((item) => {
@@ -59,27 +53,32 @@ export class ListaServicosComponent implements OnInit{
     this.serv = servicoId
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
+
   async desativarServico(servId: number) {
     this.servicoService.desativarServico(servId).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
   }
-  async ativarServico(idServ: number) {
 
-    await this.servicoService.ativarServico(idServ).subscribe((item: any) => {
+  async ativarServico(idServ: number) {
+    this.servicoService.ativarServico(idServ).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
 
   }
+
   voltar() {
     this.location.back()
   }
+
   fecharModal(): void {
     this.modalRef.hide();
   }
+
   novoServico() {
     this.modalRef = this.modalService.show(this.myModal, { class: 'modal-lg' })
   }
+
 }

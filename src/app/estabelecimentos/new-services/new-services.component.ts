@@ -25,7 +25,6 @@ export class NewServicesComponent {
   }
 
   async createHandle(servico: Servicos) {
-
     const formData = new FormData();
     formData.append("id", servico.id)
     formData.append("nome", servico.nome)
@@ -50,6 +49,5 @@ export class NewServicesComponent {
         }
       )
   }
-
 
 }

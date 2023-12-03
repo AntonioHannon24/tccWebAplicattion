@@ -16,19 +16,14 @@ export class FormContatosComponent {
 
   contatoForm!: FormGroup;
   respostaForm!: FormGroup
-
-
   @Input() btnText!: string
   @Input() title!: string
   @Input() contatoData: Contato | null = null;
   @ViewChild('myModal') myModal: any;
   modalRef!: BsModalRef<any>
-
   estado: string = ""
   opcaoSelecionada: string = ""
-
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
-
   assunt!: string
   emai!: string
   id!: number
@@ -52,10 +47,10 @@ export class FormContatosComponent {
       mensagem: new FormControl(this.contatoData ? this.contatoData.mensagem : '', [Validators.required]),
       estado: new FormControl(''),
     })
-
     this.estado = this.contatoData?.estado == "1" ? "Novo" : ""
     this.opcaoSelecionada = "1"
   }
+
   fecharModal(): void {
     this.modalRef.hide();
   }
@@ -66,11 +61,9 @@ export class FormContatosComponent {
     this.emai = this.contatoData!.email
   }
 
-  get assunto(): any {
+  get assunto(){
     return this.contatoForm.get('assunto')!;
   }
-
-
 
   botaoVoltar() {
     this.location.back()
@@ -99,6 +92,7 @@ export class FormContatosComponent {
           }
         }
       )
+
   }
 
 }

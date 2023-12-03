@@ -41,13 +41,10 @@
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
-
 </div>
-
 <ng-template class="modal" #myModal>
     <app-new-funcionarios (formularioEnviado)="fecharModal()"></app-new-funcionarios>
 </ng-template>
-
 <ng-template class="modal" #myModalEdit>
     <app-edit-funcionarios [id]="func" (formularioEnviado)="fecharModal()"></app-edit-funcionarios>
 </ng-template>

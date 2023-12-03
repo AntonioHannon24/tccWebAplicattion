@@ -1,18 +1,14 @@
 <div class="row container">
     <div class="login-2">
         <form (ngSubmit)="submit()" [formGroup]="estabForm" #formDir="ngForm">
-
             <h1 class="h1 text-center">{{title}}</h1>
             <h2 class="text-center h2">Bem vindo PetHelper</h2>
-
             <input type="hidden" formControlName="id">
-
             <div class="mb-3 campos">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" formControlName="nome" required />
                 <div *ngIf="nome.invalid && formDir.submitted" class="form-text">O nome é obrigatório</div>
             </div>
-
             <div class="mb-3 campos">
                 <label for="cnpj">CNPJ</label>
                 <input type="text" class="form-control" formControlName="cnpj" required />

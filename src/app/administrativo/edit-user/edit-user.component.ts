@@ -10,7 +10,6 @@ import { Usuario } from 'src/app/interfaces/Usuario';
 })
 export class EditUserComponent implements OnInit{
 
-
   usuario!:Usuario
   btnText:string = "Editar"
   title:string = "Editar usuário"
@@ -53,5 +52,7 @@ export class EditUserComponent implements OnInit{
         }
       }
     )
+
   }
+  
 }

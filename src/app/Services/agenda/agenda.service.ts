@@ -10,8 +10,6 @@ import { Agenda } from 'src/app/interfaces/Agenda';
 })
 export class AgendaService {
 
-
-
   private baseApiUrl = environment.baseApiUrl
   private apiUrl = `${this.baseApiUrl}api/agendamentos`
   private agendaEstabelecimentos = `${this.baseApiUrl}api/agendaEstabelecimentos`

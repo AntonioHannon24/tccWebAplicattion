@@ -73,7 +73,6 @@ body {
     min-height: 680px;
     background-position: center;
     background-size: 100% 100%;
-    /* Define a largura e altura da imagem para 100% */
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;

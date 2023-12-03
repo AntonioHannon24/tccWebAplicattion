@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Noticias } from 'src/app/interfaces/Noticas';
 import { Location } from '@angular/common';
 
@@ -8,18 +8,17 @@ import { Location } from '@angular/common';
   templateUrl: './noticias-form.component.html',
   styleUrls: ['./noticias-form.component.css']
 })
-export class NoticiasFormComponent implements OnInit{
-
+export class NoticiasFormComponent implements OnInit {
 
   @Output() onSubmit = new EventEmitter<Noticias>()
   @Input() btnText!: string
   @Input() title!: string
   @Input() noticiasData: Noticias | null = null;
-
   noticiaForm!: FormGroup;
 
-
-  constructor(private location:Location) { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
 
@@ -37,11 +36,9 @@ export class NoticiasFormComponent implements OnInit{
     if (this.noticiaForm.invalid) {
       return;
     }
-    
-      this.onSubmit.emit(this.noticiaForm.value)
-
-    
+    this.onSubmit.emit(this.noticiaForm.value)
   }
+
   get titulo() {
     return this.noticiaForm.get('titulo')!;
   }
@@ -49,22 +46,18 @@ export class NoticiasFormComponent implements OnInit{
   get descricao() {
     return this.noticiaForm.get('descricao')!;
   }
+
   get link() {
     return this.noticiaForm.get('link')!;
   }
 
-
-  voltar(){
+  voltar() {
     this.location.back()
   }
 
-  onFileSelected(event:any){
-
+  onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.noticiaForm.patchValue({image:file})
-
+    this.noticiaForm.patchValue({ image: file })
   }
-
-
 
 }

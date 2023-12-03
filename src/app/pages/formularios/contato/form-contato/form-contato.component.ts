@@ -10,12 +10,10 @@ import { Contato } from 'src/app/interfaces/Contato';
 export class FormContatoComponent {
 
   contatoForm!: FormGroup;
-
   @Output() onSubmit = new EventEmitter<Contato>()
   @Input() btnText!: string
   @Input() title!: string
 
-  
   constructor() { }
 
   ngOnInit(): void {
@@ -31,8 +29,8 @@ export class FormContatoComponent {
     if (this.contatoForm.invalid) {
       return;
     }
-    const formData = new FormData();
 
+    const formData = new FormData();
     formData.append("nome", this.contatoForm.get('nome')?.value)
     formData.append("email", this.contatoForm.get('email')?.value)
     formData.append("assunto", this.contatoForm.get('assunto')?.value)
@@ -45,12 +43,15 @@ export class FormContatoComponent {
   get nome() {
     return this.contatoForm.get('nome')!;
   }
+
   get email() {
     return this.contatoForm.get('email')!;
   }
+
   get assunto() {
     return this.contatoForm.get('assunto')!;
   }
+
   get mensagem() {
     return this.contatoForm.get('mensagem')!;
   }

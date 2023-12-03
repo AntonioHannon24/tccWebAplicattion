@@ -15,16 +15,14 @@ export class NewEstabelecimentoComponent implements OnInit {
   title: string = "Novo Petshop"
   btnText: string = "Novo Estabelecimento"
 
-
   constructor(
     private estabelecimentoService: EstabelecimentoService,
   ) { }
-
   ngOnInit(): void { }
 
   async createHandle(estabelecimento: Estabelecimento) {
+    
     const formData = new FormData();
-
     formData.append("nome", estabelecimento.nome)
     formData.append("cnpj", estabelecimento.cnpj)
     formData.append("endereco", estabelecimento.endereco)
@@ -34,13 +32,9 @@ export class NewEstabelecimentoComponent implements OnInit {
     formData.append("email", estabelecimento.email)
     formData.append("cidadeId", estabelecimento.cidade_id)
     formData.append("password", estabelecimento.password)
-
     if (estabelecimento.logo) {
       formData.append("logo", estabelecimento.logo)
     }
-
-
-
     this.estabelecimentoService.createEstab(formData)
       .subscribe(
         {
@@ -56,11 +50,7 @@ export class NewEstabelecimentoComponent implements OnInit {
           }
         }
       )
-
-
-
   }
-
 
 }
 

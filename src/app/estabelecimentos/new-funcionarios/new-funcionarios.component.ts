@@ -16,7 +16,6 @@ export class NewFuncionariosComponent {
   id!: number
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
 
-
   constructor(
     private funcionarioService: FuncionarioService,
     public messageService: MessageService,
@@ -29,9 +28,7 @@ export class NewFuncionariosComponent {
   async createHandle(funcionario: Funcionario) {
 
     const formData = new FormData();
-
     formData.append("id", funcionario.id)
-
     formData.append("nome", funcionario.nome)
     formData.append("email", funcionario.email)
     formData.append("foto", funcionario.foto)
@@ -55,8 +52,6 @@ export class NewFuncionariosComponent {
           }
         }
       )
-
   }
-
 
 }

@@ -27,15 +27,10 @@ export class NewAgendamentosComponent implements OnInit {
   @ViewChild('myModal') myModal: any;
   modalRef!: BsModalRef<any>;
   public funcionarioSelecionado: any;
-
-
   funcionarios: Funcionario[] = [];
 
-
-
-
-
-  constructor(private agendaService: AgendaService,
+  constructor(
+    private agendaService: AgendaService,
     private funcionarioService: FuncionarioService,
     private petService: PetsService,
     private router: Router,
@@ -45,13 +40,11 @@ export class NewAgendamentosComponent implements OnInit {
     private usuarioService: UsuariosService,
     private servicoService: ServiceService,
   ) { }
+
   ngOnInit(): void {
-
     const id = localStorage.getItem('id')
-
     this.agendaService.agendaEstabelecimentosNovo(Number(id)).subscribe((item) => {
       this.agendas = item.data
-
       this.agendas.forEach((agend) => {
         agend.status = "Novo"
         agend.funcionario_id == null ? agend.funcionario_id = "Sem Funcionário" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
@@ -65,22 +58,16 @@ export class NewAgendamentosComponent implements OnInit {
     this.funcionarioService.funcionariosEstab(Number(id)).subscribe(item => {
       this.funcionarios = item.data
     })
-
-
   }
 
   botaoAceitar(id: number) {
 
     let petResult, usuarioResult, servicoResult;
-
     this.agendaService.getAgenda(id).subscribe((item: any) => {
-
       const agendaLoad = item.data;
-
       petResult = this.petService.getPet(Number(agendaLoad.pet_id))
       usuarioResult = this.usuarioService.getUsuario(Number(agendaLoad.usuario_id))
       servicoResult = this.servicoService.getServico(Number(agendaLoad.servico_id))
-
       forkJoin({
         pet: petResult,
         usuario: usuarioResult,
@@ -105,14 +92,16 @@ export class NewAgendamentosComponent implements OnInit {
       this.messageService.add(item.msg)
     })
   }
+
   botaoVoltar() {
     this.location.back()
   }
+
   fecharModal(): void {
     this.modalRef.hide();
   }
-  submit() {
 
+  submit() {
     if (this.funcionarioSelecionado === undefined) {
       window.alert("Funcionario vazio!")
     } else {

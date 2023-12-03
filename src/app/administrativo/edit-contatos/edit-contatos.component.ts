@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/Services/MessageServices/message.service';
 import { Contato } from 'src/app/interfaces/Contato';
@@ -11,8 +11,6 @@ import { ContatoService } from 'src/app/Services/contato/contato.service';
 })
 export class EditContatosComponent implements OnInit {
 
-
- 
   contato!:Contato
   btnText:string = "Editar"
   title:string = "Editar Contato"

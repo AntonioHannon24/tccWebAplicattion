@@ -3,6 +3,7 @@
     height: 600px;
     opacity: .9;
 }
+
 .divLista {
     width: 550px;
     height: 600px;
@@ -10,9 +11,11 @@
     opacity: .9;
     border-radius: 5px;
 }
+
 .tabela {
     min-height: 600px;
 }
+
 .title {
     padding: 20px;
 }

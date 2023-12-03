@@ -17,8 +17,6 @@
                 <input type="email" class="form-control" formControlName="assunto" placeholder="Seu assunto">
                 <p *ngIf="assunto.invalid && formDir.submitted">O assunto é obrigatório</p>
             </div>
-            
-
             <div class="mb-3">
                 <label for="mensagem" class="form-label">Mensagem</label>
                 <textarea class="form-control" formControlName="mensagem" rows="5" placeholder="Sua Mensagem"></textarea>

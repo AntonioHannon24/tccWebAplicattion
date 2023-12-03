@@ -1,5 +1,4 @@
 <div class="page">
-
     <div class="container">
         <form (ngSubmit)="submitLogin()" [formGroup]="LoginForm" #formDir="ngForm">
             <div class="box">
@@ -19,18 +18,13 @@
                 <div class="d-grid gap-2 mb-3">
                     <button class="btn btn-primary" type="submit">Login</button>
                 </div>
-
             </div>
         </form>
         <div>
             <button class="botoesList" (click)="teste()">Cadastrar</button>
         </div>
     </div>
-
-
 </div>
-
-
 <ng-template class="modal" #myModal>
     <app-new-estabelecimento (formularioEnviado)="fecharModal()"></app-new-estabelecimento>
 </ng-template>

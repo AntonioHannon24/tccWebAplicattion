@@ -16,8 +16,6 @@ export class AgendaFuncionarioComponent {
   p: number = 1;
   servId!: string;
 
-
-
   constructor(
     private agendaService: AgendaService,
     private funcionarioService: FuncionarioService,
@@ -28,46 +26,31 @@ export class AgendaFuncionarioComponent {
   ngOnInit(): void {
 
     const mensagem = localStorage.getItem('mensagem')
-    
     if(mensagem){this.messageService.add(mensagem); localStorage.removeItem('mensagem');}
-
     const id = localStorage.getItem('id')
-
     this.agendaService.getAgendaFuncionario(Number(id)).subscribe((item) => {
       this.agendas = item.data
-
       this.agendas.forEach((agend) => {
-
         agend.status == "1" ? agend.status = "Aceito" : agend.status = "Em andamento"
-
         agend.funcionario_id == null ? agend.funcionario_id = "Sem Funcionário" : this.funcionarioService.getFuncionario(Number(agend.funcionario_id))
           .subscribe((item) => { agend.funcionario_id = item.data.nome })
-
         this.petService.getPet(Number(agend.pet_id)).subscribe((item) => {
           agend.pet_id = item.data.nome
         })
       })
-
     })
-
   }
 
   botaoFechar(id: number) {
     this.agendaService.fecharAgendas(id).subscribe((item: any) => {
-      
-      console.log(item.msg)
       localStorage.setItem('mensagem', item.msg);
-
       window.location.reload();
     })
   }
+
   botaoEmAtendimento(id: number) {
     this.agendaService.emAtendimentoAgenda(id).subscribe((item: any) => {
-      
-
-      console.log(item.msg)
       localStorage.setItem('mensagem', item.msg);
-
       window.location.reload();
     })
   }

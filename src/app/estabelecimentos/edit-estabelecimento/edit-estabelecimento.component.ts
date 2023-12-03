@@ -8,9 +8,8 @@ import { Estabelecimento } from 'src/app/interfaces/Estabelecimento';
   templateUrl: './edit-estabelecimento.component.html',
   styleUrls: ['./edit-estabelecimento.component.css']
 })
+
 export class EditEstabelecimentoComponent implements OnInit {
-
-
 
   estabelecimento!: Estabelecimento
   btnText: string = "Editar"
@@ -26,20 +25,16 @@ export class EditEstabelecimentoComponent implements OnInit {
   ngOnInit(): void {
 
     const idStore = localStorage.getItem('id')
-    const tipo =localStorage.getItem('tipo')
-    if(tipo == "Admin"){
-
+    const tipo = localStorage.getItem('tipo')
+    if (tipo == "Admin") {
       this.estabelecimentoService.getEstabelecimento(Number(this.id)).subscribe(item => {
         this.estabelecimento = item.data;
       })
-
-    }else{
+    } else {
       this.estabelecimentoService.getEstabelecimento(Number(idStore)).subscribe(item => {
         this.estabelecimento = item.data;
       })
     }
-
-
 
   }
 
@@ -56,7 +51,7 @@ export class EditEstabelecimentoComponent implements OnInit {
     formData.append("cep", estabelecimento.cep)
     formData.append("email", estabelecimento.email)
     formData.append("cidadeId", estabelecimento.cidade_id)
-
+    formData.append("password", estabelecimento.password)
 
     this.estabelecimentoService.updateEstab(id!, formData)
       .subscribe(
@@ -75,6 +70,5 @@ export class EditEstabelecimentoComponent implements OnInit {
       )
 
   }
-
 
 }

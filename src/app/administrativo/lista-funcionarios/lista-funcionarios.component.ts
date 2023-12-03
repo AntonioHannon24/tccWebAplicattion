@@ -16,7 +16,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class ListaFuncionariosComponent implements OnInit {
 
-
   estabelecimento?: Estabelecimento;
   modalRef!: BsModalRef<any>
   baseApiUrl = environment.baseApiUrl;
@@ -25,14 +24,14 @@ export class ListaFuncionariosComponent implements OnInit {
   funcionarios: Funcionario[] = [];
   @ViewChild('myModal') myModal: any;
   @ViewChild('myModalEdit') myModalEdit: any;
-  func!:number
+  func!: number
 
   constructor(
     private route: ActivatedRoute,
     private estabelecimentoService: EstabelecimentoService,
     private funcionarioService: FuncionarioService,
-    private messageService:MessageService,
-    private location: Location,   
+    private messageService: MessageService,
+    private location: Location,
     private modalService: BsModalService,
 
   ) { }
@@ -41,7 +40,6 @@ export class ListaFuncionariosComponent implements OnInit {
 
     const mensagem = localStorage.getItem('message')
     if (mensagem) { this.messageService.add(mensagem); localStorage.removeItem('message'); }
-
     this.id = Number(this.route.snapshot.paramMap.get('id'))
     this.estabelecimentoService.getEstabelecimento(this.id).subscribe(item => {
       const teste = item.data.funcionario
@@ -54,22 +52,22 @@ export class ListaFuncionariosComponent implements OnInit {
   }
 
   async desativarFuncionario(idFuncNumber: number) {
-    await this.funcionarioService.desativarFuncionario(idFuncNumber).subscribe((item: any) => {
+    this.funcionarioService.desativarFuncionario(idFuncNumber).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
 
   }
+
   async ativarFuncionario(idFuncNumber: number) {
-    await this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
+    this.funcionarioService.ativarFuncionario(idFuncNumber).subscribe((item: any) => {
       localStorage.setItem('message', item.msg)
       window.location.reload()
     })
 
   }
 
-   editarFuncionario(funcId: number) {
-
+  editarFuncionario(funcId: number) {
     this.func = funcId
     this.modalRef = this.modalService.show(this.myModalEdit, { class: 'modal-lg' })
   };
