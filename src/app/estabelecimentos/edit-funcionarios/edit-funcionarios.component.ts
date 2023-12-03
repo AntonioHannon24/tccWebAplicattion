@@ -46,7 +46,6 @@ export class EditFuncionariosComponent {
             this.formularioEnviado.emit();
           },
           error: error => {
-            console.log(error)
             window.alert(error.error.message);
 
           }

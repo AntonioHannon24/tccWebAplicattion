@@ -46,7 +46,6 @@ export class EditServicosComponent {
             this.formularioEnviado.emit();
           },
           error: error => {
-            console.log(error)
             window.alert(error.error.message);
 
           }

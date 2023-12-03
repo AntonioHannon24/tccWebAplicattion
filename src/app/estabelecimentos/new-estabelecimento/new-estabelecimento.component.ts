@@ -44,7 +44,6 @@ export class NewEstabelecimentoComponent implements OnInit {
             this.formularioEnviado.emit();
           },
           error: error => {
-            console.log(error)
             window.alert(error.error.message);
 
           }
