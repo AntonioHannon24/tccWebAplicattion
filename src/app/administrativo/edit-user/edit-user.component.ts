@@ -46,7 +46,6 @@ export class EditUserComponent implements OnInit{
           this.formularioEnviado.emit();
         },
         error: error => {
-          og(error)
           window.alert(error.error.message);
 
         }

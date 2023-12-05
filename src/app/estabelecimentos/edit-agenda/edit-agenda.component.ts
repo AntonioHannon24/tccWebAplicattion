@@ -72,17 +72,20 @@ export class EditAgendaComponent {
     formData.append('dataHora', this.dataHora)
     formData.append('status', agendaData.status)
     formData.append("servico_id", this.servId)
-    formData.append("usuario_id", this.petId)
+    formData.append("usuario_id", this.userId)
+    formData.append("estabelecimento_id", this.estabId)
     formData.append("funcionario_id", agendaData.funcionario_id)
     formData.append("pet_id", this.petId)
-    formData.append("estabelecimento_id", this.estabId)
-
+  
+    console.log(this.userId)
+    
     this.agendaService.updateAgenda(id!, formData)
       .subscribe((item: any) => {
         localStorage.setItem('message', "Agenda editada com sucesso!!")
         window.location.reload()
         this.formularioEnviado.emit();
       })
+      
   }
 
 }
