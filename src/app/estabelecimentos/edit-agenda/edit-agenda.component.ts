@@ -43,7 +43,7 @@ export class EditAgendaComponent {
       const agendaLoad = agendaResult.data;
       this.servId = agendaLoad.servico_id
       this.petId = agendaLoad.pet_id
-      this.userId = agendaLoad.servico_id
+      this.userId = agendaLoad.usuario_id
       this.estabId = agendaLoad.estabelecimento_id
       this.dataHora = agendaLoad.data_hora
 
